@@ -1,5 +1,6 @@
 package com.rene.mercado.model;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,8 +15,8 @@ public class Talla {
     @Column(name = "id_talla")
     private Integer idTalla;
 
+    // @NotBlank(message = "El tipo de Talla es Obligatrio")
     @Column(name = "tipo_talla")
     private String tipoTalla;
 
-    
 }
