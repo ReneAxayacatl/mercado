@@ -15,11 +15,11 @@ public class Comida {
     @Column(name = "id_comida")
     private Integer idComida;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto")
     private Productos producto;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name="comida_origen",
             schema="rene",

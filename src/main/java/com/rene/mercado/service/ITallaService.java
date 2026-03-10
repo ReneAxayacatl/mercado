@@ -3,8 +3,6 @@ package com.rene.mercado.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.result.Outputs;
-
 import com.rene.mercado.model.Talla;
 
 public interface ITallaService {

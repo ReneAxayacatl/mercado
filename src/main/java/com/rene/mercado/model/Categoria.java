@@ -18,7 +18,7 @@ public class Categoria {
     @Column(name = "nombre_categoria")
     private String nombreCategoria;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_caduce")
     private Caduce caduce;
     

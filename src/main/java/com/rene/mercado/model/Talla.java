@@ -16,4 +16,6 @@ public class Talla {
 
     @Column(name = "tipo_talla")
     private String tipoTalla;
+
+    
 }

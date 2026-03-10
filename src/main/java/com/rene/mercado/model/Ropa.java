@@ -16,20 +16,19 @@ public class Ropa {
     @Column(name = "id_ropa")
     private Integer idRopa;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto")
     private Productos producto;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name="ropa_talla",
-            schema="rene",
-            joinColumns=@JoinColumn(name="id_ropa"),
-            inverseJoinColumns=@JoinColumn(name="id_talla")
-    )
-    private List<Talla> tallas;
+            name = "ropa_talla",
+            schema = "rene",
+            joinColumns = @JoinColumn(name = "id_ropa"),
+            inverseJoinColumns = @JoinColumn(name = "id_talla")
+) private List < Talla > tallas;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name="ropa_origen",
             schema="rene",

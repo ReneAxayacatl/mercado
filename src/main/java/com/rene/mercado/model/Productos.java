@@ -19,7 +19,7 @@ public class Productos {
     @Column(name = "precio_unit")
     private BigDecimal precioUnit;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 }
