@@ -11,7 +11,7 @@ import com.rene.mercado.repository.TallaRepository;
 
 @Service
 
-public class TallaService implements ITallaService{
+public class TallaService implements ITallaService {
 
     @Autowired
     private TallaRepository tallaRepository;

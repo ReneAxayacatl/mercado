@@ -15,5 +15,5 @@ public interface ITallaService {
 
     Talla editTallas(Talla Talla);
 
-    void deleteTallas(Integer idInteger);
+    void deleteTallas(Integer id);
 }
