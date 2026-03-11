@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.rene.mercado.Modelo.Productos;
 
-public interface IProductosService {
+public interface ImplementacionServicioProductos {
 
     Productos saveProductos(Productos Productos);
 

@@ -7,39 +7,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Modelo.Ropa;
-import com.rene.mercado.Repositorio.RopaRepository;
-import com.rene.mercado.Servicio.Implementacion.IRopaService;
+import com.rene.mercado.Repositorio.RepositorioRopa;
+import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioRopa;
 
 @Service
 
-public class RopaService implements IRopaService {
+public class ServicioRopa implements ImplementacionServicioRopa {
 
     @Autowired
-    private RopaRepository ropaRepository;
+    private RepositorioRopa ropaRepositorio;
 
     @Override
     public Ropa saveRopas(Ropa ropas) {
-        return ropaRepository.save(ropas);
+        return ropaRepositorio.save(ropas);
     }
 
     @Override
     public Optional<Ropa> searchRopasById(Integer id) {
-        return ropaRepository.findById(id);
+        return ropaRepositorio.findById(id);
     }
 
     @Override
     public List<Ropa> obtainRopas() {
-        return ropaRepository.findAll();
+        return ropaRepositorio.findAll();
     }
 
     @Override
     public Ropa editRopas(Ropa tallas) {
-        return ropaRepository.saveAndFlush(tallas);
+        return ropaRepositorio.saveAndFlush(tallas);
     }
 
     @Override
     public void deleteRopas(Integer id) {
-        ropaRepository.deleteById(id);
+        ropaRepositorio.deleteById(id);
     }
 
 }

@@ -7,39 +7,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Modelo.Comida;
-import com.rene.mercado.Repositorio.ComidaRepository;
-import com.rene.mercado.Servicio.Implementacion.IComidaService;
+import com.rene.mercado.Repositorio.RepositorioComida;
+import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioComida;
 
 @Service
 
-public class ComidaService implements IComidaService {
+public class ServicioComida implements ImplementacionServicioComida {
 
     @Autowired
-    private ComidaRepository comidaRepository;
+    private RepositorioComida comidaRepositorio;
 
     @Override
     public Comida saveComidas(Comida Comidas) {
-        return comidaRepository.save(Comidas);
+        return comidaRepositorio.save(Comidas);
     }
 
     @Override
     public Optional<Comida> searchComidasById(Integer id) {
-        return comidaRepository.findById(id);
+        return comidaRepositorio.findById(id);
     }
 
     @Override
     public List<Comida> obtainComidas() {
-        return comidaRepository.findAll();
+        return comidaRepositorio.findAll();
     }
 
     @Override
     public Comida editComidas(Comida Comidas) {
-        return comidaRepository.saveAndFlush(Comidas);
+        return comidaRepositorio.saveAndFlush(Comidas);
     }
 
     @Override
     public void deleteComidas(Integer id) {
-        comidaRepository.deleteById(id);
+        comidaRepositorio.deleteById(id);
     }
 
 }

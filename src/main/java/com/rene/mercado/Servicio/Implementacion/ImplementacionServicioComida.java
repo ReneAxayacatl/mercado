@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.rene.mercado.Modelo.Comida;
 
-public interface IComidaService {
+public interface ImplementacionServicioComida {
 
     Comida saveComidas(Comida Comidas);
 

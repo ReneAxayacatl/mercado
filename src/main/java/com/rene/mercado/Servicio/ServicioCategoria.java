@@ -7,39 +7,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Modelo.Categoria;
-import com.rene.mercado.Repositorio.CategoriaRepository;
-import com.rene.mercado.Servicio.Implementacion.ICategoriaService;
+import com.rene.mercado.Repositorio.RepositorioCategoria;
+import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCategoria;
 
 @Service
 
-public class CategoriaService implements ICategoriaService {
+public class ServicioCategoria implements ImplementacionServicioCategoria {
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private RepositorioCategoria categoriaRepositorio;
 
     @Override
     public Categoria saveCategorias(Categoria Categorias) {
-        return categoriaRepository.save(Categorias);
+        return categoriaRepositorio.save(Categorias);
     }
 
     @Override
     public Optional<Categoria> searchCategoriasById(Integer id) {
-        return categoriaRepository.findById(id);
+        return categoriaRepositorio.findById(id);
     }
 
     @Override
     public List<Categoria> obtainCategorias() {
-        return categoriaRepository.findAll();
+        return categoriaRepositorio.findAll();
     }
 
     @Override
     public Categoria editCategorias(Categoria Categorias) {
-        return categoriaRepository.saveAndFlush(Categorias);
+        return categoriaRepositorio.saveAndFlush(Categorias);
     }
 
     @Override
     public void deleteCategorias(Integer id) {
-        categoriaRepository.deleteById(id);
+        categoriaRepositorio.deleteById(id);
     }
 
 }

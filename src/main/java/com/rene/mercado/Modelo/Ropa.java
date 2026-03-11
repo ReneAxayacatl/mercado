@@ -20,28 +20,34 @@ public class Ropa {
     @JoinColumn(name = "id_producto")
     private Productos producto;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "ropa_talla",
-            schema = "rene",
-            joinColumns = @JoinColumn(name = "id_ropa"),
-            inverseJoinColumns = @JoinColumn(name = "id_talla")
-) private List < Talla > tallas;
+    // @ManyToMany(fetch = FetchType.LAZY)
+    // @JoinTable(
+    // name = "ropa_talla",
+    // schema = "rene",
+    // joinColumns = @JoinColumn(name = "id_ropa"),
+    // inverseJoinColumns = @JoinColumn(name = "id_talla")
+    // ) private List < Talla > tallas;
+    @OneToMany(mappedBy = "ropa", 
+                cascade = CascadeType.ALL, 
+                orphanRemoval = true) // relacion que apunta a la entidad intermedia 'RopaTalla' (Entidad padre)
+    private List<RopaTalla> tallasAsignadas;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name="ropa_origen",
-            schema="rene",
-            joinColumns=@JoinColumn(name="id_ropa"),
-            inverseJoinColumns=@JoinColumn(name="id_origen")
-    )
+    @JoinTable(name = "ropa_origen", 
+                schema = "rene", 
+                joinColumns = @JoinColumn(name = "id_ropa"), 
+                inverseJoinColumns = @JoinColumn(name = "id_origen"))
     private List<Origen> origenes;
 
-    /* @ManyToMany
-    @JoinColumn(name = "id_talla")
-    private Talla talla;
-
-    @ManyToMany
-    @JoinColumn(name = "id_origen")
-    private Origen origen; */
+    /*
+     * @ManyToMany
+     * 
+     * @JoinColumn(name = "id_talla")
+     * private Talla talla;
+     * 
+     * @ManyToMany
+     * 
+     * @JoinColumn(name = "id_origen")
+     * private Origen origen;
+     */
 }

@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.rene.mercado.Modelo.Caduce;
 
-public interface CaduceRepository 
+public interface RepositorioCaduce 
     extends JpaRepository<Caduce, Integer>{
 
 }

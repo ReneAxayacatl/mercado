@@ -7,39 +7,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Modelo.Caduce;
-import com.rene.mercado.Repositorio.CaduceRepository;
-import com.rene.mercado.Servicio.Implementacion.ICaduceService;
+import com.rene.mercado.Repositorio.RepositorioCaduce;
+import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCaduce;
 
 @Service
 
-public class CaduceService implements ICaduceService {
+public class ServicioCaduce implements ImplementacionServicioCaduce {
 
     @Autowired
-    private CaduceRepository caduceRepository;
+    private RepositorioCaduce caduceRepositorio;
 
     @Override
     public Caduce saveCaduce(Caduce Caduce) {
-        return caduceRepository.save(Caduce);
+        return caduceRepositorio.save(Caduce);
     }
 
     @Override
     public Optional<Caduce> searchCaduceById(Integer id) {
-        return caduceRepository.findById(id);
+        return caduceRepositorio.findById(id);
     }
 
     @Override
     public List<Caduce> obtainCaduce() {
-        return caduceRepository.findAll();
+        return caduceRepositorio.findAll();
     }
 
     @Override
     public Caduce editCaduce(Caduce Caduce) {
-        return caduceRepository.saveAndFlush(Caduce);
+        return caduceRepositorio.saveAndFlush(Caduce);
     }
 
     @Override
     public void deleteCaduce(Integer id) {
-        caduceRepository.deleteById(id);
+        caduceRepositorio.deleteById(id);
     }
 
 }

@@ -7,39 +7,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Modelo.Productos;
-import com.rene.mercado.Repositorio.ProductosRepository;
-import com.rene.mercado.Servicio.Implementacion.IProductosService;
+import com.rene.mercado.Repositorio.RepositorioProductos;
+import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioProductos;
 
 @Service
 
-public class ProductosService implements IProductosService {
+public class ServicioProductos implements ImplementacionServicioProductos {
 
     @Autowired
-    private ProductosRepository productosRepository;
+    private RepositorioProductos productosRepositorio;
 
     @Override
     public Productos saveProductos(Productos producto) {
-        return productosRepository.save(producto);
+        return productosRepositorio.save(producto);
     }
 
     @Override
     public Optional<Productos> searchProductosById(Integer id) {
-        return productosRepository.findById(id);
+        return productosRepositorio.findById(id);
     }
 
     @Override
     public List<Productos> obtainProductos() {
-        return productosRepository.findAll();
+        return productosRepositorio.findAll();
     }
 
     @Override
     public Productos editProductos(Productos producto) {
-        return productosRepository.saveAndFlush(producto);
+        return productosRepositorio.saveAndFlush(producto);
     }
 
     @Override
     public void deleteProductos(Integer id) {
-        productosRepository.deleteById(id);
+        productosRepositorio.deleteById(id);
     }
 
 }

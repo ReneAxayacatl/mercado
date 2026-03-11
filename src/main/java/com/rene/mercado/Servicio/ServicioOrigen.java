@@ -7,36 +7,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Modelo.Origen;
-import com.rene.mercado.Repositorio.OrigenRepository;
-import com.rene.mercado.Servicio.Implementacion.IOrigenService;
+import com.rene.mercado.Repositorio.RepositorioOrigen;
+import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioOrigen;
 
 @Service
 
-public class OrigenService implements IOrigenService {
+public class ServicioOrigen implements ImplementacionServicioOrigen {
     @Autowired
-    private OrigenRepository origenRepository;
+    private RepositorioOrigen origenRepositorio;
 
     public Origen saveOrigen(Origen Origen) {
-        return origenRepository.save(Origen);
+        return origenRepositorio.save(Origen);
     }
 
     @Override
     public Optional<Origen> searchOrigenById(Integer id) {
-        return origenRepository.findById(id);
+        return origenRepositorio.findById(id);
     }
 
     @Override
     public List<Origen> obtainOrigen() {
-        return origenRepository.findAll();
+        return origenRepositorio.findAll();
     }
 
     @Override
     public Origen editOrigen(Origen origen) {
-        return origenRepository.saveAndFlush(origen);
+        return origenRepositorio.saveAndFlush(origen);
     }
 
     @Override
     public void deleteOrigen(Integer id) {
-        origenRepository.deleteById(id);
+        origenRepositorio.deleteById(id);
     }
 }

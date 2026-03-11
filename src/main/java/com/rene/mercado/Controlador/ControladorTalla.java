@@ -18,7 +18,7 @@ import jakarta.validation.constraints.*;
 import jakarta.validation.Valid;
 
 import com.rene.mercado.Modelo.Talla;
-import com.rene.mercado.Servicio.Implementacion.ITallaService;
+import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioTalla;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,12 +32,12 @@ import org.springframework.web.bind.annotation.RequestBody;
     RequestMethod.PUT,
 })
 
-public class TallaController {
+public class ControladorTalla {
 
   public static final String TALLAS_ENDPOINT = "/rene/tallas";
 
   @Autowired
-  private ITallaService tallasService;
+  private ImplementacionServicioTalla tallasService;
 
   @GetMapping(path = TALLAS_ENDPOINT + "/{id}")
   public ResponseEntity<Talla> getTallas(@PathVariable("id") Integer id) {

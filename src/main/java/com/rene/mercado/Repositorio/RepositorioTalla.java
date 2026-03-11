@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.rene.mercado.Modelo.Talla;
 
 @Repository
-public interface TallaRepository 
+public interface RepositorioTalla 
     extends JpaRepository<Talla, Integer>{
 
 }

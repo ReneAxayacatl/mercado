@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.rene.mercado.Modelo.Caduce;
 import com.rene.mercado.Modelo.Talla;
 
-public interface ICaduceService {
+public interface ImplementacionServicioCaduce {
 
     Caduce saveCaduce(Caduce Caduce);
 

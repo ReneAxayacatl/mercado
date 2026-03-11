@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.rene.mercado.Modelo.Talla;
 
-public interface ITallaService {
+public interface ImplementacionServicioTalla {
 
     Talla saveTallas(Talla Tallas);
 

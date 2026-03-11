@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.rene.mercado.Modelo.Categoria;
 
-public interface ICategoriaService {
+public interface ImplementacionServicioCategoria {
     Categoria saveCategorias(Categoria Categorias);
 
     Optional<Categoria> searchCategoriasById(Integer idInteger);
