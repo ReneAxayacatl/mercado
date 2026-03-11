@@ -8,13 +8,13 @@ import com.rene.mercado.Modelo.RopaTallaPK;
 
 public interface ImplementacionServicioRopaTalla {
 
-    RopaTalla saveRopaTallas(RopaTalla RopaTallas);
+    RopaTalla guardarRopaTallas(RopaTalla RopaTallas);
 
-    Optional<RopaTalla> searchRopaTallaById(RopaTallaPK idInteger);
+    Optional<RopaTalla> buscarRopaTallaPorId(RopaTallaPK idInteger);
 
-    List<RopaTalla> obtainRopaTalla();
+    List<RopaTalla> obtenerRopaTalla();
 
-    RopaTalla editRopaTalla(RopaTalla Talla);
+    RopaTalla editarRopaTalla(RopaTalla Talla);
 
-    void deleteRopaTalla(RopaTallaPK id);
+    void eliminarRopaTallaPorId(RopaTallaPK id);
 }

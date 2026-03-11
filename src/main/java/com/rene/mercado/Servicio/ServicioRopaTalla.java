@@ -17,27 +17,27 @@ public class ServicioRopaTalla implements ImplementacionServicioRopaTalla{
     private RepositorioRopaTalla ropatallaRepositorio;
 
     @Override
-    public RopaTalla saveRopaTallas(RopaTalla RopaTallas) {
+    public RopaTalla guardarRopaTallas(RopaTalla RopaTallas) {
         return ropatallaRepositorio.save(RopaTallas);
     }
 
     @Override
-    public Optional<RopaTalla> searchRopaTallaById(RopaTallaPK id) {
+    public Optional<RopaTalla> buscarRopaTallaPorId(RopaTallaPK id) {
         return ropatallaRepositorio.findById(id);
     }
 
     @Override
-    public List<RopaTalla> obtainRopaTalla() {
+    public List<RopaTalla> obtenerRopaTalla() {
         return ropatallaRepositorio.findAll();
     }
 
     @Override
-    public RopaTalla editRopaTalla(RopaTalla RopaTalla) {
+    public RopaTalla editarRopaTalla(RopaTalla RopaTalla) {
         return ropatallaRepositorio.saveAndFlush(RopaTalla);
     }
 
     @Override
-    public void deleteRopaTalla(RopaTallaPK id) {
+    public void eliminarRopaTallaPorId(RopaTallaPK id) {
         ropatallaRepositorio.deleteById(id);
     }
 

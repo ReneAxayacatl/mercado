@@ -4,17 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import com.rene.mercado.Modelo.Caduce;
-import com.rene.mercado.Modelo.Talla;
 
 public interface ImplementacionServicioCaduce {
 
-    Caduce saveCaduce(Caduce Caduce);
+    Caduce guardarCaduce(Caduce Caduce);
 
-    Optional<Caduce> searchCaduceById(Integer id);
+    Optional<Caduce> buscarCaducePorId(Integer id);
 
-    List<Caduce> obtainCaduce();
+    List<Caduce> obtenerCaduce();
 
-    Caduce editCaduce(Caduce Caduce);
+    Caduce editarCaduce(Caduce Caduce);
 
-    void deleteCaduce(Integer id);
+    void eliminarCaducePorId(Integer id);
 }

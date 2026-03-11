@@ -16,27 +16,27 @@ public class ServicioOrigen implements ImplementacionServicioOrigen {
     @Autowired
     private RepositorioOrigen origenRepositorio;
 
-    public Origen saveOrigen(Origen Origen) {
+    public Origen guardarOrigen(Origen Origen) {
         return origenRepositorio.save(Origen);
     }
 
     @Override
-    public Optional<Origen> searchOrigenById(Integer id) {
+    public Optional<Origen> buscarOrigenPorId(Integer id) {
         return origenRepositorio.findById(id);
     }
 
     @Override
-    public List<Origen> obtainOrigen() {
+    public List<Origen> obtenerOrigen() {
         return origenRepositorio.findAll();
     }
 
     @Override
-    public Origen editOrigen(Origen origen) {
+    public Origen editarOrigen(Origen origen) {
         return origenRepositorio.saveAndFlush(origen);
     }
 
     @Override
-    public void deleteOrigen(Integer id) {
+    public void eliminarOrigenPorId(Integer id) {
         origenRepositorio.deleteById(id);
     }
 }

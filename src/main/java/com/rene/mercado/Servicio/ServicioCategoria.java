@@ -18,27 +18,27 @@ public class ServicioCategoria implements ImplementacionServicioCategoria {
     private RepositorioCategoria categoriaRepositorio;
 
     @Override
-    public Categoria saveCategorias(Categoria Categorias) {
+    public Categoria guardarCategorias(Categoria Categorias) {
         return categoriaRepositorio.save(Categorias);
     }
 
     @Override
-    public Optional<Categoria> searchCategoriasById(Integer id) {
+    public Optional<Categoria> buscarCategoriasPorId(Integer id) {
         return categoriaRepositorio.findById(id);
     }
 
     @Override
-    public List<Categoria> obtainCategorias() {
+    public List<Categoria> obtenerCategorias() {
         return categoriaRepositorio.findAll();
     }
 
     @Override
-    public Categoria editCategorias(Categoria Categorias) {
+    public Categoria editarCategorias(Categoria Categorias) {
         return categoriaRepositorio.saveAndFlush(Categorias);
     }
 
     @Override
-    public void deleteCategorias(Integer id) {
+    public void eliminarCategoriasPorId(Integer id) {
         categoriaRepositorio.deleteById(id);
     }
 

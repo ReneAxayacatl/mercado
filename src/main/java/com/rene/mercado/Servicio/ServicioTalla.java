@@ -18,27 +18,27 @@ public class ServicioTalla implements ImplementacionServicioTalla {
     private RepositorioTalla tallaRepositorio;
 
     @Override
-    public Talla saveTallas(Talla tallas) {
+    public Talla guardarTallas(Talla tallas) {
         return tallaRepositorio.save(tallas);
     }
 
     @Override
-    public Optional<Talla> searchTallaById(Integer id) {
+    public Optional<Talla> buscarTallaPorId(Integer id) {
         return tallaRepositorio.findById(id);
     }
 
     @Override
-    public List<Talla> obtainTallas() {
+    public List<Talla> obtenerTallas() {
         return tallaRepositorio.findAll();
     }
 
     @Override
-    public Talla editTallas(Talla tallas) {
+    public Talla editarTallas(Talla tallas) {
         return tallaRepositorio.saveAndFlush(tallas);
     }
 
     @Override
-    public void deleteTallas(Integer id) {
+    public void eliminarTallasPorId(Integer id) {
         tallaRepositorio.deleteById(id);
     }
 

@@ -7,13 +7,13 @@ import com.rene.mercado.Modelo.Talla;
 
 public interface ImplementacionServicioTalla {
 
-    Talla saveTallas(Talla Tallas);
+    Talla guardarTallas(Talla Tallas);
 
-    Optional<Talla> searchTallaById(Integer idInteger);
+    Optional<Talla> buscarTallaPorId(Integer idInteger);
 
-    List<Talla> obtainTallas();
+    List<Talla> obtenerTallas();
 
-    Talla editTallas(Talla Talla);
+    Talla editarTallas(Talla Talla);
 
-    void deleteTallas(Integer id);
+    void eliminarTallasPorId(Integer id);
 }

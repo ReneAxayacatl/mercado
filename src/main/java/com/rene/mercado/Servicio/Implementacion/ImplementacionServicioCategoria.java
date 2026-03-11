@@ -6,13 +6,13 @@ import java.util.Optional;
 import com.rene.mercado.Modelo.Categoria;
 
 public interface ImplementacionServicioCategoria {
-    Categoria saveCategorias(Categoria Categorias);
+    Categoria guardarCategorias(Categoria Categorias);
 
-    Optional<Categoria> searchCategoriasById(Integer idInteger);
+    Optional<Categoria> buscarCategoriasPorId(Integer idInteger);
 
-    List<Categoria> obtainCategorias();
+    List<Categoria> obtenerCategorias();
 
-    Categoria editCategorias(Categoria Categorias);
+    Categoria editarCategorias(Categoria Categorias);
 
-    void deleteCategorias(Integer idInteger);
+    void eliminarCategoriasPorId(Integer idInteger);
 }

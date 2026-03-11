@@ -7,13 +7,13 @@ import com.rene.mercado.Modelo.Productos;
 
 public interface ImplementacionServicioProductos {
 
-    Productos saveProductos(Productos Productos);
+    Productos guardarProductos(Productos Productos);
 
-    Optional<Productos> searchProductosById(Integer idInteger);
+    Optional<Productos> buscarProductosPorId(Integer idInteger);
 
-    List<Productos> obtainProductos();
+    List<Productos> obtenerProductos();
 
-    Productos editProductos(Productos Producto);
+    Productos editarProductos(Productos Producto);
 
-    void deleteProductos(Integer idInteger);
+    void eliminarProductosPorId(Integer idInteger);
 }

@@ -18,27 +18,27 @@ public class ServicioCaduce implements ImplementacionServicioCaduce {
     private RepositorioCaduce caduceRepositorio;
 
     @Override
-    public Caduce saveCaduce(Caduce Caduce) {
+    public Caduce guardarCaduce(Caduce Caduce) {
         return caduceRepositorio.save(Caduce);
     }
 
     @Override
-    public Optional<Caduce> searchCaduceById(Integer id) {
+    public Optional<Caduce> buscarCaducePorId(Integer id) {
         return caduceRepositorio.findById(id);
     }
 
     @Override
-    public List<Caduce> obtainCaduce() {
+    public List<Caduce> obtenerCaduce() {
         return caduceRepositorio.findAll();
     }
 
     @Override
-    public Caduce editCaduce(Caduce Caduce) {
+    public Caduce editarCaduce(Caduce Caduce) {
         return caduceRepositorio.saveAndFlush(Caduce);
     }
 
     @Override
-    public void deleteCaduce(Integer id) {
+    public void eliminarCaducePorId(Integer id) {
         caduceRepositorio.deleteById(id);
     }
 

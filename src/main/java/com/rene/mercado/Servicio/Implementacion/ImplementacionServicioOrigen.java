@@ -6,13 +6,13 @@ import java.util.Optional;
 import com.rene.mercado.Modelo.Origen;
 
 public interface ImplementacionServicioOrigen {
-    Origen saveOrigen(Origen Origen);
+    Origen guardarOrigen(Origen Origen);
 
-    Optional<Origen> searchOrigenById(Integer idInteger);
+    Optional<Origen> buscarOrigenPorId(Integer idInteger);
 
-    List<Origen> obtainOrigen();
+    List<Origen> obtenerOrigen();
 
-    Origen editOrigen(Origen Origen);
+    Origen editarOrigen(Origen Origen);
 
-    void deleteOrigen(Integer idInteger);
+    void eliminarOrigenPorId(Integer idInteger);
 }

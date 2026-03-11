@@ -18,27 +18,27 @@ public class ServicioProductos implements ImplementacionServicioProductos {
     private RepositorioProductos productosRepositorio;
 
     @Override
-    public Productos saveProductos(Productos producto) {
+    public Productos guardarProductos(Productos producto) {
         return productosRepositorio.save(producto);
     }
 
     @Override
-    public Optional<Productos> searchProductosById(Integer id) {
+    public Optional<Productos> buscarProductosPorId(Integer id) {
         return productosRepositorio.findById(id);
     }
 
     @Override
-    public List<Productos> obtainProductos() {
+    public List<Productos> obtenerProductos() {
         return productosRepositorio.findAll();
     }
 
     @Override
-    public Productos editProductos(Productos producto) {
+    public Productos editarProductos(Productos producto) {
         return productosRepositorio.saveAndFlush(producto);
     }
 
     @Override
-    public void deleteProductos(Integer id) {
+    public void eliminarProductosPorId(Integer id) {
         productosRepositorio.deleteById(id);
     }
 

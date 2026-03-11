@@ -7,13 +7,13 @@ import com.rene.mercado.Modelo.Comida;
 
 public interface ImplementacionServicioComida {
 
-    Comida saveComidas(Comida Comidas);
+    Comida guardarComidas(Comida Comidas);
 
-    Optional<Comida> searchComidasById(Integer idInteger);
+    Optional<Comida> buscarComidasPorId(Integer idInteger);
 
-    List<Comida> obtainComidas();
+    List<Comida> obtenerComidas();
 
-    Comida editComidas(Comida Comidas);
+    Comida editarComidas(Comida Comidas);
 
-    void deleteComidas(Integer idInteger);
+    void eliminarComidasPorId(Integer idInteger);
 }

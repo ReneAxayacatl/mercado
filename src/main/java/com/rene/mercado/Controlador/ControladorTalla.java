@@ -41,7 +41,7 @@ public class ControladorTalla {
 
   @GetMapping(path = TALLAS_ENDPOINT + "/{id}")
   public ResponseEntity<Talla> getTallas(@PathVariable("id") Integer id) {
-    Optional<Talla> optTallas = tallasService.searchTallaById(id);
+    Optional<Talla> optTallas = tallasService.buscarTallaPorId(id);
     if (optTallas.isPresent()) {
       Talla tallas = optTallas.get();
       return ResponseEntity.ok(tallas);
@@ -52,7 +52,7 @@ public class ControladorTalla {
 
   @PostMapping(path = TALLAS_ENDPOINT, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Talla> addTallas(@Valid @RequestBody Talla tallas) {
-    Talla talla = tallasService.saveTallas(tallas);
+    Talla talla = tallasService.guardarTallas(tallas);
     return ResponseEntity
         .created(URI.create("/rene/tallas" + talla.getIdTalla()))
         .body(talla);

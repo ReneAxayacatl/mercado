@@ -18,27 +18,27 @@ public class ServicioComida implements ImplementacionServicioComida {
     private RepositorioComida comidaRepositorio;
 
     @Override
-    public Comida saveComidas(Comida Comidas) {
+    public Comida guardarComidas(Comida Comidas) {
         return comidaRepositorio.save(Comidas);
     }
 
     @Override
-    public Optional<Comida> searchComidasById(Integer id) {
+    public Optional<Comida> buscarComidasPorId(Integer id) {
         return comidaRepositorio.findById(id);
     }
 
     @Override
-    public List<Comida> obtainComidas() {
+    public List<Comida> obtenerComidas() {
         return comidaRepositorio.findAll();
     }
 
     @Override
-    public Comida editComidas(Comida Comidas) {
+    public Comida editarComidas(Comida Comidas) {
         return comidaRepositorio.saveAndFlush(Comidas);
     }
 
     @Override
-    public void deleteComidas(Integer id) {
+    public void eliminarComidasPorId(Integer id) {
         comidaRepositorio.deleteById(id);
     }
 

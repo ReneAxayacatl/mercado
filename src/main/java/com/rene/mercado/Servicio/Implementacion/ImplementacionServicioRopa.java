@@ -7,13 +7,13 @@ import com.rene.mercado.Modelo.Ropa;
 
 public interface ImplementacionServicioRopa {
 
-    Ropa saveRopas(Ropa Ropas);
+    Ropa guardarRopas(Ropa Ropas);
 
-    Optional<Ropa> searchRopasById(Integer idInteger);
+    Optional<Ropa> buscarRopasPorId(Integer idInteger);
 
-    List<Ropa> obtainRopas();
+    List<Ropa> obtenerRopas();
 
-    Ropa editRopas(Ropa Ropa);
+    Ropa editarRopas(Ropa Ropa);
 
-    void deleteRopas(Integer idInteger);
+    void eliminarRopasPorId(Integer idInteger);
 }
