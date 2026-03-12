@@ -1,4 +1,4 @@
-package com.rene.mercado.Controlador;
+package com.rene.mercado.RestControlador;
 
 import java.net.URI;
 import java.util.Optional;
