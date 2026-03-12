@@ -18,11 +18,14 @@ public class Talla {
     @Column(name = "id_talla")
     private Integer idTalla;
 
-    // @NotBlank(message = "El tipo de Talla es Obligatrio")
+    @NotBlank(message = "El tipo de Talla es Obligatrio")
     @Column(name = "tipo_talla")
     private String tipoTalla;
     
-    @OneToMany(mappedBy = "talla", cascade = CascadeType.ALL, orphanRemoval = true) // relacion que apunta a la entidad intermedia 'RopaTalla' (Entidad Hija)
+    @OneToMany(mappedBy = "talla", 
+                fetch = FetchType.LAZY,
+                cascade = CascadeType.ALL, 
+                orphanRemoval = true) // relacion que apunta a la entidad intermedia 'RopaTalla'
     private List<RopaTalla> ropasAsignadas;
 
 }

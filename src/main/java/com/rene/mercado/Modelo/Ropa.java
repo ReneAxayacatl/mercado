@@ -28,8 +28,9 @@ public class Ropa {
     // inverseJoinColumns = @JoinColumn(name = "id_talla")
     // ) private List < Talla > tallas;
     @OneToMany(mappedBy = "ropa", 
+                fetch = FetchType.LAZY,
                 cascade = CascadeType.ALL, 
-                orphanRemoval = true) // relacion que apunta a la entidad intermedia 'RopaTalla' (Entidad padre)
+                orphanRemoval = true)       // relacion que apunta a la entidad intermedia 'RopaTalla'
     private List<RopaTalla> tallasAsignadas;
 
     @ManyToMany(fetch = FetchType.LAZY)
