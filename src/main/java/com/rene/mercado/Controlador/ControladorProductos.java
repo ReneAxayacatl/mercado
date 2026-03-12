@@ -19,7 +19,6 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -52,7 +51,7 @@ public class ControladorProductos {
     public ResponseEntity<Productos> agregarProductos(@Valid @RequestBody Productos productos) {
         Productos producto = productoServicio.guardarProductos(productos);
         return ResponseEntity
-                .created(URI.create("/Producto" + producto.getIdProducto()))
+                .created(URI.create("/Productos" + producto.getIdProducto()))
                 .body(producto);
     }
 

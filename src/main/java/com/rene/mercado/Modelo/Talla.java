@@ -19,7 +19,8 @@ public class Talla {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_talla")
-    @NonNull private Integer idTalla;
+    private Integer idTalla;
+    // @NonNull private Integer idTalla;
 
     @NotBlank(message = "El tipo de Talla es Obligatrio")
     @Column(name = "tipo_talla")

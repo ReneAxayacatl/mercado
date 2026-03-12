@@ -57,8 +57,6 @@ public class ControladorTalla {
     return ResponseEntity
         .created(URI.create("/rene/Tallas" + talla.getIdTalla()))
         .body(talla);
-        // URI location = URI.create(TALLAS_ENDPOINT + "/" + talla.getIdTalla());
-        // return ResponseEntity.created(location).body(talla);
   }
 
   @PutMapping(path = TALLAS_ENDPOINT, produces = MediaType.APPLICATION_JSON_VALUE)
