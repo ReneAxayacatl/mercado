@@ -4,8 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
-import org.springframework.lang.NonNull;
-
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,11 +22,14 @@ public class Talla {
     @NotBlank(message = "El tipo de Talla es Obligatrio")
     @Column(name = "tipo_talla")
     private String tipoTalla;
-    
-    @OneToMany(mappedBy = "talla", 
-                fetch = FetchType.LAZY,
-                cascade = CascadeType.ALL, 
-                orphanRemoval = true) // relacion que apunta a la entidad intermedia 'RopaTalla'
+
+    @OneToMany(mappedBy = "talla", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true) // relacion
+                                                                                                            // que
+                                                                                                            // apunta a
+                                                                                                            // la
+                                                                                                            // entidad
+                                                                                                            // intermedia
+                                                                                                            // 'RopaTalla'
     private List<RopaTalla> ropasAsignadas;
 
 }
