@@ -1,7 +1,5 @@
 package com.rene.mercado.Modelo;
 
-import java.util.List;
-
 import jakarta.persistence.*;
 import lombok.Data;
 

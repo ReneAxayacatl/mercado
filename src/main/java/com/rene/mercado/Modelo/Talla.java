@@ -1,7 +1,6 @@
 package com.rene.mercado.Modelo;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 

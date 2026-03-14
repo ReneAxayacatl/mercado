@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.PutMapping;
     RequestMethod.DELETE,
     RequestMethod.PUT,
 })
-@RequestMapping("/Ropa")
+@RequestMapping("api/Ropa")
 public class RestControladorRopa {
 
     @Autowired
@@ -51,7 +51,7 @@ public class RestControladorRopa {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Ropa> agregarRopa(@Valid @RequestBody Ropa ropas){
         Ropa ropa = ropaServicio.guardarRopas(ropas);
-        return ResponseEntity.created(URI.create("/Ropa" + ropa.getIdRopa()))
+        return ResponseEntity.created(URI.create("api/Ropa" + ropa.getIdRopa()))
                 .body(ropa);
     }
 

@@ -2,7 +2,7 @@ package com.rene.mercado.Servicio;
 
 import java.util.List;
 import java.util.Optional;
-
+import org.springframework.lang.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +23,9 @@ public class ServicioCaduce implements ImplementacionServicioCaduce {
     }
 
     @Override
-    public Optional<Caduce> buscarCaducePorId(Integer id) {
+    public Optional<Caduce> buscarCaducePorId(@NonNull Integer id) {
         return caduceRepositorio.findById(id);
+        
     }
 
     @Override

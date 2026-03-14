@@ -30,7 +30,7 @@ import jakarta.validation.Valid;
     RequestMethod.DELETE,
     RequestMethod.PUT,
 })
-@RequestMapping("/Caduce")
+@RequestMapping("api/Caduce")
 public class RestControladorCaduce {
 
     // public static final String CADUCE_ENDPOINT = "/rene/caduce";
@@ -53,7 +53,7 @@ public class RestControladorCaduce {
     public ResponseEntity<Caduce> agregarCaduce(@Valid @RequestBody Caduce caduca) {
         Caduce caduce = caduceService.guardarCaduce(caduca);
         return ResponseEntity
-                .created(URI.create("/Caduce" + caduce.getIdCaduce()))
+                .created(URI.create("api/Caduce" + caduce.getIdCaduce()))
                 .body(caduce);
         // URI location = URI.create(CADUCE_ENDPOINT + "/" + caduce.getIdCaduce());
         // return ResponseEntity.created(location).body(caduce);

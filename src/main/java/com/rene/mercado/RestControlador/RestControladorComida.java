@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +30,7 @@ import org.springframework.web.bind.annotation.PutMapping;
         RequestMethod.DELETE,
         RequestMethod.PUT,
 })
-@RequestMapping("/Comida")
+@RequestMapping("api/Comida")
 public class RestControladorComida {
 
     @Autowired
@@ -52,7 +51,7 @@ public class RestControladorComida {
     public ResponseEntity<Comida> agregarCaduce(@Valid @RequestBody Comida comidas) {
         Comida comida = comidaServicio.guardarComidas(comidas);
         return ResponseEntity
-                .created(URI.create("/Caduce" + comida.getIdComida()))
+                .created(URI.create("api/Caduce" + comida.getIdComida()))
                 .body(comida);
     }
 
