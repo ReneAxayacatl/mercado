@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Modelo.Categoria;
@@ -18,12 +19,12 @@ public class ServicioCategoria implements ImplementacionServicioCategoria {
     private RepositorioCategoria categoriaRepositorio;
 
     @Override
-    public Categoria guardarCategorias(Categoria Categorias) {
+    public Categoria guardarCategorias(@NonNull Categoria Categorias) {
         return categoriaRepositorio.save(Categorias);
     }
 
     @Override
-    public Optional<Categoria> buscarCategoriasPorId(Integer id) {
+    public Optional<Categoria> buscarCategoriasPorId(@NonNull Integer id) {
         return categoriaRepositorio.findById(id);
     }
 
@@ -33,12 +34,12 @@ public class ServicioCategoria implements ImplementacionServicioCategoria {
     }
 
     @Override
-    public Categoria editarCategorias(Categoria Categorias) {
+    public Categoria editarCategorias(@NonNull Categoria Categorias) {
         return categoriaRepositorio.saveAndFlush(Categorias);
     }
 
     @Override
-    public void eliminarCategoriasPorId(Integer id) {
+    public void eliminarCategoriasPorId(@NonNull Integer id) {
         categoriaRepositorio.deleteById(id);
     }
 

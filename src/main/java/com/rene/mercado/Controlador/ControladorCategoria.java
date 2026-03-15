@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,7 +38,7 @@ public class ControladorCategoria {
     private ImplementacionServicioCategoria categoriaService;
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Categoria> traerCategoria(@PathVariable("id") Integer id) {
+    public ResponseEntity<Categoria> traerCategoria(@NonNull @PathVariable("id") Integer id) {
         Optional<Categoria> optCategoria = categoriaService.buscarCategoriasPorId(id);
         if (optCategoria.isPresent()) {
             Categoria categoria = optCategoria.get();
@@ -48,7 +49,7 @@ public class ControladorCategoria {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Categoria> agregarCategoria(@Valid @RequestBody Categoria categorias) {
+    public ResponseEntity<Categoria> agregarCategoria(@NonNull @Valid @RequestBody Categoria categorias) {
         Categoria categoria = categoriaService.guardarCategorias(categorias);
         return ResponseEntity
                 .created(URI.create("/Categoria" + categoria.getIdCategoria()))
@@ -56,17 +57,19 @@ public class ControladorCategoria {
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Categoria> editarCaduce(
-            @Valid @RequestBody Categoria categorias) {
+    public ResponseEntity<Categoria> editarCaduce(@NonNull @Valid @RequestBody Categoria categorias) {
         Categoria categoria = categoriaService.editarCategorias(categorias);
-        return categoriaService.buscarCategoriasPorId(categoria.getIdCategoria())
+        Integer id = categoria.getIdCategoria();
+        if (id == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return categoriaService.buscarCategoriasPorId(id)
                 .map(iterarActualizar -> ResponseEntity.ok(categoriaService.editarCategorias(categoria)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Categoria> eliminarCaduce(
-            @PathVariable("id") Integer id) {
+    public ResponseEntity<Categoria> eliminarCaduce(@NonNull @PathVariable("id") Integer id) {
         return categoriaService.buscarCategoriasPorId(id)
                 .map(iterarEliminacion -> {
                     categoriaService.eliminarCategoriasPorId(id);

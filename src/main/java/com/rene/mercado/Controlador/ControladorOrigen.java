@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,7 +38,7 @@ public class ControladorOrigen {
     private ImplementacionServicioOrigen origenServicio;
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Origen> traerOirgen(@PathVariable Integer id) {
+    public ResponseEntity<Origen> traerOirgen(@NonNull @PathVariable Integer id) {
         Optional<Origen> optOrigen = origenServicio.buscarOrigenPorId(id);
         if (optOrigen.isPresent()) {
             Origen origen = optOrigen.get();
@@ -48,7 +49,7 @@ public class ControladorOrigen {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Origen> agregarCaduce(@Valid @RequestBody Origen origenes) {
+    public ResponseEntity<Origen> agregarCaduce(@NonNull @Valid @RequestBody Origen origenes) {
         Origen origen = origenServicio.guardarOrigen(origenes);
         return ResponseEntity
                 .created(URI.create("/Caduce" + origen.getIdOrigen()))
@@ -56,15 +57,19 @@ public class ControladorOrigen {
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Origen> agregarOrigen(@Valid @RequestBody Origen origenes) {
+    public ResponseEntity<Origen> agregarOrigen(@NonNull @Valid @RequestBody Origen origenes) {
         Origen origen = origenServicio.editarOrigen(origenes);
-        return origenServicio.buscarOrigenPorId(origen.getIdOrigen())
+        Integer id = origen.getIdOrigen();
+        if (id == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return origenServicio.buscarOrigenPorId(id)
                 .map((iterarActualizar -> ResponseEntity.ok(origenServicio.editarOrigen(origen))))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Origen> eliminarOrigen(@PathVariable Integer id) {
+    public ResponseEntity<Origen> eliminarOrigen(@NonNull @PathVariable Integer id) {
         return origenServicio.buscarOrigenPorId(id).map(iterarEliminacion -> {
             origenServicio.eliminarOrigenPorId(id);
             return ResponseEntity.ok(iterarEliminacion);

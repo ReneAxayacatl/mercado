@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,10 +26,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @Controller
 @CrossOrigin(origins = "*", methods = {
-    RequestMethod.GET,
-    RequestMethod.POST,
-    RequestMethod.DELETE,
-    RequestMethod.PUT,
+        RequestMethod.GET,
+        RequestMethod.POST,
+        RequestMethod.DELETE,
+        RequestMethod.PUT,
 })
 @RequestMapping("/Ropa")
 public class ControladorRopa {
@@ -37,7 +38,7 @@ public class ControladorRopa {
     private ImplementacionServicioRopa ropaServicio;
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Ropa> traerCaduce(@PathVariable Integer id) {
+    public ResponseEntity<Ropa> traerCaduce(@NonNull @PathVariable Integer id) {
         Optional<Ropa> optRopa = ropaServicio.buscarRopasPorId(id);
         if (optRopa.isPresent()) {
             Ropa ropa = optRopa.get();
@@ -48,26 +49,29 @@ public class ControladorRopa {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Ropa> agregarRopa(@Valid @RequestBody Ropa ropas){
+    public ResponseEntity<Ropa> agregarRopa(@NonNull @Valid @RequestBody Ropa ropas) {
         Ropa ropa = ropaServicio.guardarRopas(ropas);
         return ResponseEntity.created(URI.create("/Ropa" + ropa.getIdRopa()))
                 .body(ropa);
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Ropa> editarRopa(@Valid @RequestBody Ropa ropas){
+    public ResponseEntity<Ropa> editarRopa(@NonNull @Valid @RequestBody Ropa ropas) {
         Ropa ropa = ropaServicio.editarRopas(ropas);
-        return ropaServicio.buscarRopasPorId(ropa.getIdRopa())
+        Integer id = ropa.getIdRopa();
+        if (id == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ropaServicio.buscarRopasPorId(id)
                 .map(iterarActualizar -> ResponseEntity.ok(ropaServicio.editarRopas(ropa)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-    
+
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Ropa> eliminarRopa(
-            @PathVariable Integer id) {
+    public ResponseEntity<Ropa> eliminarRopa(@NonNull @PathVariable Integer id) {
         return ropaServicio.buscarRopasPorId(id)
                 .map(iterarEliminacion -> {
-                    ropaServicio.eliminarRopasPorId(id);;
+                    ropaServicio.eliminarRopasPorId(id);
                     return ResponseEntity.ok(iterarEliminacion);
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());

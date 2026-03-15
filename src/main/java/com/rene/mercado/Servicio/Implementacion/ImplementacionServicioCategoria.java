@@ -3,16 +3,18 @@ package com.rene.mercado.Servicio.Implementacion;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.lang.NonNull;
+
 import com.rene.mercado.Modelo.Categoria;
 
 public interface ImplementacionServicioCategoria {
-    Categoria guardarCategorias(Categoria Categorias);
+    Categoria guardarCategorias(@NonNull Categoria Categorias);
 
-    Optional<Categoria> buscarCategoriasPorId(Integer idInteger);
+    Optional<Categoria> buscarCategoriasPorId(@NonNull Integer idInteger);
 
     List<Categoria> obtenerCategorias();
 
-    Categoria editarCategorias(Categoria Categorias);
+    Categoria editarCategorias(@NonNull Categoria Categorias);
 
-    void eliminarCategoriasPorId(Integer idInteger);
+    void eliminarCategoriasPorId(@NonNull Integer idInteger);
 }

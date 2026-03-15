@@ -6,11 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.rene.mercado.Modelo.Origen;
 import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioOrigen;
@@ -30,14 +32,14 @@ import org.springframework.web.bind.annotation.PutMapping;
         RequestMethod.DELETE,
         RequestMethod.PUT,
 })
-@RequestMapping("api/Origen")
+@RequestMapping("rene/api/Origen")
 public class RestControladorOrigen {
 
     @Autowired
     private ImplementacionServicioOrigen origenServicio;
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Origen> traerOirgen(@PathVariable Integer id) {
+    public ResponseEntity<Origen> traerOirgen(@NonNull @PathVariable Integer id) {
         Optional<Origen> optOrigen = origenServicio.buscarOrigenPorId(id);
         if (optOrigen.isPresent()) {
             Origen origen = optOrigen.get();
@@ -48,23 +50,29 @@ public class RestControladorOrigen {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Origen> agregarCaduce(@Valid @RequestBody Origen origenes) {
+    public ResponseEntity<Origen> agregarCaduce(@NonNull @Valid @RequestBody Origen origenes) {
         Origen origen = origenServicio.guardarOrigen(origenes);
-        return ResponseEntity
-                .created(URI.create("api/Caduce" + origen.getIdOrigen()))
-                .body(origen);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(origen.getIdOrigen())
+                .toUri();
+        return ResponseEntity.created(location).body(origen);
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Origen> agregarOrigen(@Valid @RequestBody Origen origenes) {
+    public ResponseEntity<Origen> agregarOrigen(@NonNull @Valid @RequestBody Origen origenes) {
         Origen origen = origenServicio.editarOrigen(origenes);
-        return origenServicio.buscarOrigenPorId(origen.getIdOrigen())
+        Integer id = origen.getIdOrigen();
+        if (id == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return origenServicio.buscarOrigenPorId(id)
                 .map((iterarActualizar -> ResponseEntity.ok(origenServicio.editarOrigen(origen))))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Origen> eliminarOrigen(@PathVariable Integer id) {
+    public ResponseEntity<Origen> eliminarOrigen(@NonNull @PathVariable Integer id) {
         return origenServicio.buscarOrigenPorId(id).map(iterarEliminacion -> {
             origenServicio.eliminarOrigenPorId(id);
             return ResponseEntity.ok(iterarEliminacion);

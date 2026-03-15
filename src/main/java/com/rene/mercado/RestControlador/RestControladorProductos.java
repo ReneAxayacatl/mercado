@@ -6,11 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.rene.mercado.Modelo.Productos;
 import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioProductos;
@@ -30,14 +32,14 @@ import org.springframework.web.bind.annotation.PutMapping;
         RequestMethod.DELETE,
         RequestMethod.PUT,
 })
-@RequestMapping("api/Productos")
+@RequestMapping("rene/api/Productos")
 public class RestControladorProductos {
 
     @Autowired
     private ImplementacionServicioProductos productoServicio;
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Productos> traerOrigen(@PathVariable Integer id) {
+    public ResponseEntity<Productos> traerOrigen(@NonNull @PathVariable Integer id) {
         Optional<Productos> optProducto = productoServicio.buscarProductosPorId(id);
         if (optProducto.isPresent()) {
             Productos producto = optProducto.get();
@@ -48,24 +50,29 @@ public class RestControladorProductos {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Productos> agregarProductos(@Valid @RequestBody Productos productos) {
+    public ResponseEntity<Productos> agregarProductos(@NonNull @Valid @RequestBody Productos productos) {
         Productos producto = productoServicio.guardarProductos(productos);
-        return ResponseEntity
-                .created(URI.create("api/Productos" + producto.getIdProducto()))
-                .body(producto);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(producto.getIdProducto())
+                .toUri();
+        return ResponseEntity.created(location).body(producto);
     }
 
     @PutMapping(path = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Productos> editarProductos(@Valid @RequestBody Productos productos) {
+    public ResponseEntity<Productos> editarProductos(@NonNull @Valid @RequestBody Productos productos) {
         Productos producto = productoServicio.editarProductos(productos);
-        return productoServicio.buscarProductosPorId(producto.getIdProducto())
+        Integer id = producto.getIdProducto();
+        if (id == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return productoServicio.buscarProductosPorId(id)
                 .map(iterarActualizar -> ResponseEntity.ok(productoServicio.editarProductos(producto)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Productos> eliminarProductos(
-            @PathVariable Integer id) {
+    public ResponseEntity<Productos> eliminarProductos(@NonNull @PathVariable Integer id) {
         return productoServicio.buscarProductosPorId(id)
                 .map(iterarEliminacion -> {
                     productoServicio.eliminarProductosPorId(id);

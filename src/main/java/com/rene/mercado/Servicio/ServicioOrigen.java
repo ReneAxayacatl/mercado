@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Modelo.Origen;
@@ -16,12 +17,12 @@ public class ServicioOrigen implements ImplementacionServicioOrigen {
     @Autowired
     private RepositorioOrigen origenRepositorio;
 
-    public Origen guardarOrigen(Origen Origen) {
+    public Origen guardarOrigen(@NonNull Origen Origen) {
         return origenRepositorio.save(Origen);
     }
 
     @Override
-    public Optional<Origen> buscarOrigenPorId(Integer id) {
+    public Optional<Origen> buscarOrigenPorId(@NonNull Integer id) {
         return origenRepositorio.findById(id);
     }
 
@@ -31,12 +32,12 @@ public class ServicioOrigen implements ImplementacionServicioOrigen {
     }
 
     @Override
-    public Origen editarOrigen(Origen origen) {
+    public Origen editarOrigen(@NonNull Origen origen) {
         return origenRepositorio.saveAndFlush(origen);
     }
 
     @Override
-    public void eliminarOrigenPorId(Integer id) {
+    public void eliminarOrigenPorId(@NonNull Integer id) {
         origenRepositorio.deleteById(id);
     }
 }

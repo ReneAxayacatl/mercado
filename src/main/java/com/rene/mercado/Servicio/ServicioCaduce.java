@@ -18,14 +18,14 @@ public class ServicioCaduce implements ImplementacionServicioCaduce {
     private RepositorioCaduce caduceRepositorio;
 
     @Override
-    public Caduce guardarCaduce(Caduce Caduce) {
+    public Caduce guardarCaduce(@NonNull Caduce Caduce) {
         return caduceRepositorio.save(Caduce);
     }
 
     @Override
     public Optional<Caduce> buscarCaducePorId(@NonNull Integer id) {
         return caduceRepositorio.findById(id);
-        
+
     }
 
     @Override
@@ -34,12 +34,12 @@ public class ServicioCaduce implements ImplementacionServicioCaduce {
     }
 
     @Override
-    public Caduce editarCaduce(Caduce Caduce) {
+    public Caduce editarCaduce(@NonNull Caduce Caduce) {
         return caduceRepositorio.saveAndFlush(Caduce);
     }
 
     @Override
-    public void eliminarCaducePorId(Integer id) {
+    public void eliminarCaducePorId(@NonNull Integer id) {
         caduceRepositorio.deleteById(id);
     }
 

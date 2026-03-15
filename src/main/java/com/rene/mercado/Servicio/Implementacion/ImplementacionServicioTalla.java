@@ -3,17 +3,19 @@ package com.rene.mercado.Servicio.Implementacion;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.lang.NonNull;
+
 import com.rene.mercado.Modelo.Talla;
 
 public interface ImplementacionServicioTalla {
 
-    Talla guardarTallas(Talla Tallas);
+    Talla guardarTallas(@NonNull Talla Tallas);
 
-    Optional<Talla> buscarTallaPorId(Integer idInteger);
+    Optional<Talla> buscarTallaPorId(@NonNull Integer idInteger);
 
     List<Talla> obtenerTallas();
 
-    Talla editarTallas(Talla Talla);
+    Talla editarTallas(@NonNull Talla Talla);
 
-    void eliminarTallasPorId(Integer id);
+    void eliminarTallasPorId(@NonNull Integer id);
 }

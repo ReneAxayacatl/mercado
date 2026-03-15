@@ -10,13 +10,13 @@ import com.rene.mercado.Modelo.Caduce;
 
 public interface ImplementacionServicioCaduce {
 
-    Caduce guardarCaduce(Caduce Caduce);
+    Caduce guardarCaduce(@NonNull Caduce Caduce);
 
     Optional<Caduce> buscarCaducePorId(@NonNull Integer id);
 
     List<Caduce> obtenerCaduce();
 
-    Caduce editarCaduce(Caduce Caduce);
+    Caduce editarCaduce(@NonNull Caduce Caduce);
 
-    void eliminarCaducePorId(Integer id);
+    void eliminarCaducePorId(@NonNull Integer id);
 }

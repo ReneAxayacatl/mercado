@@ -3,17 +3,19 @@ package com.rene.mercado.Servicio.Implementacion;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.lang.NonNull;
+
 import com.rene.mercado.Modelo.Ropa;
 
 public interface ImplementacionServicioRopa {
 
-    Ropa guardarRopas(Ropa Ropas);
+    Ropa guardarRopas(@NonNull Ropa Ropas);
 
-    Optional<Ropa> buscarRopasPorId(Integer idInteger);
+    Optional<Ropa> buscarRopasPorId(@NonNull Integer idInteger);
 
     List<Ropa> obtenerRopas();
 
-    Ropa editarRopas(Ropa Ropa);
+    Ropa editarRopas(@NonNull Ropa Ropa);
 
-    void eliminarRopasPorId(Integer idInteger);
+    void eliminarRopasPorId(@NonNull Integer idInteger);
 }

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,7 +38,7 @@ public class ControladorComida {
     private ImplementacionServicioComida comidaServicio;
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Comida> traerCaduce(@PathVariable("id") Integer id) {
+    public ResponseEntity<Comida> traerCaduce(@NonNull @PathVariable("id") Integer id) {
         Optional<Comida> optComida = comidaServicio.buscarComidasPorId(id);
         if (optComida.isPresent()) {
             Comida comida = optComida.get();
@@ -48,7 +49,7 @@ public class ControladorComida {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Comida> agregarCaduce(@Valid @RequestBody Comida comidas) {
+    public ResponseEntity<Comida> agregarCaduce(@NonNull @Valid @RequestBody Comida comidas) {
         Comida comida = comidaServicio.guardarComidas(comidas);
         return ResponseEntity
                 .created(URI.create("/Caduce" + comida.getIdComida()))
@@ -56,16 +57,19 @@ public class ControladorComida {
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Comida> editarComida(@Valid @RequestBody Comida comidas) {
+    public ResponseEntity<Comida> editarComida(@NonNull @Valid @RequestBody Comida comidas) {
         Comida comida = comidaServicio.editarComidas(comidas);
-        return comidaServicio.buscarComidasPorId(comida.getIdComida())
+        Integer id = comida.getIdComida();
+        if (id == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return comidaServicio.buscarComidasPorId(id)
                 .map(iterarActualizar -> ResponseEntity.ok(comidaServicio.editarComidas(comida)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Comida> eliminarComida(
-            @PathVariable Integer id) {
+    public ResponseEntity<Comida> eliminarComida(@NonNull @PathVariable Integer id) {
         return comidaServicio.buscarComidasPorId(id)
                 .map(iterarEliminacion -> {
                     comidaServicio.eliminarComidasPorId(id);

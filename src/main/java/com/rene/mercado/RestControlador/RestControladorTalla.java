@@ -6,12 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import jakarta.validation.Valid;
 
@@ -39,7 +41,7 @@ public class RestControladorTalla {
   private ImplementacionServicioTalla tallasService;
 
   @GetMapping(path = TALLAS_ENDPOINT + "/{id}")
-  public ResponseEntity<Talla> traerTallas(@PathVariable("id") Integer id) {
+  public ResponseEntity<Talla> traerTallas(@NonNull @PathVariable("id") Integer id) {
     Optional<Talla> optTallas = tallasService.buscarTallaPorId(id);
     if (optTallas.isPresent()) {
       Talla tallas = optTallas.get();
@@ -50,25 +52,29 @@ public class RestControladorTalla {
   }
 
   @PostMapping(path = TALLAS_ENDPOINT, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Talla> agregarTallas(@Valid @RequestBody Talla tallas) {
+  public ResponseEntity<Talla> agregarTallas(@NonNull @Valid @RequestBody Talla tallas) {
     Talla talla = tallasService.guardarTallas(tallas);
-    return ResponseEntity
-        .created(URI.create("/rene/api/Tallas" + talla.getIdTalla()))
-        .body(talla);
+    URI location = ServletUriComponentsBuilder
+        .fromCurrentRequest()
+        .path("{/id}")
+        .buildAndExpand(talla.getIdTalla()).toUri();
+    return ResponseEntity.created(location).body(talla);
   }
 
   @PutMapping(path = TALLAS_ENDPOINT, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Talla> editarTallas(
-      @Valid @RequestBody Talla tallas) {
+  public ResponseEntity<Talla> editarTallas(@Valid @RequestBody @NonNull Talla tallas) {
     Talla talla = tallasService.editarTallas(tallas);
-    return tallasService.buscarTallaPorId(talla.getIdTalla())
+    Integer id = talla.getIdTalla();
+    if (id == null) {
+      return ResponseEntity.badRequest().build();
+    }
+    return tallasService.buscarTallaPorId(id)
         .map(c -> ResponseEntity.ok(tallasService.editarTallas(talla)))
         .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
   @DeleteMapping(path = TALLAS_ENDPOINT + "/{id}")
-  public ResponseEntity<Talla> eliminarTallas(
-      @PathVariable("id") Integer id) {
+  public ResponseEntity<Talla> eliminarTallas(@NonNull @PathVariable("id") Integer id) {
     return tallasService.buscarTallaPorId(id)
         .map(iterarEliminacion -> {
           tallasService.eliminarTallasPorId(id);

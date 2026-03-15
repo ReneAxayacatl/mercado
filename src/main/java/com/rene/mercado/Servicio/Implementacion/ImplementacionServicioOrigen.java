@@ -3,16 +3,18 @@ package com.rene.mercado.Servicio.Implementacion;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.lang.NonNull;
+
 import com.rene.mercado.Modelo.Origen;
 
 public interface ImplementacionServicioOrigen {
-    Origen guardarOrigen(Origen Origen);
+    Origen guardarOrigen(@NonNull Origen Origen);
 
-    Optional<Origen> buscarOrigenPorId(Integer idInteger);
+    Optional<Origen> buscarOrigenPorId(@NonNull Integer idInteger);
 
     List<Origen> obtenerOrigen();
 
-    Origen editarOrigen(Origen Origen);
+    Origen editarOrigen(@NonNull Origen Origen);
 
-    void eliminarOrigenPorId(Integer idInteger);
+    void eliminarOrigenPorId(@NonNull Integer idInteger);
 }

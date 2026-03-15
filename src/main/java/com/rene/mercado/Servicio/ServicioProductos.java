@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Modelo.Productos;
@@ -18,12 +19,12 @@ public class ServicioProductos implements ImplementacionServicioProductos {
     private RepositorioProductos productosRepositorio;
 
     @Override
-    public Productos guardarProductos(Productos producto) {
+    public Productos guardarProductos(@NonNull Productos producto) {
         return productosRepositorio.save(producto);
     }
 
     @Override
-    public Optional<Productos> buscarProductosPorId(Integer id) {
+    public Optional<Productos> buscarProductosPorId(@NonNull Integer id) {
         return productosRepositorio.findById(id);
     }
 
@@ -33,12 +34,12 @@ public class ServicioProductos implements ImplementacionServicioProductos {
     }
 
     @Override
-    public Productos editarProductos(Productos producto) {
+    public Productos editarProductos(@NonNull Productos producto) {
         return productosRepositorio.saveAndFlush(producto);
     }
 
     @Override
-    public void eliminarProductosPorId(Integer id) {
+    public void eliminarProductosPorId(@NonNull Integer id) {
         productosRepositorio.deleteById(id);
     }
 

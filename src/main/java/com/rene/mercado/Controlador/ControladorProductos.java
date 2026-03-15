@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,7 +38,7 @@ public class ControladorProductos {
     private ImplementacionServicioProductos productoServicio;
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Productos> traerOrigen(@PathVariable Integer id) {
+    public ResponseEntity<Productos> traerOrigen(@NonNull @PathVariable Integer id) {
         Optional<Productos> optProducto = productoServicio.buscarProductosPorId(id);
         if (optProducto.isPresent()) {
             Productos producto = optProducto.get();
@@ -48,7 +49,7 @@ public class ControladorProductos {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Productos> agregarProductos(@Valid @RequestBody Productos productos) {
+    public ResponseEntity<Productos> agregarProductos(@NonNull @Valid @RequestBody Productos productos) {
         Productos producto = productoServicio.guardarProductos(productos);
         return ResponseEntity
                 .created(URI.create("/Productos" + producto.getIdProducto()))
@@ -56,16 +57,19 @@ public class ControladorProductos {
     }
 
     @PutMapping(path = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Productos> editarProductos(@Valid @RequestBody Productos productos) {
+    public ResponseEntity<Productos> editarProductos(@NonNull @Valid @RequestBody Productos productos) {
         Productos producto = productoServicio.editarProductos(productos);
-        return productoServicio.buscarProductosPorId(producto.getIdProducto())
+        Integer id = producto.getIdProducto();
+        if (id == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return productoServicio.buscarProductosPorId(id)
                 .map(iterarActualizar -> ResponseEntity.ok(productoServicio.editarProductos(producto)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Productos> eliminarProductos(
-            @PathVariable Integer id) {
+    public ResponseEntity<Productos> eliminarProductos(@NonNull @PathVariable Integer id) {
         return productoServicio.buscarProductosPorId(id)
                 .map(iterarEliminacion -> {
                     productoServicio.eliminarProductosPorId(id);
