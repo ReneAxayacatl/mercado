@@ -39,6 +39,10 @@ public class ControladorTalla {
   @Autowired
   private ImplementacionServicioTalla tallasService;
 
+  // @GetMapping(path = TALLAS_ENDPOINT)
+  // public String tallas() {
+  // return "tallas";
+  // }
   @GetMapping(path = TALLAS_ENDPOINT + "/{id}")
   public ResponseEntity<Talla> traerTallas(@NonNull @PathVariable("id") Integer id) {
     Optional<Talla> optTallas = tallasService.buscarTallaPorId(id);

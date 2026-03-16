@@ -30,7 +30,7 @@ public class ServicioRopa implements ImplementacionServicioRopa {
 
     @Override
     public List<Ropa> obtenerRopas() {
-        return ropaRepositorio.findAll();
+        return ropaRepositorio.listarRopa();
     }
 
     @Override

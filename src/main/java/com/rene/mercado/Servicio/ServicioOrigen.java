@@ -28,7 +28,7 @@ public class ServicioOrigen implements ImplementacionServicioOrigen {
 
     @Override
     public List<Origen> obtenerOrigen() {
-        return origenRepositorio.findAll();
+        return origenRepositorio.listarOrigen();
     }
 
     @Override

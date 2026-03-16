@@ -30,7 +30,7 @@ public class ServicioCaduce implements ImplementacionServicioCaduce {
 
     @Override
     public List<Caduce> obtenerCaduce() {
-        return caduceRepositorio.findAll();
+        return caduceRepositorio.listarCaduce();
     }
 
     @Override

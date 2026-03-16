@@ -1,0 +1,31 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Caduce</title>
+  </head>
+  <body>
+    <h2>Caduce</h2>
+
+    <a th:href="@{/caduce/nuevo}"> Nuevo </a>
+
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Tipo</th>
+        <th>Eliminar</th>
+      </tr>
+
+      <tr th:each="c:${caduce}">
+        <td th:text="${c.idCaduce}"></td>
+
+        <td th:text="${c.caduce}"></td>
+
+        <td>
+          <a th:href="@{'/caduce/eliminar/'+${c.idCaduce}}"> Eliminar </a>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

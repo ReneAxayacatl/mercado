@@ -1,0 +1,21 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Caduce</title>
+  </head>
+  <body>
+    <form th:action="@{/caduce/guardar}" th:object="${caduce}" method="post">
+      <label>ID Caduce</label>
+      <input type="number" th:field="*{idCaduce}" />
+      <br /><br />
+
+      <label>No Caduce(1) - Caduce(2)</label>
+      <input type="text" th:field="*{caduce}" />
+      <br /><br />
+
+      <button type="submit">Guardar</button>
+    </form>
+  </body>
+</html>

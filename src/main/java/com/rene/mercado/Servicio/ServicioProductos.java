@@ -30,7 +30,7 @@ public class ServicioProductos implements ImplementacionServicioProductos {
 
     @Override
     public List<Productos> obtenerProductos() {
-        return productosRepositorio.findAll();
+        return productosRepositorio.listarProductos();
     }
 
     @Override

@@ -30,7 +30,7 @@ public class ServicioTalla implements ImplementacionServicioTalla {
 
     @Override
     public List<Talla> obtenerTallas() {
-        return tallaRepositorio.findAll();
+        return tallaRepositorio.listarTallas();
     }
 
     @Override

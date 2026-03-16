@@ -1,0 +1,33 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Productos</title>
+  </head>
+  <body>
+    <form
+      th:action="@{/productos/guardar}"
+      th:object="${productos}"
+      method="post"
+    >
+      <input type="hidden" th:field="*{idProducto}" />
+
+      Precio
+
+      <input type="text" th:field="*{precioUnit}" />
+
+      Categoria
+
+      <select th:field="*{categoria}">
+        <option
+          th:each="c:${categorias}"
+          th:value="${c}"
+          th:text="${c.nombreCategoria}"
+        ></option>
+      </select>
+
+      <button type="submit">Guardar</button>
+    </form>
+  </body>
+</html>

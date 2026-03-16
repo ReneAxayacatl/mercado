@@ -12,13 +12,17 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rene.mercado.Modelo.Categoria;
+import com.rene.mercado.Modelo.Productos;
+import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCaduce;
 import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCategoria;
 
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,50 +35,101 @@ import org.springframework.web.bind.annotation.RequestBody;
         RequestMethod.DELETE,
         RequestMethod.PUT,
 })
-@RequestMapping("/Categoria")
+@RequestMapping("/categoria")
 public class ControladorCategoria {
 
     @Autowired
     private ImplementacionServicioCategoria categoriaService;
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Categoria> traerCategoria(@NonNull @PathVariable("id") Integer id) {
-        Optional<Categoria> optCategoria = categoriaService.buscarCategoriasPorId(id);
-        if (optCategoria.isPresent()) {
-            Categoria categoria = optCategoria.get();
-            return ResponseEntity.ok(categoria);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @Autowired
+    private ImplementacionServicioCaduce caduceService;
+
+    @GetMapping
+    public ModelAndView listar() {
+
+        ModelAndView mav = new ModelAndView("categorias/lista");
+
+        mav.addObject("categorias",
+                categoriaService.obtenerCategorias());
+
+        return mav;
+
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Categoria> agregarCategoria(@NonNull @Valid @RequestBody Categoria categorias) {
-        Categoria categoria = categoriaService.guardarCategorias(categorias);
-        return ResponseEntity
-                .created(URI.create("/Categoria" + categoria.getIdCategoria()))
-                .body(categoria);
+    @GetMapping("/nuevo")
+    public ModelAndView nuevo() {
+
+        ModelAndView mav = new ModelAndView("categorias/formulario");
+
+        mav.addObject("categorias", new Categoria());
+        mav.addObject("caduces", caduceService.obtenerCaduce());
+
+        return mav;
+
     }
 
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Categoria> editarCaduce(@NonNull @Valid @RequestBody Categoria categorias) {
-        Categoria categoria = categoriaService.editarCategorias(categorias);
-        Integer id = categoria.getIdCategoria();
-        if (id == null) {
-            return ResponseEntity.badRequest().build();
-        }
-        return categoriaService.buscarCategoriasPorId(id)
-                .map(iterarActualizar -> ResponseEntity.ok(categoriaService.editarCategorias(categoria)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    @PostMapping("/guardar")
+    public String guardar(@NonNull @ModelAttribute Categoria c) {
+
+        categoriaService.guardarCategorias(c);
+
+        return "redirect:/categorias";
+
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Categoria> eliminarCaduce(@NonNull @PathVariable("id") Integer id) {
-        return categoriaService.buscarCategoriasPorId(id)
-                .map(iterarEliminacion -> {
-                    categoriaService.eliminarCategoriasPorId(id);
-                    return ResponseEntity.ok(iterarEliminacion);
-                })
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@NonNull @PathVariable Integer id) {
+
+        categoriaService.eliminarCategoriasPorId(id);
+
+        return "redirect:/categorias";
+
     }
+
+    // @GetMapping(path = "/{id}")
+    // public ResponseEntity<Categoria> traerCategoria(@NonNull @PathVariable("id")
+    // Integer id) {
+    // Optional<Categoria> optCategoria =
+    // categoriaService.buscarCategoriasPorId(id);
+    // if (optCategoria.isPresent()) {
+    // Categoria categoria = optCategoria.get();
+    // return ResponseEntity.ok(categoria);
+    // } else {
+    // return ResponseEntity.notFound().build();
+    // }
+    // }
+
+    // @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<Categoria> agregarCategoria(@NonNull @Valid
+    // @RequestBody Categoria categorias) {
+    // Categoria categoria = categoriaService.guardarCategorias(categorias);
+    // return ResponseEntity
+    // .created(URI.create("/Categoria" + categoria.getIdCategoria()))
+    // .body(categoria);
+    // }
+
+    // @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<Categoria> editarCaduce(@NonNull @Valid @RequestBody
+    // Categoria categorias) {
+    // Categoria categoria = categoriaService.editarCategorias(categorias);
+    // Integer id = categoria.getIdCategoria();
+    // if (id == null) {
+    // return ResponseEntity.badRequest().build();
+    // }
+    // return categoriaService.buscarCategoriasPorId(id)
+    // .map(iterarActualizar ->
+    // ResponseEntity.ok(categoriaService.editarCategorias(categoria)))
+    // .orElseGet(() -> ResponseEntity.notFound().build());
+    // }
+
+    // @DeleteMapping(path = "/{id}")
+    // public ResponseEntity<Categoria> eliminarCaduce(@NonNull @PathVariable("id")
+    // Integer id) {
+    // return categoriaService.buscarCategoriasPorId(id)
+    // .map(iterarEliminacion -> {
+    // categoriaService.eliminarCategoriasPorId(id);
+    // return ResponseEntity.ok(iterarEliminacion);
+    // })
+    // .orElseGet(() -> ResponseEntity.notFound().build());
+    // }
 }

@@ -1,0 +1,35 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario Categoria</title>
+  </head>
+  <body>
+    <h2>Formulario Categoria</h2>
+
+    <form
+      th:action="@{/categoria/guardar}"
+      th:object="${categorias}"
+      method="post"
+    >
+      <input type="hidden" th:field="*{idCategoria}" />
+
+      Nombre
+
+      <input type="text" th:field="*{nombreCategoria}" />
+
+      Caduce
+
+      <select th:field="*{caduce}">
+        <option
+          th:each="c : ${caduces}"
+          th:value="${c.idCaduce}"
+          th:text="${c.caduce}"
+        ></option>
+      </select>
+
+      <button type="submit">Guardar</button>
+    </form>
+  </body>
+</html>
