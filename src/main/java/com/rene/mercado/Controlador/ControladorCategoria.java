@@ -73,8 +73,21 @@ public class ControladorCategoria {
 
         categoriaService.guardarCategorias(c);
 
-        return "redirect:/categorias";
+        return "redirect:/categoria";
 
+    }
+
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@NonNull @PathVariable Integer id) {
+
+        ModelAndView mav = new ModelAndView("categorias/formulario");
+
+        Categoria categoria = categoriaService.buscarCategoriasPorId(id).orElseThrow();
+
+        mav.addObject("categorias", categoria);
+        mav.addObject("caduces", caduceService.obtenerCaduce());
+
+        return mav;
     }
 
     @GetMapping("/eliminar/{id}")
@@ -82,7 +95,7 @@ public class ControladorCategoria {
 
         categoriaService.eliminarCategoriasPorId(id);
 
-        return "redirect:/categorias";
+        return "redirect:/categoria";
 
     }
 

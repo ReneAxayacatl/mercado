@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rene.mercado.Modelo.Categoria;
 import com.rene.mercado.Modelo.Productos;
 import com.rene.mercado.Servicio.ServicioCategoria;
+import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCaduce;
 import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCategoria;
 import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioProductos;
 
@@ -42,6 +44,8 @@ public class ControladorProductos {
     private ImplementacionServicioProductos productoServicio;
     @Autowired
     private ImplementacionServicioCategoria categoriaService;
+    @Autowired
+    private ImplementacionServicioCaduce caduceService;
 
     @GetMapping
     public ModelAndView listar() {
@@ -74,6 +78,18 @@ public class ControladorProductos {
 
         return "redirect:/productos";
 
+    }
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@NonNull @PathVariable Integer id) {
+
+        ModelAndView mav = new ModelAndView("productos/formulario");
+
+        Productos producto = productoServicio.buscarProductosPorId(id).orElseThrow();
+
+        mav.addObject("productos", producto);
+        mav.addObject("categorias", categoriaService.obtenerCategorias());
+
+        return mav;
     }
 
     @GetMapping("/eliminar/{id}")
