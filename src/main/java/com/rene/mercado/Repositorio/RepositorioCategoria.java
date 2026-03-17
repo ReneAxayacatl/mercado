@@ -9,6 +9,6 @@ import com.rene.mercado.Modelo.Categoria;
 
 public interface RepositorioCategoria
                 extends JpaRepository<Categoria, Integer> {
-        @Query("SELECT c FROM Categoria c JOIN c.caduce d")
+        @Query("SELECT c FROM Categoria c JOIN c.caduce d")             // Query JPQL que obtiene las categorias que tengan relacion con caduce
         List<Categoria> listarCategorias();
 }

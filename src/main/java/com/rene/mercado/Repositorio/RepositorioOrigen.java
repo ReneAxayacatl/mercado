@@ -9,6 +9,6 @@ import com.rene.mercado.Modelo.Origen;
 
 public interface RepositorioOrigen
                 extends JpaRepository<Origen, Integer> {
-        @Query("SELECT o FROM Origen o ORDER BY o.nombreOrigen")
+        @Query("SELECT o FROM Origen o ORDER BY o.nombreOrigen")        // Query JPQL que obtiene Origen y esta ordenado por Nombre de Origen
         List<Origen> listarOrigen();
 }

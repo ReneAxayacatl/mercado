@@ -1,34 +1,34 @@
 package com.rene.mercado.Controlador;
 
-import java.net.URI;
-import java.util.Optional;
+// import java.net.URI;
+// import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+// import org.springframework.http.MediaType;
+// import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
+// import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.rene.mercado.Modelo.Categoria;
+// import com.rene.mercado.Modelo.Categoria;
 import com.rene.mercado.Modelo.Productos;
-import com.rene.mercado.Servicio.ServicioCategoria;
-import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCaduce;
+// import com.rene.mercado.Servicio.ServicioCategoria;
+// import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCaduce;
 import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCategoria;
 import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioProductos;
 
-import jakarta.validation.Valid;
+// import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
+// import org.springframework.web.bind.annotation.RequestBody;
+// import org.springframework.web.bind.annotation.PutMapping;
 
 @Controller
 @CrossOrigin(origins = "*", methods = {
@@ -45,7 +45,7 @@ public class ControladorProductos {
     @Autowired
     private ImplementacionServicioCategoria categoriaService;
     @Autowired
-    private ImplementacionServicioCaduce caduceService;
+    // private ImplementacionServicioCaduce caduceService;
 
     @GetMapping
     public ModelAndView listar() {

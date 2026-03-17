@@ -11,6 +11,6 @@ import com.rene.mercado.Modelo.Talla;
 @Repository
 public interface RepositorioTalla
                 extends JpaRepository<Talla, Integer> {
-        @Query("SELECT t FROM Talla t ORDER BY t.tipoTalla")
+        @Query("SELECT t FROM Talla t ORDER BY t.tipoTalla")    // Query JPQL que obtiene Tallas y esta ordenada por Tipo de Talla
         List<Talla> listarTallas();
 }

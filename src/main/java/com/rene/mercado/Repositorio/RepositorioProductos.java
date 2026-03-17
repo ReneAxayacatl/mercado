@@ -10,6 +10,6 @@ import com.rene.mercado.Modelo.Productos;
 public interface RepositorioProductos
                 extends JpaRepository<Productos, Integer> {
         // @Query("SELECT p FROM Productos p JOIN p.categoria c")
-        @Query("SELECT p FROM Productos p JOIN p.categoria c JOIN c.caduce d")
+        @Query("SELECT p FROM Productos p JOIN p.categoria c JOIN c.caduce d")  // Query JPQL que obtiene Productos que tenga categoria y esta tenga o no caducidad
         List<Productos> listarProductos();
 }

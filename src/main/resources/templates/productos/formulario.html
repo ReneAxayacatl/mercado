@@ -20,16 +20,14 @@
       Categoria
 
       <select th:field="*{categoria.idCategoria}">
+        <option value="">Seleccione una categoria</option>
 
-  <option value="">Seleccione una categoria</option>
-
-  <option
-    th:each="c : ${categorias}"
-    th:value="${c.idCategoria}"
-    th:text="${c.nombreCategoria}">
-  </option>
-
-</select>
+        <option
+          th:each="c : ${categorias}"
+          th:value="${c.idCategoria}"
+          th:text="${c.nombreCategoria}"
+        ></option>
+      </select>
 
       <button type="submit">Guardar</button>
     </form>

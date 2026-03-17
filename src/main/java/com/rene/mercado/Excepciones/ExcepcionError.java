@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class ExcepcionError {
 
-    private String mensaje;     // Da el mensaje de la Escepcion
-    private String error;       // Da el 
-    private int estado;
-    private Date fecha;
-    private String URI;
+    private String mensaje;     // para asignar el mensaje de error
+    private String error;       // para asignar la cadena de erorres
+    private int estado;         // muestra el tipo de error (Ejemplo: 400, 404, 500, etc...)
+    private Date fecha;         // muestra la fecha que se genero el error
+    private String URI;         // muestra la Uri del error
 
 }

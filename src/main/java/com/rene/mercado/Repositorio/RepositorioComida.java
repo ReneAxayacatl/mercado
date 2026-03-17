@@ -10,6 +10,6 @@ import com.rene.mercado.Modelo.Comida;
 public interface RepositorioComida
                 extends JpaRepository<Comida, Integer> {
         // @Query("SELECT c FROM Comida c JOIN c.producto p")
-        @Query("SELECT c FROM Comida c JOIN c.producto p JOIN p.categoria cat")
+        @Query("SELECT c FROM Comida c JOIN c.producto p JOIN p.categoria cat")         // Query JPQL que obtiene Comida que tenga relacion con producto y producto a categoria
         List<Comida> listarComida();
 }
