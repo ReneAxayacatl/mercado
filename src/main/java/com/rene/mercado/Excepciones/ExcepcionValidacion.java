@@ -5,16 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpHeaders;
-// import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-// import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
-// import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
@@ -49,23 +46,6 @@ public class ExcepcionValidacion extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(excepcionError, headers, status);
     }
 
-    // @ExceptionHandler(NoHandlerFoundException.class)
-    // public ResponseEntity<Object> manejar404(
-    // NoHandlerFoundException ex,
-    // WebRequest request) {
-
-    // ExcepcionError error = new ExcepcionError();
-    // error.setMensaje("Recurso no encontrado");
-    // error.setError(ex.getMessage());
-    // error.setEstado(404);
-    // error.setFecha(new Date());
-
-    // String uri = request.getDescription(false);
-    // error.setURI("URI: " + uri);
-
-    // return new ResponseEntity<>(error, HttpStatusCode.valueOf(404));
-    // }
-
     @Override
     protected ResponseEntity<Object> handleNoResourceFoundException(        // Metodo para manejar errores(excepciones) 404
             @NonNull NoResourceFoundException ex,                           // Trae el mensaje del error de recurso estatico o ruta mapeada
@@ -84,8 +64,5 @@ public class ExcepcionValidacion extends ResponseEntityExceptionHandler {
                                                                             // Devuelve la respuesta con tu objeto personalizado
         return new ResponseEntity<>(error, headers, status);
     }
-
-    // @Override
-    // protected Res
 
 }
