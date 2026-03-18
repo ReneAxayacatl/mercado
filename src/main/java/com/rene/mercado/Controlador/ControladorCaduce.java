@@ -19,18 +19,18 @@ import com.rene.mercado.Modelo.Caduce;
 import com.rene.mercado.Servicio.ServicioCaduce;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@Controller // Componente que regresa nuestras peticiones con vista Thymeleaf y ModelAndView
-@CrossOrigin(origins = "*", methods = { // Anotacion para manejar peticiones completas Crud
+@Controller                                                           // Componente que regresa nuestras peticiones con vista Thymeleaf y ModelAndView
+@CrossOrigin(origins = "*", methods = {                               // Anotacion para manejar peticiones completas CRUD
         RequestMethod.GET,
         RequestMethod.POST,
         RequestMethod.DELETE,
         RequestMethod.PUT,
 })
-@RequestMapping("/caduce") // Ruta global base que manejara toda la clase ControladorCaduce
+@RequestMapping("/caduce")                                           // Ruta global base que manejara toda la clase ControladorCaduce
 public class ControladorCaduce {
 
     @Autowired
-    private ServicioCaduce caduceService;                            // Inyeccion de la dependencia servicio caduce 'caduceService'
+    private ServicioCaduce caduceService;                            // Inyeccion de la dependencia servicio caduce para usar sus metodos definidos
 
     @GetMapping // Funcion que muestra la lista de los registros de caducidad registrados (TOP)
     public ModelAndView listar() {
@@ -41,8 +41,8 @@ public class ControladorCaduce {
         modelAndView = new ModelAndView();                           // Inicialización de la variable de tipo ModelAndView
         listaDatosCaduce = caduceService.obtenerCaduce();            // Obtener los datos registrado de caduce.
 
-        modelAndView.addObject("listDatosCaduce", listaDatosCaduce); // Obtenemos lista de Caduce para nuestro atributo listDatosCaduce.
-        modelAndView.setViewName("caduce/lista");                    // Asignamos la vista 'caduce/lista' a nuestro objeto modelAndView
+        modelAndView.setViewName("caduce/lista");                    // Asignamos la vista de nuestra lista para visualizar los registros.
+        modelAndView.addObject("listDatosCaduce", listaDatosCaduce); // Obtenemos la lista de Caduce para nuestro atributo listDatosCaduce.
 
         return modelAndView;
     } // Funcion que muestra la lista de los registros de caducidad registrados (BOTTOM)
@@ -50,7 +50,7 @@ public class ControladorCaduce {
     @GetMapping("/nuevo") // Funcion que crea un nuevo registro de caducidad (TOP)
     public ModelAndView nuevo() {
 
-        ModelAndView modelAndView = null;                            // Variable que almacena la vista y los datos que se van a mostrar en la vista 'caduce'
+        ModelAndView modelAndView = null;                            // Variable que almacena las operaciones de la vista de caduce
 
         modelAndView = new ModelAndView();                           // Inicialización de la variable de tipo ModelAndView
         modelAndView.setViewName("caduce/formulario");               // Definimos la vista para mostrar el formulario de registro de caduce
@@ -62,7 +62,7 @@ public class ControladorCaduce {
     @PostMapping("/guardar") // Funcion que guarda los registros de caducidad (TOP)
     public ModelAndView guardar(@NonNull @ModelAttribute Caduce caduce) {
 
-        ModelAndView modelAndView = null;                            // Variable que almacena la vista y los datos que se van a mostrar en la vista 'caduce'
+        ModelAndView modelAndView = null;                            // Variable que almacena las operaciones de la vista caduce
 
         modelAndView = new ModelAndView();                          // Inicialización de la variable de tipo ModelAndView
         caduceService.guardarCaduce(caduce);                        // Guardamos el objeto caduce que recibimos del formulario de los registros a través del servicio caduceService
@@ -72,15 +72,15 @@ public class ControladorCaduce {
         return modelAndView;
     } // Funcion que guarda los registros de caducidad (BOTTOM)
 
-    @PostMapping("/eliminar") // Funcion que guarda los registros de caducidad (TOP)
+    @PostMapping("/eliminar") // Funcion que elimina los registros de caducidad (TOP)
     public ModelAndView eliminar(@NonNull @RequestParam Integer id) {
 
-        ModelAndView modelAndView = null;                           // Variable que almacena la vista y los datos que se van a mostrar en la vista 'caduce'
+        ModelAndView modelAndView = null;                           // Variable que almacena las operaciones de la vista caduce
 
         modelAndView = new ModelAndView();                          // Inicialización de la variable de tipo ModelAndView
         caduceService.eliminarCaducePorId(id);                      // Eliminamos el registro de caducidad por su id a través del servicio caduceService
 
         modelAndView.setViewName("redirect:/caduce");               // Definimos la vista para redireccionar a la lista de los registros de caducidad después de eliminar un registro
         return modelAndView;
-    } // Funcion que guarda los registros de caducidad (BOTTOM)
+    } // Funcion que elimina los registros de caducidad (BOTTOM)
 }
