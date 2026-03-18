@@ -21,7 +21,7 @@
 
       ¿Caduce? = No Caduce(1) - Caduce(2)
 
-      <select th:field="*{caduce}">
+      <select th:field="*{caduce.idCaduce}">
         <option
           th:each="c : ${caduces}"
           th:value="${c.idCaduce}"

@@ -9,13 +9,13 @@ import com.rene.mercado.Modelo.Productos;
 
 public interface ServicioProductos {
 
-    Productos guardarProductos(@NonNull Productos Productos);
+    public Productos guardarProductos(@NonNull Productos Productos);
 
-    Optional<Productos> buscarProductosPorId(@NonNull Integer idInteger);
+    public Productos buscarProductosPorId(@NonNull Integer idInteger);
 
-    List<Productos> obtenerProductos();
+    public List<Productos> obtenerProductos();
 
-    Productos editarProductos(@NonNull Productos Producto);
+    public Productos editarProductos(@NonNull Productos Producto);
 
-    void eliminarProductosPorId(@NonNull Integer idInteger);
+    public void eliminarProductosPorId(@NonNull Integer idInteger);
 }

@@ -8,13 +8,15 @@ import org.springframework.lang.NonNull;
 import com.rene.mercado.Modelo.Categoria;
 
 public interface ServicioCategoria {
-    Categoria guardarCategorias(@NonNull Categoria Categorias);
+    public Categoria guardarCategorias(@NonNull Categoria Categorias);
 
-    Optional<Categoria> buscarCategoriasPorId(@NonNull Integer idInteger);
+    // Optional<Categoria> buscarCategoriasPorId(@NonNull Integer idInteger);
 
-    List<Categoria> obtenerCategorias();
+    public Categoria buscarCategoriasPorId(Integer id);
 
-    Categoria editarCategorias(@NonNull Categoria Categorias);
+    public List<Categoria> obtenerCategorias();
 
-    void eliminarCategoriasPorId(@NonNull Integer idInteger);
+    public Categoria editarCategorias(@NonNull Categoria Categorias);
+
+    public void eliminarCategoriasPorId(@NonNull Integer idInteger);
 }

@@ -24,8 +24,8 @@ public class ImplementacionServicioProductos implements ServicioProductos {
     }
 
     @Override
-    public Optional<Productos> buscarProductosPorId(@NonNull Integer id) {
-        return productosRepositorio.findById(id);
+    public Productos buscarProductosPorId(@NonNull Integer id) {
+        return productosRepositorio.buscarProductosPorId(id);
     }
 
     @Override

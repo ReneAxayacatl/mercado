@@ -24,8 +24,8 @@ public class ImplementacionServicioCategoria implements ServicioCategoria {
     }
 
     @Override
-    public Optional<Categoria> buscarCategoriasPorId(@NonNull Integer id) {
-        return categoriaRepositorio.findById(id);
+    public Categoria buscarCategoriasPorId(@NonNull Integer id) {
+        return categoriaRepositorio.buscarCategoriaPorId(id);
     }
 
     @Override

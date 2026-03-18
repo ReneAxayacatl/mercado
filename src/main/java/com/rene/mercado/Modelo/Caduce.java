@@ -1,5 +1,7 @@
 package com.rene.mercado.Modelo;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,4 +17,7 @@ public class Caduce {
 
     @Column(name = "caduce")
     private String caduce;
+
+    @OneToMany(mappedBy = "caduce", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Categoria> categorias;
 }

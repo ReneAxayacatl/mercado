@@ -1,147 +1,111 @@
 package com.rene.mercado.Controlador;
 
-// import java.net.URI;
-// import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.http.MediaType;
-// import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-// import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rene.mercado.Modelo.Caduce;
 import com.rene.mercado.Modelo.Categoria;
 import com.rene.mercado.Servicio.ServicioCaduce;
 import com.rene.mercado.Servicio.ServicioCategoria;
-
-// import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.PutMapping;
-// import org.springframework.web.bind.annotation.RequestBody;
 
-@Controller                                                             //Componente que regresa nuestras peticiones con vista Thymeleaf y ModelAndView
-@CrossOrigin(origins = "*", methods = {                                 //Anotacion para manejar peticiones completas Crud
+@Controller
+@CrossOrigin(origins = "*", methods = {
         RequestMethod.GET,
         RequestMethod.POST,
         RequestMethod.DELETE,
         RequestMethod.PUT,
 })
-@RequestMapping("/categoria")                                           //Ruta global base que manejara toda la clase ControladorCategoria
+@RequestMapping("/categoria")
 public class ControladorCategoria {
 
     @Autowired
-    private ServicioCategoria categoriaService;           //Inyeccion de la dependencia servicio categoria 'categoriaService'
-
+    private ServicioCategoria categoriaService;
     @Autowired
-    private ServicioCaduce caduceService;                 //Inyeccion de la dependencia servicio caduce 'caduceService'
+    private ServicioCaduce caduceService;
 
     @GetMapping
-    public ModelAndView listar() {                                      //Metodo Get para traer la vista de 'lista.html'
+    public ModelAndView listar() {
 
-        ModelAndView mav = new ModelAndView("categorias/lista");//Objeto que trae la vista 'lista.html' con ModelAndView
+        ModelAndView modelAndView = null;
+        List<Categoria> listaDatosCategorias = null;
 
-        mav.addObject("categorias",                         //Obtenemos lista de Categoria para nuestro atributo categoria.
-                categoriaService.obtenerCategorias());
+        modelAndView = new ModelAndView();
+        listaDatosCategorias = categoriaService.obtenerCategorias();
 
-        return mav;                                                     //Retornamos nuestra obejto de nuestra vista 'categoria/lista'
+        modelAndView.setViewName("categorias/lista");
+        modelAndView.addObject("categorias", listaDatosCategorias);
+
+        return modelAndView;
 
     }
 
-    @GetMapping("/nuevo")                                               //Metodo Get para traer la vista con la ruta '/nuevo'
+    @GetMapping("/nuevo")
     public ModelAndView nuevo() {
 
-        ModelAndView mav = new ModelAndView("categorias/formulario");//Objeto que trae la vista con la ruta 'categoria/formulario' con ModelAndView
+        ModelAndView modelAndView = null;
 
-        mav.addObject("categorias", new Categoria());     //Cremos un objeto Categoria a nuestro atributo categoria
-        mav.addObject("caduces", caduceService.obtenerCaduce());//Cremos un objeto Caduce a nuestro atributo caduce
+        modelAndView = new ModelAndView();
+        modelAndView.setViewName("categorias/formulario");
 
-        return mav;                                                     //Retornamos nuestro objeto con nuestra vista 'categoria/formulario'
+        modelAndView.addObject("categorias", new Categoria());
+        modelAndView.addObject("caduces", caduceService.obtenerCaduce());
 
-    }
-
-    @PostMapping("/guardar")                                            //Mandamos una peticion Post con la ruta '/guardar'
-    public String guardar(@NonNull @ModelAttribute Categoria c) {       //Metodo que maneja peticion post de tipo Categoria
-
-        categoriaService.guardarCategorias(c);                          //Metodo para guardar categoria
-
-        return "redirect:/categoria";                                   //Retornamos la vista a '/categoria'
+        return modelAndView;
 
     }
 
-    @GetMapping("/editar/{id}")                                         //Peticion Get para traer por la ruta el id a eliminar '/eliminar/{id}'
-    public ModelAndView editar(@NonNull @PathVariable Integer id) {
+    @PostMapping("/guardar")
+    public ModelAndView guardar(@NonNull @ModelAttribute Categoria categoria) {
 
-        ModelAndView mav = new ModelAndView("categorias/formulario");//Objeto para traer formulario de nuevo
+        ModelAndView modelAndView = null;
+        modelAndView = new ModelAndView();
 
-        Categoria categoria = categoriaService.buscarCategoriasPorId(id).orElseThrow();
+        categoriaService.guardarCategorias(categoria);
 
-        mav.addObject("categorias", categoria);
-        mav.addObject("caduces", caduceService.obtenerCaduce());
+        modelAndView.setViewName("redirect:/categoria");
 
-        return mav;
+        return modelAndView;
+
     }
 
-    @GetMapping("/eliminar/{id}")
-    public String eliminar(@NonNull @PathVariable Integer id) {
+    @PostMapping("/editar")
+    public ModelAndView editar(@NonNull @RequestParam Integer id) {
+        ;
+        ModelAndView modelAndView = null;
+
+        modelAndView = new ModelAndView();
+        modelAndView.setViewName("categorias/formulario");
+
+        modelAndView.addObject("categorias", categoriaService.buscarCategoriasPorId(id));
+        modelAndView.addObject("caduces", caduceService.obtenerCaduce());
+
+        return modelAndView;
+    }
+
+    @PostMapping("/eliminar")
+    public ModelAndView eliminar(@NonNull @RequestParam Integer id) {
 
         categoriaService.eliminarCategoriasPorId(id);
 
-        return "redirect:/categoria";
+        ModelAndView modelAndView = null;
+        modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("redirect:/categoria");
+
+        return modelAndView;
 
     }
-
-    // @GetMapping(path = "/{id}")
-    // public ResponseEntity<Categoria> traerCategoria(@NonNull @PathVariable("id")
-    // Integer id) {
-    // Optional<Categoria> optCategoria =
-    // categoriaService.buscarCategoriasPorId(id);
-    // if (optCategoria.isPresent()) {
-    // Categoria categoria = optCategoria.get();
-    // return ResponseEntity.ok(categoria);
-    // } else {
-    // return ResponseEntity.notFound().build();
-    // }
-    // }
-
-    // @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<Categoria> agregarCategoria(@NonNull @Valid
-    // @RequestBody Categoria categorias) {
-    // Categoria categoria = categoriaService.guardarCategorias(categorias);
-    // return ResponseEntity
-    // .created(URI.create("/Categoria" + categoria.getIdCategoria()))
-    // .body(categoria);
-    // }
-
-    // @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<Categoria> editarCaduce(@NonNull @Valid @RequestBody
-    // Categoria categorias) {
-    // Categoria categoria = categoriaService.editarCategorias(categorias);
-    // Integer id = categoria.getIdCategoria();
-    // if (id == null) {
-    // return ResponseEntity.badRequest().build();
-    // }
-    // return categoriaService.buscarCategoriasPorId(id)
-    // .map(iterarActualizar ->
-    // ResponseEntity.ok(categoriaService.editarCategorias(categoria)))
-    // .orElseGet(() -> ResponseEntity.notFound().build());
-    // }
-
-    // @DeleteMapping(path = "/{id}")
-    // public ResponseEntity<Categoria> eliminarCaduce(@NonNull @PathVariable("id")
-    // Integer id) {
-    // return categoriaService.buscarCategoriasPorId(id)
-    // .map(iterarEliminacion -> {
-    // categoriaService.eliminarCategoriasPorId(id);
-    // return ResponseEntity.ok(iterarEliminacion);
-    // })
-    // .orElseGet(() -> ResponseEntity.notFound().build());
-    // }
 }
