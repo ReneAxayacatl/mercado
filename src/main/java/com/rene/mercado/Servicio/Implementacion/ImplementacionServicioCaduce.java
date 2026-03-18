@@ -1,7 +1,6 @@
 package com.rene.mercado.Servicio.Implementacion;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.lang.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,41 +14,31 @@ import com.rene.mercado.Servicio.ServicioCaduce;
 public class ImplementacionServicioCaduce implements ServicioCaduce {
 
     @Autowired
-    private RepositorioCaduce caduceRepositorio;
+    private RepositorioCaduce caduceRepositorio;                            // Inyeccion de dependencia para desarrollar metodos ya definidos en la interfaz ServicioCaduce
 
     @Override
-    public Caduce guardarCaduce(@NonNull Caduce Caduce) {
-        return caduceRepositorio.save(Caduce);
-    }
-
-    // @Override
-    // public Optional<Caduce> buscarCaducePorId(@NonNull Integer id) {
-    // return caduceRepositorio.findById(id);
-
-    // }
-    // @Override
-    // public Caduce buscarCaducePorId(@NonNull Integer id) {
-    // return caduceRepositorio.findById(id).orElse(null);
-
-    // }
-    @Override
-    public Caduce buscarCaducePorId(@NonNull Integer id) {
-        return caduceRepositorio.buscarCaducePorId(id);
+    public Caduce guardarCaduce(@NonNull Caduce Caduce) {                   // Metodo para guardar datos de Caduce.
+        return caduceRepositorio.save(Caduce);                              // Utilizamos el Metodo 'save' del repositorio para guardar el objeto Caduce en la Base de Datos.
     }
 
     @Override
-    public List<Caduce> obtenerCaduce() {
-        return caduceRepositorio.listarCaduce();
+    public Caduce buscarCaducePorId(@NonNull Integer id) {                  // Metodo para buscar por su ID ya definido con jpql en el repositorio.
+        return caduceRepositorio.buscarCaducePorId(id);                     // Utilizamos el Metodo 'buscarCaducePorId' del repositorio para buscar el objeto Caduce por su ID en la Base de Datos.
     }
 
     @Override
-    public Caduce editarCaduce(@NonNull Caduce Caduce) {
-        return caduceRepositorio.saveAndFlush(Caduce);
+    public List<Caduce> obtenerCaduce() {                                   // Metodo para obtener una lista de datos de Caduce ya definido con jpql en el repositorio.
+        return caduceRepositorio.listarCaduce();                            // Utilizamos el Metodo 'listarCaduce' del repositorio para obtener una lista de objetos Caduce ordenados por su ID en la Base de Datos.
     }
 
     @Override
-    public void eliminarCaducePorId(@NonNull Integer id) {
-        caduceRepositorio.deleteById(id);
+    public Caduce editarCaduce(@NonNull Caduce Caduce) {                    // Metodo para editar datos de Caduce.
+        return caduceRepositorio.saveAndFlush(Caduce);                      // Utilizamos el Metodo 'saveAndFlush' del repositorio para actualizar el objeto Caduce en la Base de Datos.
+    }
+
+    @Override
+    public void eliminarCaducePorId(@NonNull Integer id) {                  // Metodo para eliminar por su ID.
+        caduceRepositorio.deleteById(id);                                   // Utilizamos el Metodo 'deleteById' del repositorio para eliminar el objeto Caduce por su ID en la Base de Datos.
     }
 
 }

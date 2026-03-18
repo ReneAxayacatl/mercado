@@ -24,8 +24,8 @@ public class ImplementacionServicioComida implements ServicioComida {
     }
 
     @Override
-    public Optional<Comida> buscarComidasPorId(@NonNull Integer id) {
-        return comidaRepositorio.findById(id);
+    public Comida buscarComidasPorId(@NonNull Integer id) {
+        return comidaRepositorio.buscarComidasPorId(id);
     }
 
     @Override

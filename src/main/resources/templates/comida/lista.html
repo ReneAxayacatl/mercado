@@ -1,0 +1,61 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Comidas</title>
+  </head>
+  <body>
+    <h2>Comidas</h2>
+
+    <a th:href="@{/comida/nuevo}"> Nueva Comida </a><br /><br />
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Producto</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+
+      <tr th:each="c : ${listaComidas}">
+        <td th:text="${c.idComida}"></td>
+
+        <td th:text="${c.nombre}"></td>
+
+        <td th:text="${c.descripcion}"></td>
+
+        <td th:text="${c.precio}"></td>
+
+        <!-- Relación con producto -->
+        <td th:text="${c.producto.nombre}"></td>
+
+        <td>
+          <form
+            th:action="@{/comida/editar}"
+            method="post"
+            style="display: inline"
+          >
+            <input type="hidden" name="id" th:value="${c.idComida}" />
+            <button type="submit">Editar</button>
+          </form>
+        </td>
+
+        <td>
+          <form
+            th:action="@{/comida/eliminar}"
+            method="post"
+            style="display: inline"
+          >
+            <input type="hidden" name="id" th:value="${c.idComida}" />
+            <button type="submit">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+    </table>
+    <br /><br />
+    <a th:href="@{/}">Regresar al menú principal</a>
+  </body>
+</html>

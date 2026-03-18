@@ -16,31 +16,31 @@ import com.rene.mercado.Servicio.ServicioProductos;
 public class ImplementacionServicioProductos implements ServicioProductos {
 
     @Autowired
-    private RepositorioProductos productosRepositorio;
+    private RepositorioProductos productosRepositorio;                      // Inyeccion de dependencia para desarrollar metodos ya definidos en la interfaz ServicioProductos
 
     @Override
-    public Productos guardarProductos(@NonNull Productos producto) {
-        return productosRepositorio.save(producto);
+    public Productos guardarProductos(@NonNull Productos producto) {        // Metodo para guardar datos de Productos.
+        return productosRepositorio.save(producto);                         // Utilizamos el Metodo 'save' del repositorio para guardar el objeto Productos en la Base de Datos.
     }
 
     @Override
-    public Productos buscarProductosPorId(@NonNull Integer id) {
-        return productosRepositorio.buscarProductosPorId(id);
+    public Productos buscarProductosPorId(@NonNull Integer id) {            // Metodo para buscar por su ID ya definido con jpql en el repositorio.
+        return productosRepositorio.buscarProductosPorId(id);               // Utilizamos el Metodo 'buscarProductosPorId' del repositorio para buscar el objeto Productos por su ID en la Base de Datos.
     }
 
     @Override
-    public List<Productos> obtenerProductos() {
-        return productosRepositorio.listarProductos();
+    public List<Productos> obtenerProductos() {                            // Metodo para obtener una lista de datos de Productos ya definido con jpql en el repositorio.
+        return productosRepositorio.listarProductos();                     // Utilizamos el Metodo 'listarProductos' del repositorio para obtener una lista de objetos Productos ordenados por su ID en la Base de Datos.
     }
 
     @Override
-    public Productos editarProductos(@NonNull Productos producto) {
-        return productosRepositorio.saveAndFlush(producto);
+    public Productos editarProductos(@NonNull Productos producto) {        // Metodo para editar datos de Productos.
+        return productosRepositorio.saveAndFlush(producto);                // Utilizamos el Metodo 'saveAndFlush' del repositorio para actualizar el objeto Productos en la Base de Datos.
     }
 
     @Override
-    public void eliminarProductosPorId(@NonNull Integer id) {
-        productosRepositorio.deleteById(id);
+    public void eliminarProductosPorId(@NonNull Integer id) {               // Metodo para eliminar por su ID.
+        productosRepositorio.deleteById(id);                                // Utilizamos el Metodo 'deleteById' del repositorio para eliminar el objeto Productos por su ID en la Base de Datos.
     }
 
 }

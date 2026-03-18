@@ -1,0 +1,53 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Comida</title>
+  </head>
+  <body>
+    <h2>Formulario de Comida</h2>
+
+    <form
+      th:action="@{/comida/guardar}"
+      th:object="${comida}"
+      method="post"
+    >
+      <!-- Campo oculto para ID (para edición) -->
+      <input type="hidden" th:field="*{idComida}" />
+
+      <!-- Nombre de la comida -->
+      <label>Nombre:</label>
+      <input type="text" th:field="*{nombre}" required />
+      <br/><br/>
+
+      <!-- Descripción -->
+      <label>Descripción:</label>
+      <input type="text" th:field="*{descripcion}" required />
+      <br/><br/>
+
+      <!-- Precio -->
+      <label>Precio:</label>
+      <input type="number" step="0.01" th:field="*{precio}" required />
+      <br/><br/>
+
+      <!-- Selección de Producto -->
+      <label>Producto:</label>
+      <select th:field="*{producto.idProducto}" required>
+        <option value="" disabled selected>Seleccione un producto</option>
+        <option
+          th:each="p : ${productos}"
+          th:value="${p.idProducto}"
+          th:text="${p.precioUnit} + ' - ' + ${p.categoria.nombreCategoria}"
+          th:selected="${comida.producto != null} ? ${comida.producto.idProducto} == ${p.idProducto} : false"
+        ></option>
+      </select>
+      <br/><br/>
+
+      <button type="submit">Guardar</button>
+    </form>
+
+    <br/>
+    <a th:href="@{/comida}">Regresar a la lista de comidas</a>
+  </body>
+</html>
