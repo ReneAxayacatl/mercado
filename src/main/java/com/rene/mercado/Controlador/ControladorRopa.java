@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.rene.mercado.Modelo.Ropa;
-import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioRopa;
+import com.rene.mercado.Servicio.ServicioRopa;
 
 import jakarta.validation.Valid;
 
@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class ControladorRopa {
 
     @Autowired
-    private ImplementacionServicioRopa ropaServicio;
+    private ServicioRopa ropaServicio;
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Ropa> traerCaduce(@NonNull @PathVariable Integer id) {

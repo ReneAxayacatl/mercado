@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rene.mercado.Modelo.Categoria;
-import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCaduce;
-import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCategoria;
+import com.rene.mercado.Servicio.ServicioCaduce;
+import com.rene.mercado.Servicio.ServicioCategoria;
 
 // import jakarta.validation.Valid;
 
@@ -27,59 +27,59 @@ import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.PutMapping;
 // import org.springframework.web.bind.annotation.RequestBody;
 
-@Controller
-@CrossOrigin(origins = "*", methods = {
+@Controller                                                             //Componente que regresa nuestras peticiones con vista Thymeleaf y ModelAndView
+@CrossOrigin(origins = "*", methods = {                                 //Anotacion para manejar peticiones completas Crud
         RequestMethod.GET,
         RequestMethod.POST,
         RequestMethod.DELETE,
         RequestMethod.PUT,
 })
-@RequestMapping("/categoria")
+@RequestMapping("/categoria")                                           //Ruta global base que manejara toda la clase ControladorCategoria
 public class ControladorCategoria {
 
     @Autowired
-    private ImplementacionServicioCategoria categoriaService;
+    private ServicioCategoria categoriaService;           //Inyeccion de la dependencia servicio categoria 'categoriaService'
 
     @Autowired
-    private ImplementacionServicioCaduce caduceService;
+    private ServicioCaduce caduceService;                 //Inyeccion de la dependencia servicio caduce 'caduceService'
 
     @GetMapping
-    public ModelAndView listar() {
+    public ModelAndView listar() {                                      //Metodo Get para traer la vista de 'lista.html'
 
-        ModelAndView mav = new ModelAndView("categorias/lista");
+        ModelAndView mav = new ModelAndView("categorias/lista");//Objeto que trae la vista 'lista.html' con ModelAndView
 
-        mav.addObject("categorias",
+        mav.addObject("categorias",                         //Obtenemos lista de Categoria para nuestro atributo categoria.
                 categoriaService.obtenerCategorias());
 
-        return mav;
+        return mav;                                                     //Retornamos nuestra obejto de nuestra vista 'categoria/lista'
 
     }
 
-    @GetMapping("/nuevo")
+    @GetMapping("/nuevo")                                               //Metodo Get para traer la vista con la ruta '/nuevo'
     public ModelAndView nuevo() {
 
-        ModelAndView mav = new ModelAndView("categorias/formulario");
+        ModelAndView mav = new ModelAndView("categorias/formulario");//Objeto que trae la vista con la ruta 'categoria/formulario' con ModelAndView
 
-        mav.addObject("categorias", new Categoria());
-        mav.addObject("caduces", caduceService.obtenerCaduce());
+        mav.addObject("categorias", new Categoria());     //Cremos un objeto Categoria a nuestro atributo categoria
+        mav.addObject("caduces", caduceService.obtenerCaduce());//Cremos un objeto Caduce a nuestro atributo caduce
 
-        return mav;
-
-    }
-
-    @PostMapping("/guardar")
-    public String guardar(@NonNull @ModelAttribute Categoria c) {
-
-        categoriaService.guardarCategorias(c);
-
-        return "redirect:/categoria";
+        return mav;                                                     //Retornamos nuestro objeto con nuestra vista 'categoria/formulario'
 
     }
 
-    @GetMapping("/editar/{id}")
+    @PostMapping("/guardar")                                            //Mandamos una peticion Post con la ruta '/guardar'
+    public String guardar(@NonNull @ModelAttribute Categoria c) {       //Metodo que maneja peticion post de tipo Categoria
+
+        categoriaService.guardarCategorias(c);                          //Metodo para guardar categoria
+
+        return "redirect:/categoria";                                   //Retornamos la vista a '/categoria'
+
+    }
+
+    @GetMapping("/editar/{id}")                                         //Peticion Get para traer por la ruta el id a eliminar '/eliminar/{id}'
     public ModelAndView editar(@NonNull @PathVariable Integer id) {
 
-        ModelAndView mav = new ModelAndView("categorias/formulario");
+        ModelAndView mav = new ModelAndView("categorias/formulario");//Objeto para traer formulario de nuevo
 
         Categoria categoria = categoriaService.buscarCategoriasPorId(id).orElseThrow();
 

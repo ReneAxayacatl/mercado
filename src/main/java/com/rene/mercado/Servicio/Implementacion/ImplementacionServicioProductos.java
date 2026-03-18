@@ -3,19 +3,44 @@ package com.rene.mercado.Servicio.Implementacion;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Modelo.Productos;
+import com.rene.mercado.Repositorio.RepositorioProductos;
+import com.rene.mercado.Servicio.ServicioProductos;
 
-public interface ImplementacionServicioProductos {
+@Service
 
-    Productos guardarProductos(@NonNull Productos Productos);
+public class ImplementacionServicioProductos implements ServicioProductos {
 
-    Optional<Productos> buscarProductosPorId(@NonNull Integer idInteger);
+    @Autowired
+    private RepositorioProductos productosRepositorio;
 
-    List<Productos> obtenerProductos();
+    @Override
+    public Productos guardarProductos(@NonNull Productos producto) {
+        return productosRepositorio.save(producto);
+    }
 
-    Productos editarProductos(@NonNull Productos Producto);
+    @Override
+    public Optional<Productos> buscarProductosPorId(@NonNull Integer id) {
+        return productosRepositorio.findById(id);
+    }
 
-    void eliminarProductosPorId(@NonNull Integer idInteger);
+    @Override
+    public List<Productos> obtenerProductos() {
+        return productosRepositorio.listarProductos();
+    }
+
+    @Override
+    public Productos editarProductos(@NonNull Productos producto) {
+        return productosRepositorio.saveAndFlush(producto);
+    }
+
+    @Override
+    public void eliminarProductosPorId(@NonNull Integer id) {
+        productosRepositorio.deleteById(id);
+    }
+
 }

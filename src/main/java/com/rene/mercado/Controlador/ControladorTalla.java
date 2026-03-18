@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import jakarta.validation.Valid;
 
 import com.rene.mercado.Modelo.Talla;
-import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioTalla;
+import com.rene.mercado.Servicio.ServicioTalla;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,7 +37,7 @@ public class ControladorTalla {
   public static final String TALLAS_ENDPOINT = "rene/Tallas";
 
   @Autowired
-  private ImplementacionServicioTalla tallasService;
+  private ServicioTalla tallasService;
 
   // @GetMapping(path = TALLAS_ENDPOINT)
   // public String tallas() {

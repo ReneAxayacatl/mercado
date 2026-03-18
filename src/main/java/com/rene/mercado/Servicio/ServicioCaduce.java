@@ -2,45 +2,22 @@ package com.rene.mercado.Servicio;
 
 import java.util.List;
 import java.util.Optional;
-import org.springframework.lang.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+// import org.springframework.lang.NonNull;
+
+import org.springframework.lang.NonNull;
 
 import com.rene.mercado.Modelo.Caduce;
-import com.rene.mercado.Repositorio.RepositorioCaduce;
-import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCaduce;
 
-@Service
+public interface ServicioCaduce {
 
-public class ServicioCaduce implements ImplementacionServicioCaduce {
+    public Caduce guardarCaduce(@NonNull Caduce Caduce);
 
-    @Autowired
-    private RepositorioCaduce caduceRepositorio;
+    // Optional<Caduce> buscarCaducePorId(@NonNull Integer id);
+    public Caduce buscarCaducePorId(@NonNull Integer id);
 
-    @Override
-    public Caduce guardarCaduce(@NonNull Caduce Caduce) {
-        return caduceRepositorio.save(Caduce);
-    }
+    public List<Caduce> obtenerCaduce();
 
-    @Override
-    public Optional<Caduce> buscarCaducePorId(@NonNull Integer id) {
-        return caduceRepositorio.findById(id);
+    public Caduce editarCaduce(@NonNull Caduce Caduce);
 
-    }
-
-    @Override
-    public List<Caduce> obtenerCaduce() {
-        return caduceRepositorio.listarCaduce();
-    }
-
-    @Override
-    public Caduce editarCaduce(@NonNull Caduce Caduce) {
-        return caduceRepositorio.saveAndFlush(Caduce);
-    }
-
-    @Override
-    public void eliminarCaducePorId(@NonNull Integer id) {
-        caduceRepositorio.deleteById(id);
-    }
-
+    public void eliminarCaducePorId(@NonNull Integer id);
 }

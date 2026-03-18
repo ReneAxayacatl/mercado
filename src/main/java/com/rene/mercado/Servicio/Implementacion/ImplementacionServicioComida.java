@@ -3,19 +3,44 @@ package com.rene.mercado.Servicio.Implementacion;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Modelo.Comida;
+import com.rene.mercado.Repositorio.RepositorioComida;
+import com.rene.mercado.Servicio.ServicioComida;
 
-public interface ImplementacionServicioComida {
+@Service
 
-    Comida guardarComidas(@NonNull Comida Comidas);
+public class ImplementacionServicioComida implements ServicioComida {
 
-    Optional<Comida> buscarComidasPorId(@NonNull Integer idInteger);
+    @Autowired
+    private RepositorioComida comidaRepositorio;
 
-    List<Comida> obtenerComidas();
+    @Override
+    public Comida guardarComidas(@NonNull Comida Comidas) {
+        return comidaRepositorio.save(Comidas);
+    }
 
-    Comida editarComidas(@NonNull Comida Comidas);
+    @Override
+    public Optional<Comida> buscarComidasPorId(@NonNull Integer id) {
+        return comidaRepositorio.findById(id);
+    }
 
-    void eliminarComidasPorId(@NonNull Integer idInteger);
+    @Override
+    public List<Comida> obtenerComidas() {
+        return comidaRepositorio.listarComida();
+    }
+
+    @Override
+    public Comida editarComidas(@NonNull Comida Comidas) {
+        return comidaRepositorio.saveAndFlush(Comidas);
+    }
+
+    @Override
+    public void eliminarComidasPorId(@NonNull Integer id) {
+        comidaRepositorio.deleteById(id);
+    }
+
 }

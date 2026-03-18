@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.rene.mercado.Modelo.Productos;
-import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioProductos;
+import com.rene.mercado.Servicio.ServicioProductos;
 
 import jakarta.validation.Valid;
 
@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class RestControladorProductos {
 
     @Autowired
-    private ImplementacionServicioProductos productoServicio;
+    private ServicioProductos productoServicio;
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Productos> traerOrigen(@NonNull @PathVariable Integer id) {

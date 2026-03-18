@@ -3,42 +3,20 @@ package com.rene.mercado.Servicio;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 
 import com.rene.mercado.Modelo.RopaTalla;
 import com.rene.mercado.Modelo.RopaTallaPK;
-import com.rene.mercado.Repositorio.RepositorioRopaTalla;
-import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioRopaTalla;
 
-public class ServicioRopaTalla implements ImplementacionServicioRopaTalla {
+public interface ServicioRopaTalla {
 
-    @Autowired
-    private RepositorioRopaTalla ropatallaRepositorio;
+    RopaTalla guardarRopaTallas(@NonNull RopaTalla RopaTallas);
 
-    @Override
-    public RopaTalla guardarRopaTallas(@NonNull RopaTalla RopaTallas) {
-        return ropatallaRepositorio.save(RopaTallas);
-    }
+    Optional<RopaTalla> buscarRopaTallaPorId(@NonNull RopaTallaPK idInteger);
 
-    @Override
-    public Optional<RopaTalla> buscarRopaTallaPorId(@NonNull RopaTallaPK id) {
-        return ropatallaRepositorio.findById(id);
-    }
+    List<RopaTalla> obtenerRopaTalla();
 
-    @Override
-    public List<RopaTalla> obtenerRopaTalla() {
-        return ropatallaRepositorio.findAll();
-    }
+    RopaTalla editarRopaTalla(@NonNull RopaTalla Talla);
 
-    @Override
-    public RopaTalla editarRopaTalla(@NonNull RopaTalla RopaTalla) {
-        return ropatallaRepositorio.saveAndFlush(RopaTalla);
-    }
-
-    @Override
-    public void eliminarRopaTallaPorId(@NonNull RopaTallaPK id) {
-        ropatallaRepositorio.deleteById(id);
-    }
-
+    void eliminarRopaTallaPorId(@NonNull RopaTallaPK id);
 }

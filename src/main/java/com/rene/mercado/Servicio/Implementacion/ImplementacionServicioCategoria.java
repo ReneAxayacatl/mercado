@@ -3,18 +3,44 @@ package com.rene.mercado.Servicio.Implementacion;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Modelo.Categoria;
+import com.rene.mercado.Repositorio.RepositorioCategoria;
+import com.rene.mercado.Servicio.ServicioCategoria;
 
-public interface ImplementacionServicioCategoria {
-    Categoria guardarCategorias(@NonNull Categoria Categorias);
+@Service
 
-    Optional<Categoria> buscarCategoriasPorId(@NonNull Integer idInteger);
+public class ImplementacionServicioCategoria implements ServicioCategoria {
 
-    List<Categoria> obtenerCategorias();
+    @Autowired
+    private RepositorioCategoria categoriaRepositorio;
 
-    Categoria editarCategorias(@NonNull Categoria Categorias);
+    @Override
+    public Categoria guardarCategorias(@NonNull Categoria Categorias) {
+        return categoriaRepositorio.save(Categorias);
+    }
 
-    void eliminarCategoriasPorId(@NonNull Integer idInteger);
+    @Override
+    public Optional<Categoria> buscarCategoriasPorId(@NonNull Integer id) {
+        return categoriaRepositorio.findById(id);
+    }
+
+    @Override
+    public List<Categoria> obtenerCategorias() {
+        return categoriaRepositorio.listarCategorias();
+    }
+
+    @Override
+    public Categoria editarCategorias(@NonNull Categoria Categorias) {
+        return categoriaRepositorio.saveAndFlush(Categorias);
+    }
+
+    @Override
+    public void eliminarCategoriasPorId(@NonNull Integer id) {
+        categoriaRepositorio.deleteById(id);
+    }
+
 }

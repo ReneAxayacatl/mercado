@@ -18,7 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import jakarta.validation.Valid;
 
 import com.rene.mercado.Modelo.Talla;
-import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioTalla;
+import com.rene.mercado.Servicio.ServicioTalla;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -38,7 +38,7 @@ public class RestControladorTalla {
   public static final String TALLAS_ENDPOINT = "rene/api/Tallas";
 
   @Autowired
-  private ImplementacionServicioTalla tallasService;
+  private ServicioTalla tallasService;
 
   @GetMapping(path = TALLAS_ENDPOINT + "/{id}")
   public ResponseEntity<Talla> traerTallas(@NonNull @PathVariable("id") Integer id) {

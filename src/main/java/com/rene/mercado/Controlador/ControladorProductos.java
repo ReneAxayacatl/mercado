@@ -16,10 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 // import com.rene.mercado.Modelo.Categoria;
 import com.rene.mercado.Modelo.Productos;
-// import com.rene.mercado.Servicio.ServicioCategoria;
-// import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCaduce;
-import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCategoria;
-import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioProductos;
+import com.rene.mercado.Servicio.ServicioCategoria;
+import com.rene.mercado.Servicio.ServicioProductos;
 
 // import jakarta.validation.Valid;
 
@@ -41,10 +39,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ControladorProductos {
 
     @Autowired
-    private ImplementacionServicioProductos productoServicio;
+    private ServicioProductos productoServicio;
     @Autowired
-    private ImplementacionServicioCategoria categoriaService;
-    @Autowired
+    private ServicioCategoria categoriaService;
+    // @Autowired
     // private ImplementacionServicioCaduce caduceService;
 
     @GetMapping

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.rene.mercado.Modelo.Categoria;
-import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioCategoria;
+import com.rene.mercado.Servicio.ServicioCategoria;
 
 import jakarta.validation.Valid;
 
@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class RestControladorCategoria {
 
     @Autowired
-    private ImplementacionServicioCategoria categoriaService;
+    private ServicioCategoria categoriaService;
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Categoria> traerCategoria(@NonNull @PathVariable("id") Integer id) {

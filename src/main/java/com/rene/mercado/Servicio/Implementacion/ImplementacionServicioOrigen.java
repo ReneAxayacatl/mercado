@@ -3,18 +3,41 @@ package com.rene.mercado.Servicio.Implementacion;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Modelo.Origen;
+import com.rene.mercado.Repositorio.RepositorioOrigen;
+import com.rene.mercado.Servicio.ServicioOrigen;
 
-public interface ImplementacionServicioOrigen {
-    Origen guardarOrigen(@NonNull Origen Origen);
+@Service
 
-    Optional<Origen> buscarOrigenPorId(@NonNull Integer idInteger);
+public class ImplementacionServicioOrigen implements ServicioOrigen {
+    @Autowired
+    private RepositorioOrigen origenRepositorio;
 
-    List<Origen> obtenerOrigen();
+    public Origen guardarOrigen(@NonNull Origen Origen) {
+        return origenRepositorio.save(Origen);
+    }
 
-    Origen editarOrigen(@NonNull Origen Origen);
+    @Override
+    public Optional<Origen> buscarOrigenPorId(@NonNull Integer id) {
+        return origenRepositorio.findById(id);
+    }
 
-    void eliminarOrigenPorId(@NonNull Integer idInteger);
+    @Override
+    public List<Origen> obtenerOrigen() {
+        return origenRepositorio.listarOrigen();
+    }
+
+    @Override
+    public Origen editarOrigen(@NonNull Origen origen) {
+        return origenRepositorio.saveAndFlush(origen);
+    }
+
+    @Override
+    public void eliminarOrigenPorId(@NonNull Integer id) {
+        origenRepositorio.deleteById(id);
+    }
 }
