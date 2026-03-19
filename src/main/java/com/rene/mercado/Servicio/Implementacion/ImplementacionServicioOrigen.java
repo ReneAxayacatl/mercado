@@ -1,7 +1,6 @@
 package com.rene.mercado.Servicio.Implementacion;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -22,8 +21,8 @@ public class ImplementacionServicioOrigen implements ServicioOrigen {
     }
 
     @Override
-    public Optional<Origen> buscarOrigenPorId(@NonNull Integer id) {
-        return origenRepositorio.findById(id);
+    public Origen buscarOrigenPorId(@NonNull Integer id) {
+        return origenRepositorio.buscarOrigenPorId(id);
     }
 
     @Override

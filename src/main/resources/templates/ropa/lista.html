@@ -8,13 +8,14 @@
 
 <h2>Ropa</h2>
 
-<a th:href="@{/ropa/nuevo}">Nueva Ropa</a>
+<a th:href="@{/ropa/nuevo}">Nueva Registro</a>
 <br/><br/>
 
 <table border="1" bgcolor="#4a4747">
     <tr>
     <th>ID</th>
     <th>Producto</th>
+    <th>Tallas</th>
     <th>Origen</th>
     <th>Editar</th>
     <th>Eliminar</th>
@@ -26,19 +27,25 @@
 
     <!-- PRODUCTO -->
     <td th:text="${r.producto != null ? r.producto.idProducto : 'Sin producto'}"></td>
+    <!-- TALLAS -->
+    <td>
+    <span th:each="rt : ${r.tallasAsignadas}">
+        <span th:text="${rt.talla.tipoTalla}"></span>
+    </span>
+    </td>
 
     <!-- ORIGEN -->
     <td>
         <span th:if="${r.origenes != null}">
         <span th:each="o : ${r.origenes}" 
-                th:text="${o.nombre + ' '}">
+                th:text="${o.nombreOrigen + ' '}">
         </span>
         </span>
     </td>
 
     <!-- EDITAR -->
     <td>
-        <form th:action="@{/ropa/editar}" method="post">
+    <form th:action="@{/ropa/editar}" method="post">
         <input type="hidden" name="id" th:value="${r.idRopa}" />
         <button type="submit">Editar</button>
     </form>

@@ -26,15 +26,16 @@
 
   <br/><br/>
 
-  <!-- ORIGEN (many-to-many) -->
-  <label>Origen:</label><br/><br/>
-  <div th:each="o : ${origen}">
-    <input type="checkbox"
-          th:value="${o.idOrigen}"
-          th:field="*{origen}" />
-    <span th:text="${o.nombre}"></span>
-    <br/>
-  </div>
+  <!-- ORIGEN -->
+    <label>Origen:</label>
+
+    <select th:field="*{origenes}" required>
+        <option value="" disabled selected>Seleccione un Origen</option>
+        <option th:each="o : ${origenes}"
+            th:value="${o.idOrigen}"
+            th:text="${o.nombreOrigen}">
+        </option>
+    </select><br/><br/>
 
   <br/>
 

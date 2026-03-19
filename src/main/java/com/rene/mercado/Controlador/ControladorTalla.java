@@ -55,8 +55,8 @@ public class ControladorTalla {
     public ModelAndView guardar(@NonNull @ModelAttribute Talla talla) {
 
         ModelAndView modelAndView = null;
-        modelAndView = new ModelAndView();
 
+        modelAndView = new ModelAndView();
         tallaService.guardarTallas(talla);
 
         modelAndView.setViewName("redirect:/talla");
@@ -80,8 +80,8 @@ public class ControladorTalla {
     public ModelAndView eliminar(@NonNull @RequestParam Integer id) {
 
         ModelAndView modelAndView = null;
-        modelAndView = new ModelAndView();
 
+        modelAndView = new ModelAndView();
         tallaService.eliminarTallasPorId(id);
 
         modelAndView.setViewName("redirect:/talla");

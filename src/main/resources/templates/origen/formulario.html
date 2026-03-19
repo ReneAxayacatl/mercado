@@ -1,0 +1,29 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Origen</title>
+</head>
+<body>
+
+<h2>Formulario de Origen</h2>
+
+<form th:action="@{/origen/guardar}" th:object="${origen}" method="post">
+
+    <!-- ID -->
+    <input type="hidden" th:field="*{idOrigen}" />
+
+    <label>Nombre del Origen:</label>
+    <input type="text" th:field="*{nombreOrigen}" required />
+
+    <br/><br/>
+
+    <button type="submit">Guardar</button>
+
+</form>
+
+<br/>
+<a th:href="@{/origen}">Regresar a la lista</a>
+
+</body>
+</html>

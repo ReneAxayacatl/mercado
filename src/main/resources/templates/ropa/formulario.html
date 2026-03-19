@@ -16,31 +16,38 @@
     <!-- PRODUCTO -->
     <label>Producto:</label>
     <select th:field="*{producto.idProducto}" required>
-    <option value="" disabled selected>Seleccione un producto</option>
-
-    <option th:each="p : ${productos}"
+        <option value="" disabled selected>Seleccione un producto</option>
+            <option th:each="p : ${productos}"
             th:value="${p.idProducto}"
             th:text="${p.idProducto}">
-    </option>
+            </option>
     </select>
 
     <br/><br/>
+    <!-- TALLAS -->
+    <label>Tallas:</label><br/><br/>
+
+    <div th:each="t : ${tallas}">
+        <input type="checkbox"
+                name="idsTalla"
+                th:value="${t.idTalla}" />
+        <span th:text="${t.tipoTalla}"></span>
+        <br/>
+    </div><br/><br/>
 
     <!-- ORIGEN -->
-    <label>Origen:</label><br/><br/>
+    <label>Origen:</label>
 
-    <div th:each="o : ${origenes}">
-    <span th:text="${o.nombre}"></span><br/>
-    </div>
-
-    <br/>
-
+    <select th:field="*{origenes}" required>
+        <option value="" disabled selected>Seleccione un Origen</option>
+        <option th:each="o : ${origenes}"
+            th:value="${o.idOrigen}"
+            th:text="${o.nombreOrigen}">
+        </option>
+    </select><br/><br/>
     <button type="submit">Guardar</button>
-
 </form>
-
 <br/>
 <a th:href="@{/ropa}">Regresar a la lista</a>
-
 </body>
 </html>

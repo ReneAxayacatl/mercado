@@ -1,5 +1,6 @@
 package com.rene.mercado.Controlador;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rene.mercado.Modelo.Ropa;
+import com.rene.mercado.Modelo.RopaTalla;
+import com.rene.mercado.Modelo.RopaTallaPK;
+import com.rene.mercado.Modelo.Talla;
 import com.rene.mercado.Servicio.ServicioOrigen;
 import com.rene.mercado.Servicio.ServicioProductos;
 import com.rene.mercado.Servicio.ServicioRopa;
@@ -64,23 +68,60 @@ public class ControladorRopa {
         modelAndView.addObject("ropa", new Ropa());
         modelAndView.addObject("productos", productoServicio.obtenerProductos());
         modelAndView.addObject("origenes", origenServicio.obtenerOrigen());
-        // modelAndView.addObject("talla", tallaServicio.obtenerTallas());
+        modelAndView.addObject("tallas", tallaServicio.obtenerTallas());
 
         return modelAndView;
     }
 
+    // @PostMapping("/guardar")
+    // public ModelAndView guardar(@NonNull @ModelAttribute Ropa ropa) {
+
+    //     ModelAndView modelAndView = null;
+
+    //     modelAndView = new ModelAndView();
+    //     ropaServicio.guardarRopas(ropa);
+
+    //     modelAndView.setViewName("redirect:/ropa");
+
+    //     return modelAndView;
+    // }
     @PostMapping("/guardar")
-    public ModelAndView guardar(@NonNull @ModelAttribute Ropa ropa) {
+public ModelAndView guardar(
+        @NonNull @ModelAttribute Ropa ropa,
+        @RequestParam(name = "idsTalla", required = false) List<Integer> idsTalla) {
 
-        ModelAndView modelAndView = null;
+    ModelAndView mv = new ModelAndView();
 
-        modelAndView = new ModelAndView();
-        ropaServicio.guardarRopas(ropa);
+    ropa.setTallasAsignadas(new ArrayList<>());
 
-        modelAndView.setViewName("redirect:/ropa");
+    if (idsTalla != null) {
+        for (Integer idTalla : idsTalla) {
 
-        return modelAndView;
+            RopaTalla rt = new RopaTalla();
+
+            // traer talla REAL desde BD
+            Talla talla = tallaServicio.buscarTallaPorId(idTalla);
+
+            if (talla != null) {
+
+                // PK
+                RopaTallaPK pk = new RopaTallaPK();
+                pk.setIdTalla(idTalla);
+                rt.setId(pk);
+
+                rt.setRopa(ropa);
+                rt.setTalla(talla);
+
+                ropa.getTallasAsignadas().add(rt);
+            }
+        }
     }
+
+    ropaServicio.guardarRopas(ropa);
+
+    mv.setViewName("redirect:/ropa");
+    return mv;
+}
 
     @PostMapping("/editar")
     public ModelAndView editar(@NonNull @RequestParam Integer id) {
@@ -93,7 +134,7 @@ public class ControladorRopa {
         modelAndView.addObject("ropa", ropaServicio.buscarRopasPorId(id));
         modelAndView.addObject("productos", productoServicio.obtenerProductos());
         modelAndView.addObject("origenes", origenServicio.obtenerOrigen());
-        // modelAndView.addObject("talla", tallaServicio.obtenerTallas());
+        modelAndView.addObject("tallas", tallaServicio.obtenerTallas());
 
         return modelAndView;
     }

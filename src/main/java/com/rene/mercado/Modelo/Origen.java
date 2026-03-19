@@ -1,5 +1,7 @@
 package com.rene.mercado.Modelo;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,10 +19,9 @@ public class Origen {
     @Column(name = "nombre_origen")
     private String nombreOrigen;
 
-    // @OneToMany(mappedBy = "comida", 
-    //             fetch = FetchType.LAZY,
-    //             cascade = CascadeType.ALL, 
-    //             orphanRemoval = true)       // relacion inversa que apunta a la entidad Comida
-    // private List<Comida> comida;
+    @ManyToMany(mappedBy = "origenes", 
+                fetch = FetchType.LAZY,
+                cascade = CascadeType.ALL)       // relacion inversa que apunta a la entidad Comida
+    private List<Comida> comida;
 
 }

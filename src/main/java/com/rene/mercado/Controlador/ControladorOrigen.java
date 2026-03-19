@@ -1,28 +1,17 @@
 package com.rene.mercado.Controlador;
 
-import java.net.URI;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rene.mercado.Modelo.Origen;
 import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioOrigen;
-
-import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
+import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioProductos;
 
 @Controller
 @CrossOrigin(origins = "*", methods = {
@@ -31,48 +20,73 @@ import org.springframework.web.bind.annotation.PutMapping;
         RequestMethod.DELETE,
         RequestMethod.PUT,
 })
-@RequestMapping("/Origen")
+@RequestMapping("/origen")
 public class ControladorOrigen {
 
     @Autowired
     private ImplementacionServicioOrigen origenServicio;
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Origen> traerOirgen(@NonNull @PathVariable Integer id) {
-        Optional<Origen> optOrigen = origenServicio.buscarOrigenPorId(id);
-        if (optOrigen.isPresent()) {
-            Origen origen = optOrigen.get();
-            return ResponseEntity.ok(origen);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping
+    public ModelAndView listar() {
+
+        ModelAndView modelAndView = null;
+        List<Origen> listaDatosOrigen = null;
+
+        modelAndView = new ModelAndView();
+        listaDatosOrigen = origenServicio.obtenerOrigen();
+
+        modelAndView.setViewName("origen/lista");
+        modelAndView.addObject("listaOrigen", listaDatosOrigen);
+
+        return modelAndView;
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Origen> agregarCaduce(@NonNull @Valid @RequestBody Origen origenes) {
-        Origen origen = origenServicio.guardarOrigen(origenes);
-        return ResponseEntity
-                .created(URI.create("/Caduce" + origen.getIdOrigen()))
-                .body(origen);
+    @GetMapping("/nuevo")
+    public ModelAndView nuevo() {
+
+        ModelAndView modelAndView = null;
+
+        modelAndView = new ModelAndView();
+        modelAndView.setViewName("origen/formulario");
+        modelAndView.addObject("origen", new Origen());
+        return modelAndView;
     }
 
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Origen> agregarOrigen(@NonNull @Valid @RequestBody Origen origenes) {
-        Origen origen = origenServicio.editarOrigen(origenes);
-        Integer id = origen.getIdOrigen();
-        if (id == null) {
-            return ResponseEntity.badRequest().build();
-        }
-        return origenServicio.buscarOrigenPorId(id)
-                .map((iterarActualizar -> ResponseEntity.ok(origenServicio.editarOrigen(origen))))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    @PostMapping("/guardar")
+    public ModelAndView guardar(@NonNull @ModelAttribute Origen origen) {
+
+        ModelAndView modelAndView = null;
+
+        modelAndView = new ModelAndView();
+        origenServicio.guardarOrigen(origen);
+
+        modelAndView.setViewName("redirect:/origen");
+
+        return modelAndView;
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Origen> eliminarOrigen(@NonNull @PathVariable Integer id) {
-        return origenServicio.buscarOrigenPorId(id).map(iterarEliminacion -> {
-            origenServicio.eliminarOrigenPorId(id);
-            return ResponseEntity.ok(iterarEliminacion);
-        }).orElseGet(() -> ResponseEntity.notFound().build());
+    @PostMapping("/editar")
+    public ModelAndView editar(@NonNull @RequestParam Integer id) {
+
+        ModelAndView modelAndView = null;
+        modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("origen/formulario");
+        modelAndView.addObject("origen", origenServicio.buscarOrigenPorId(id));
+
+        return modelAndView;
+    }
+
+    @PostMapping("/eliminar")
+    public ModelAndView eliminar(@NonNull @RequestParam Integer id) {
+
+        ModelAndView modelAndView = null;
+
+        modelAndView = new ModelAndView();
+        origenServicio.eliminarOrigenPorId(id);
+
+        modelAndView.setViewName("redirect:/origen");
+
+        return modelAndView;
     }
 }
