@@ -85,10 +85,8 @@ public ModelAndView guardar(
 
     ModelAndView modelAndView = new ModelAndView();
 
-    // 🔹 Inicializar lista
     comida.setOrigenes(new java.util.ArrayList<>());
 
-    // 🔹 Convertir IDs → objetos
     if (idsOrigen != null) {
         for (Integer id : idsOrigen) {
 
