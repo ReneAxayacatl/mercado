@@ -29,16 +29,16 @@
     <td th:text="${c.producto != null ? c.producto.idProducto : 'Sin producto'}"></td>
     <!-- ORIGEN -->
     <td>
-      <span th:if="${c.origenes == null || #lists.isEmpty(c.origenes)}">
-        Sin origen
-      </span>
+  <span th:if="${c.origenes == null || #lists.isEmpty(c.origenes)}">
+    Sin origen
+  </span>
 
-      <ul th:if="${c.origenes != null}">
-        <li th:each="o : ${c.origenes}"
-            th:text="${o.nombre}">
-        </li>
-      </ul>
-    </td>
+  <span th:if="${c.origenes != null}">
+    <span th:each="o : ${c.origenes}"
+          th:text="${o.nombreOrigen + ' '}">
+    </span>
+  </span>
+</td>
 
     <!-- EDITAR -->
     <td>

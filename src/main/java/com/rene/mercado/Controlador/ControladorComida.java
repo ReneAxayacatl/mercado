@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rene.mercado.Modelo.Comida;
+import com.rene.mercado.Modelo.Origen;
 import com.rene.mercado.Servicio.ServicioComida;
 import com.rene.mercado.Servicio.ServicioOrigen;
 import com.rene.mercado.Servicio.ServicioProductos;
@@ -60,23 +61,50 @@ public class ControladorComida {
         modelAndView.setViewName("comida/formulario");                          // Asignamos la vista de nuestro formulario para crear nuevos registros.
         modelAndView.addObject("comida", new Comida());                    // Creamos un nuevo registro al formulario de comida.
         modelAndView.addObject("productos", productoServicio.obtenerProductos()); // Obtenemos y agregamos la lista de Datos de productos para el formulario de comida.
-        modelAndView.addObject("origen", origenServicio.obtenerOrigen());   // Obtenemos y agregamos la lista de Datos de origen para el formulario de comida.
+        modelAndView.addObject("origenes", origenServicio.obtenerOrigen());   // Obtenemos y agregamos la lista de Datos de origen para el formulario de comida.
 
         return modelAndView;
     } // Funcion que crea un nuevo registro de Comida (BOTTOM)
 
-    @PostMapping("/guardar") // Funcion que guarda un nuevo registro de comida (TOP)
-    public ModelAndView guardar(@NonNull @ModelAttribute Comida comida) {
+    // @PostMapping("/guardar") // Funcion que guarda un nuevo registro de comida (TOP)
+    // public ModelAndView guardar(@NonNull @ModelAttribute Comida comida) {
 
-        ModelAndView modelAndView = null;                                               // Variable que almacena las operaciones de la vista comida
+    //     ModelAndView modelAndView = null;                                               // Variable que almacena las operaciones de la vista comida
 
-        modelAndView = new ModelAndView();                                              // Inicialización de la variable de tipo ModelAndView
-        comidaService.guardarComidas(comida);                                           // Guardamos el dato del objeto comida que recibimos de los registros del formulario a través del servicio comida.
+    //     modelAndView = new ModelAndView();                                              // Inicialización de la variable de tipo ModelAndView
+    //     comidaService.guardarComidas(comida);                                           // Guardamos el dato del objeto comida que recibimos de los registros del formulario a través del servicio comida.
 
-        modelAndView.setViewName("redirect:/comida");                           // Definimos la vista para redireccionar a la lista de los registros de comida después de guardar un nuevo registro
+    //     modelAndView.setViewName("redirect:/comida");                           // Definimos la vista para redireccionar a la lista de los registros de comida después de guardar un nuevo registro
 
-        return modelAndView;
-    } // Funcion que guarda un nuevo registro de comida (TOP)
+    //     return modelAndView;
+    // } // Funcion que guarda un nuevo registro de comida (TOP)
+    @PostMapping("/guardar")
+public ModelAndView guardar(
+    @NonNull @ModelAttribute Comida comida,
+    @RequestParam(name = "idsOrigen", required = false) List<Integer> idsOrigen) {
+
+    ModelAndView modelAndView = new ModelAndView();
+
+    // 🔹 Inicializar lista
+    comida.setOrigenes(new java.util.ArrayList<>());
+
+    // 🔹 Convertir IDs → objetos
+    if (idsOrigen != null) {
+        for (Integer id : idsOrigen) {
+
+            Origen origen = origenServicio.buscarOrigenPorId(id);
+
+            if (origen != null) {
+                comida.getOrigenes().add(origen);
+            }
+        }
+    }
+
+    comidaService.guardarComidas(comida);
+
+    modelAndView.setViewName("redirect:/comida");
+    return modelAndView;
+}
 
     @PostMapping("/editar") // Funcion que edita un registro de comida (TOP)
     public ModelAndView editar(@NonNull @RequestParam Integer id) {

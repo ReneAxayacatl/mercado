@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
   <title>Formulario de Comida</title>
@@ -10,14 +10,13 @@
 
 <form th:action="@{/comida/guardar}" th:object="${comida}" method="post">
 
-  <!-- ID (oculto) -->
+  <!-- ID -->
   <input type="hidden" th:field="*{idComida}" />
 
   <!-- PRODUCTO -->
   <label>Producto:</label>
   <select th:field="*{producto.idProducto}" required>
-    <option value="" disabled selected>Seleccione un producto</option>
-
+    <option value="" disabled>Seleccione un producto</option>
     <option th:each="p : ${productos}"
             th:value="${p.idProducto}"
             th:text="${p.idProducto}">
@@ -26,8 +25,8 @@
 
   <br/><br/>
 
-  <!-- ORIGEN -->
-    <label>Origen:</label>
+  <!-- ORIGEN (FIX IMPORTANTE) -->
+  <label>Origen:</label>
 
     <select th:field="*{origenes}" required>
         <option value="" disabled selected>Seleccione un Origen</option>
@@ -37,13 +36,11 @@
         </option>
     </select><br/><br/>
 
-  <br/>
-
   <button type="submit">Guardar</button>
 </form>
 
 <br/>
-<a th:href="@{/comida}">Regresar a la lista de comidas</a>
+<a th:href="@{/comida}">Regresar</a>
 
 </body>
 </html>
