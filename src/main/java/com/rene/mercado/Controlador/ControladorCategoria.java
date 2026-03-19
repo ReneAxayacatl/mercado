@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.rene.mercado.Modelo.Caduce;
 import com.rene.mercado.Modelo.Categoria;
 import com.rene.mercado.Servicio.ServicioCaduce;
 import com.rene.mercado.Servicio.ServicioCategoria;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller                                                         // Componente que regresa nuestras peticiones con vista Thymeleaf y ModelAndView
@@ -46,7 +44,7 @@ public class ControladorCategoria {
         listaDatosCategorias = categoriaService.obtenerCategorias();// Obtener los datos registrado de categorias.
 
         modelAndView.setViewName("categorias/lista");               // Asignamos la vista de nuestra lista para visualizar los registros.
-        modelAndView.addObject("categorias", listaDatosCategorias); // Obtenemos la lista de Categoria para nuestro atributo categorias.
+        modelAndView.addObject("categorias", listaDatosCategorias); // Agregamos la lista de datos de categoria que obtuvimos y lo pasamos a la vista.
 
         return modelAndView;
     } // Funcion que muestra la lista de los registros de categoria registrados (BOTTOM)
@@ -59,13 +57,13 @@ public class ControladorCategoria {
         modelAndView = new ModelAndView();                          // Inicialización de la variable de tipo ModelAndView
         modelAndView.setViewName("categorias/formulario");          // Asignamos la vista de nuestro formulario para crear nuevos registros.
 
-        modelAndView.addObject("categorias", new Categoria());      // Creamos un nuevo registro al formulario de categoria para el atributo categorias.
-        modelAndView.addObject("caduces", caduceService.obtenerCaduce());// Obtenemos la listad de Datos de caduce para el formulario de categoria..
+        modelAndView.addObject("categorias", new Categoria());      // Creamos un nuevo registro al formulario de categoria.
+        modelAndView.addObject("caduces", caduceService.obtenerCaduce());// Obtenemos y agregamos la lista de Datos de caduce para el formulario de categoria..
 
         return modelAndView;
     } // Funcion que crea un nuevo registro de categoria (BOTTOM)
 
-    @PostMapping("/guardar") // Funcion que guarda un nuevo registro de categoria
+    @PostMapping("/guardar") // Funcion que guarda un nuevo registro de categoria (TOP)
     public ModelAndView guardar(@NonNull @ModelAttribute Categoria categoria) {
 
         ModelAndView modelAndView = null;                           // Variable que almacena las operaciones de la vista categorias
@@ -95,10 +93,10 @@ public class ControladorCategoria {
     @PostMapping("/eliminar") // Funcion que elimina un registro de categoria (TOP)
     public ModelAndView eliminar(@NonNull @RequestParam Integer id) {
 
-        categoriaService.eliminarCategoriasPorId(id);               // Eliminamos el registro de categoria por su id a traves del metodo inyectado de categoriaService
-
         ModelAndView modelAndView = null;                           // Variable que almacena las operaciones de la vista categorias
+        
         modelAndView = new ModelAndView();                          // Inicialización de la variable de tipo ModelAndView
+        categoriaService.eliminarCategoriasPorId(id);               // Eliminamos el registro de categoria por su id a traves del metodo inyectado de categoriaService
 
         modelAndView.setViewName("redirect:/categoria");            // Definimos la vista para redireccionar a la lista de los registros de categoria después de eliminar un registro
 

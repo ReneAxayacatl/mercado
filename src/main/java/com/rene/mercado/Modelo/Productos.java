@@ -1,7 +1,7 @@
 package com.rene.mercado.Modelo;
 
 import java.math.BigDecimal;
-
+import java.util.List;
 import jakarta.persistence.*;
 // import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,4 +25,10 @@ public class Productos {
     @ManyToOne(fetch = FetchType.LAZY)                                      // Anotacion para definir la relacion de muchos a uno entre Productos y Categoria, y traer datos de forma secuencial (LAZY)
     @JoinColumn(name = "id_categoria")                                      // Anotacion para definir el nombre de la llave foranea de la columna en la BD que se relaciona con la tabla 'categoria'
     private Categoria categoria;                                            // Variable de tipo Categoria para almacenar los datos de categoria asociado a un producto
+
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private List<Ropa> ropas;                                          // Lista de datos de las ropas asociados a un producto
+
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private List<Comida> comidas;   
 }

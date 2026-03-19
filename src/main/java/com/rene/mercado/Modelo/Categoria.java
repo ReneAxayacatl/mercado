@@ -22,6 +22,6 @@ public class Categoria {
     @JoinColumn(name = "id_caduce")                                             // Anotacion para definir la llave foranea de la columna en la BD que se relaciona con la tabla 'caduce'
     private Caduce caduce;                                                      // Variable de tipo Caduce para almacenar los datos de caduce asociado a una categoria
 
-    @OneToMany(mappedBy = "categoria")                                          // Anotacion para definir la relacion de uno a muchos entre Categoria y Productos
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)                                          // Anotacion para definir la relacion de uno a muchos entre Categoria y Productos
     private List<Productos> productos;                                          // Lista de datos de los productos asociados a una categoria
 }

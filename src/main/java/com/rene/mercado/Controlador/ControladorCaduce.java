@@ -28,7 +28,7 @@ import com.rene.mercado.Servicio.ServicioCaduce;
 public class ControladorCaduce {
 
     @Autowired
-    private ServicioCaduce caduceService;                            // Inyeccion de la dependencia servicio caduce para usar sus metodos definidos
+    private ServicioCaduce caduceService;                            // Inyeccion de la dependencia servicio caduce 
 
     @GetMapping // Funcion que muestra la lista de los registros de caducidad registrados (TOP)
     public ModelAndView listar() {
