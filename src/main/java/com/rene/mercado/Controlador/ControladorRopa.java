@@ -86,42 +86,45 @@ public class ControladorRopa {
     //     return modelAndView;
     // }
     @PostMapping("/guardar")
-public ModelAndView guardar(
-        @NonNull @ModelAttribute Ropa ropa,
+    public ModelAndView guardar(@NonNull @ModelAttribute Ropa ropa, 
         @RequestParam(name = "idsTalla", required = false) List<Integer> idsTalla) {
 
-    ModelAndView mv = new ModelAndView();
+        ModelAndView modelAndView = null;
+        modelAndView = new ModelAndView();
 
-    ropa.setTallasAsignadas(new ArrayList<>());
+        ropa.setTallasAsignadas(new ArrayList<>());
 
-    if (idsTalla != null) {
-        for (Integer idTalla : idsTalla) {
+        // if (idsTalla != null) {
+        if (idsTalla == null || idsTalla.isEmpty()) {
+            // No se han seleccionado tallas
+        } else {
+            for (Integer idTalla : idsTalla) {
 
-            RopaTalla rt = new RopaTalla();
+                RopaTalla ropaTalla = null;
+                ropaTalla = new RopaTalla();
 
-            // traer talla REAL desde BD
+            // Traer Talla real desde BD
             Talla talla = tallaServicio.buscarTallaPorId(idTalla);
 
             if (talla != null) {
 
-                // PK
-                RopaTallaPK pk = new RopaTallaPK();
-                pk.setIdTalla(idTalla);
-                rt.setId(pk);
+                // Llave Primaria 'PK' para la tabla intermedia 'RopaTalla'
+                RopaTallaPK llavePrimaria = new RopaTallaPK();
+                llavePrimaria.setIdTalla(idTalla);
+                ropaTalla.setId(llavePrimaria);
 
-                rt.setRopa(ropa);
-                rt.setTalla(talla);
+                ropaTalla.setRopa(ropa);
+                ropaTalla.setTalla(talla);
 
-                ropa.getTallasAsignadas().add(rt);
+                ropa.getTallasAsignadas().add(ropaTalla);
+                }
             }
         }
+        ropaServicio.guardarRopas(ropa);
+        modelAndView.setViewName("redirect:/ropa");
+
+        return modelAndView;
     }
-
-    ropaServicio.guardarRopas(ropa);
-
-    mv.setViewName("redirect:/ropa");
-    return mv;
-}
 
     @PostMapping("/editar")
     public ModelAndView editar(@NonNull @RequestParam Integer id) {

@@ -29,7 +29,7 @@
     <td th:text="${r.producto != null ? r.producto.idProducto : 'Sin producto'}"></td>
     <!-- TALLAS -->
     <td>
-    <span th:each="rt : ${r.tallasAsignadas}">
+        <span th:each="rt : ${r.tallasAsignadas}">
         <span th:text="${rt.talla.tipoTalla}"></span>
     </span>
     </td>
