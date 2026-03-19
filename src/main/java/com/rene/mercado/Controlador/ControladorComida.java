@@ -26,7 +26,7 @@ import com.rene.mercado.Servicio.ServicioProductos;
         RequestMethod.DELETE,
         RequestMethod.PUT,
 })
-@RequestMapping("/comida")
+@RequestMapping("/comida")                                                          // Ruta global base que manejara toda la clase ControladorComida
 public class ControladorComida {
 
     @Autowired
@@ -96,12 +96,12 @@ public class ControladorComida {
     @PostMapping("/eliminar") // Funcion que elimina un registro de comida (TOP)
     public ModelAndView eliminar(@NonNull @RequestParam Integer id) {
 
-        ModelAndView modelAndView = null;
+        ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista comida
 
-        modelAndView = new ModelAndView();
-        comidaService.eliminarComidasPorId(id);
+        modelAndView = new ModelAndView();                                                      // Inicialización de la variable de tipo ModelAndView
+        comidaService.eliminarComidasPorId(id);                                                 // Eliminamos el registro de comida por su id.
 
-        modelAndView.setViewName("redirect:/comida");
+        modelAndView.setViewName("redirect:/comida");                                   // Definimos la vista para redireccionar a la lista de los registros de comida después de eliminar un registro
 
         return modelAndView;
     } // Funcion que elimina un registro de comida (BOTTOM)

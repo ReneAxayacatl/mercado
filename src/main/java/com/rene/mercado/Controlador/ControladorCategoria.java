@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@Controller                                                         // Componente que regresa nuestras peticiones con vista Thymeleaf y ModelAndView
-@CrossOrigin(origins = "*", methods = {                             // Anotacion para manejar peticiones completas CRUD
+@Controller                                                         
+@CrossOrigin(origins = "*", methods = {                             
         RequestMethod.GET,
         RequestMethod.POST,
         RequestMethod.DELETE,
@@ -30,9 +30,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ControladorCategoria {
 
     @Autowired
-    private ServicioCategoria categoriaService;                     // Inyeccion de la dependencia servicio categoria para usar sus metodos definidos
+    private ServicioCategoria categoriaService;                     // Inyeccion de servicio categoria.
     @Autowired
-    private ServicioCaduce caduceService;                           // Inyeccion de la dependencia servicio caduce para usar sus metodos definidos
+    private ServicioCaduce caduceService;                           // Inyeccion de servicio caduce.
 
     @GetMapping // Funcion que muestra la lista de los registros de categoria registrados (TOP)
     public ModelAndView listar() {
@@ -44,7 +44,7 @@ public class ControladorCategoria {
         listaDatosCategorias = categoriaService.obtenerCategorias();// Obtener los datos registrado de categorias.
 
         modelAndView.setViewName("categorias/lista");               // Asignamos la vista de nuestra lista para visualizar los registros.
-        modelAndView.addObject("categorias", listaDatosCategorias); // Agregamos la lista de datos de categoria que obtuvimos y lo pasamos a la vista.
+        modelAndView.addObject("categorias", listaDatosCategorias); // Agregamos la lista de datos de categoria que obtuvimos a la vista.
 
         return modelAndView;
     } // Funcion que muestra la lista de los registros de categoria registrados (BOTTOM)
@@ -69,7 +69,7 @@ public class ControladorCategoria {
         ModelAndView modelAndView = null;                           // Variable que almacena las operaciones de la vista categorias
     
         modelAndView = new ModelAndView();                          // Inicialización de la variable de tipo ModelAndView
-        categoriaService.guardarCategorias(categoria);              // Guardamos el objeto categoria que recibimos del formulario de los registros a través del servicio categoriaService
+        categoriaService.guardarCategorias(categoria);              // Guardamos el objeto categoria que recibimos del formulario de los registros
 
         modelAndView.setViewName("redirect:/categoria");            // Definimos la vista para redireccionar a la lista de los registros de categoria después de guardar un nuevo registro
 
@@ -96,7 +96,7 @@ public class ControladorCategoria {
         ModelAndView modelAndView = null;                           // Variable que almacena las operaciones de la vista categorias
         
         modelAndView = new ModelAndView();                          // Inicialización de la variable de tipo ModelAndView
-        categoriaService.eliminarCategoriasPorId(id);               // Eliminamos el registro de categoria por su id a traves del metodo inyectado de categoriaService
+        categoriaService.eliminarCategoriasPorId(id);               // Metodo para Eliminar el registro de categoria por su id
 
         modelAndView.setViewName("redirect:/categoria");            // Definimos la vista para redireccionar a la lista de los registros de categoria después de eliminar un registro
 

@@ -20,73 +20,73 @@ import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioProductos;
         RequestMethod.DELETE,
         RequestMethod.PUT,
 })
-@RequestMapping("/origen")
+@RequestMapping("/origen")                                                          // Ruta global base que manejara toda la clase ControladorOrigen
 public class ControladorOrigen {
 
     @Autowired
-    private ImplementacionServicioOrigen origenServicio;
+    private ImplementacionServicioOrigen origenServicio;                            // Inyecccion de servicio Origen.
 
-    @GetMapping
+    @GetMapping // Funcion que muestra la lista de los registros de origen registrados (TOP)
     public ModelAndView listar() {
 
-        ModelAndView modelAndView = null;
-        List<Origen> listaDatosOrigen = null;
+        ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista origen.
+        List<Origen> listaDatosOrigen = null;                                       // Variable que almacena la lista de informacion registrada de origen.
 
-        modelAndView = new ModelAndView();
-        listaDatosOrigen = origenServicio.obtenerOrigen();
+        modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndView
+        listaDatosOrigen = origenServicio.obtenerOrigen();                          // Obtener los datos registrado de origen.
 
-        modelAndView.setViewName("origen/lista");
-        modelAndView.addObject("listaOrigen", listaDatosOrigen);
+        modelAndView.setViewName("origen/lista");                           // Asignamos la vista de nuestra lista para visualizar los registros.
+        modelAndView.addObject("listaOrigen", listaDatosOrigen);      // Agregamos la lista de datos de origen que obtuvimos a la vista.
 
         return modelAndView;
-    }
+    } // Funcion que muestra la lista de los registros de origen registrados (BOTTOM)
 
-    @GetMapping("/nuevo")
+    @GetMapping("/nuevo") // Funcion que crea un nuevo registro de origen (TOP)
     public ModelAndView nuevo() {
 
-        ModelAndView modelAndView = null;
+        ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista origen
 
-        modelAndView = new ModelAndView();
-        modelAndView.setViewName("origen/formulario");
-        modelAndView.addObject("origen", new Origen());
+        modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndView
+        modelAndView.setViewName("origen/formulario");                    // Asigamos la vista de nuestro formulario para crear nuevos registros.
+        modelAndView.addObject("origen", new Origen());             // Creamos un nuevo registro al formulario de origen.
         return modelAndView;
-    }
+    } // Funcion que crea un nuevo registro de origen (BOTTOM)
 
-    @PostMapping("/guardar")
+    @PostMapping("/guardar") // Funcion que guarda un nuevo registro de origen (TOP)
     public ModelAndView guardar(@NonNull @ModelAttribute Origen origen) {
 
-        ModelAndView modelAndView = null;
+        ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista origen
 
-        modelAndView = new ModelAndView();
-        origenServicio.guardarOrigen(origen);
+        modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndView
+        origenServicio.guardarOrigen(origen);                                       // Guardamos el objeto origen que recibimos del formulario de los registros
 
-        modelAndView.setViewName("redirect:/origen");
+        modelAndView.setViewName("redirect:/origen");                     // Definimos la vista para redireccionar a la lista de los registros de origen después de guardar un nuevo registro
 
         return modelAndView;
-    }
+    } // Funcion que guarda un nuevo registro de origen (BOTTOM)
 
-    @PostMapping("/editar")
+    @PostMapping("/editar") // Funcion que edita un registro de origen (TOP)
     public ModelAndView editar(@NonNull @RequestParam Integer id) {
 
-        ModelAndView modelAndView = null;
-        modelAndView = new ModelAndView();
+        ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista origen
+        modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndView 
 
-        modelAndView.setViewName("origen/formulario");
-        modelAndView.addObject("origen", origenServicio.buscarOrigenPorId(id));
+        modelAndView.setViewName("origen/formulario");                    // Asigamos la vista de nuestro formulario para editar registros.   
+        modelAndView.addObject("origen", origenServicio.buscarOrigenPorId(id)); // Buscamos el registro de origen por su id y lo agregamos al formulario para editarlo.
 
         return modelAndView;
-    }
+    } // Funcion que edita un registro de origen (BOTTOM)
 
-    @PostMapping("/eliminar")
+    @PostMapping("/eliminar") // Funcion que elimina un registro de origen (TOP)
     public ModelAndView eliminar(@NonNull @RequestParam Integer id) {
 
-        ModelAndView modelAndView = null;
+        ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista origen
 
-        modelAndView = new ModelAndView();
-        origenServicio.eliminarOrigenPorId(id);
+        modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndView
+        origenServicio.eliminarOrigenPorId(id);                                     // metodo para Eliminar el registro de origen por su id
 
-        modelAndView.setViewName("redirect:/origen");
+        modelAndView.setViewName("redirect:/origen");                     // Definimos la vista para redireccionar a la lista de los registros de origen después de eliminar un registro  
 
         return modelAndView;
-    }
+    } // Funcion que elimina un registro de origen (BOTTOM)
 }

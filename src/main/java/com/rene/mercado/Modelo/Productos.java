@@ -27,8 +27,8 @@ public class Productos {
     private Categoria categoria;                                            // Variable de tipo Categoria para almacenar los datos de categoria asociado a un producto
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    private List<Ropa> ropas;                                          // Lista de datos de las ropas asociados a un producto
+    private List<Ropa> ropas;                                               // Lista de datos de las ropas asociados a un producto
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    private List<Comida> comidas;   
+    private List<Comida> comidas;                                           // Lista de datos de las comidas asociados a un producto
 }

@@ -18,8 +18,8 @@ import com.rene.mercado.Servicio.ServicioProductos;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-@Controller                                                                          // Componente que regresa nuestras peticiones con vista Thymeleaf y ModelAndView
-@CrossOrigin(origins = "*", methods = {                                              // Anotacion para manejar peticiones completas CRUD
+@Controller                                                                          
+@CrossOrigin(origins = "*", methods = {                                              
         RequestMethod.GET,
         RequestMethod.POST,
         RequestMethod.DELETE,
@@ -29,9 +29,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ControladorProductos {
 
     @Autowired
-    private ServicioProductos productoServicio;                                      // Inyeccion de la dependencia servicio productos para usar sus metodos definidos
+    private ServicioProductos productoServicio;                                      // Inyeccion de servicio productos
     @Autowired
-    private ServicioCategoria categoriaService;                                      // Inyeccion de la dependencia servicio categoria para usar sus metodos definidos
+    private ServicioCategoria categoriaService;                                      // Inyeccion de servicio categoria
 
     @GetMapping // Funcion que muestra la lista de los registros de productos registrados (TOP)
     public ModelAndView listar() {
@@ -40,11 +40,11 @@ public class ControladorProductos {
         List<Productos> listaDatosProductos = null;                                 // Variable que almacena la lista de informacion registrada de productos.
 
         modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndViews
-        listaDatosProductos = productoServicio.obtenerProductos();                  // Obtener los datos registrado de productos.
+        listaDatosProductos = productoServicio.obtenerProductos();                  // Metodo para Obtener los datos registrado de productos.
 
         modelAndView.setViewName("productos/lista");                                // Asignamos la vista de nuestra lista para visualizar los registros.
 
-        modelAndView.addObject("productos", listaDatosProductos);                   // Obtenemos la lista de Productos para nuestro atributo productos.
+        modelAndView.addObject("productos", listaDatosProductos);                   // Agregamos la lista de datos de Productos que obtuvimos del servicio productos.
 
         return modelAndView;
     } // Funcion que muestra la lista de los registros de productos registrados (BOTTOM)
@@ -57,8 +57,8 @@ public class ControladorProductos {
         modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndView
         modelAndView.setViewName("productos/formulario");                           // Asignamos la vista de nuestro formulario para crear nuevos registros.
 
-        modelAndView.addObject("productos", new Productos());                       // Creamos un nuevo registro al formulario de prodcutos para el atributo productos.
-        modelAndView.addObject("categorias", categoriaService.obtenerCategorias()); // Obtenemos la listad de Datos de categoria para el formulario de producto.
+        modelAndView.addObject("productos", new Productos());                       // Creamos un nuevo registro al formulario de prodcutos
+        modelAndView.addObject("categorias", categoriaService.obtenerCategorias()); // Obtenemos y agregamos la listad de Datos de categoria para el formulario de producto.
 
         return modelAndView;
     } // Funcion que crea un nuevo registro de producto (BOTTOM)
@@ -69,7 +69,7 @@ public class ControladorProductos {
         ModelAndView modelAndView = null;                                            // Variable que almacena las operaciones de la vista productos
 
         modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndView
-        productoServicio.guardarProductos(productos);                               // Guardamos el objeto productos que recibimos del formulario de los registros a través del servicio productosService
+        productoServicio.guardarProductos(productos);                               // Guardamos el objeto productos que recibimos del formulario de los registros.
 
         modelAndView.setViewName("redirect:/productos");                            // / Definimos la vista para redireccionar a la lista de los registros de productos después de guardar un nuevo registro
 
@@ -85,7 +85,7 @@ public class ControladorProductos {
         modelAndView.setViewName("productos/formulario");                           // Asignamos la vista de nuestro formulario para editar el registro seleccionado.
 
         modelAndView.addObject("productos", productoServicio.buscarProductosPorId(id));// Obtenemos y asignamos el registro de productos por su id para el formulario de productos.
-        modelAndView.addObject("categorias", categoriaService.obtenerCategorias());    // Obtenemos la listad de Datos de categoria para el formulario de producto.
+        modelAndView.addObject("categorias", categoriaService.obtenerCategorias());    // Obtenemos y asiganmos la listad de Datos de categoria para el formulario de productos.
 
         return modelAndView;
     } // Funcion que edita un registro de productos (BOTTOM)
@@ -96,7 +96,7 @@ public class ControladorProductos {
         ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista productos
         
         modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndView
-        productoServicio.eliminarProductosPorId(id);                                // Eliminamos el registro de productos por su id a traves del metodo inyectado de productosService
+        productoServicio.eliminarProductosPorId(id);                                // Eliminamos el registro de productos por su id.
 
         modelAndView.setViewName("redirect:/productos");                            // Definimos la vista para redireccionar a la lista de los registros de productos después de eliminar un registro
 
