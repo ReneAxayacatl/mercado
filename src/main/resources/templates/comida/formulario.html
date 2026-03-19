@@ -1,53 +1,48 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Formulario de Comida</title>
-  </head>
-  <body>
-    <h2>Formulario de Comida</h2>
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulario de Comida</title>
+</head>
+<body bgcolor="#6c9eab" text="white">
 
-    <form
-      th:action="@{/comida/guardar}"
-      th:object="${comida}"
-      method="post"
-    >
-      <!-- Campo oculto para ID (para edición) -->
-      <input type="hidden" th:field="*{idComida}" />
+<h2>Formulario de Comida</h2>
 
-      <!-- Nombre de la comida -->
-      <label>Nombre:</label>
-      <input type="text" th:field="*{nombre}" required />
-      <br/><br/>
+<form th:action="@{/comida/guardar}" th:object="${comida}" method="post">
 
-      <!-- Descripción -->
-      <label>Descripción:</label>
-      <input type="text" th:field="*{descripcion}" required />
-      <br/><br/>
+  <!-- ID (oculto) -->
+  <input type="hidden" th:field="*{idComida}" />
 
-      <!-- Precio -->
-      <label>Precio:</label>
-      <input type="number" step="0.01" th:field="*{precio}" required />
-      <br/><br/>
+  <!-- PRODUCTO -->
+  <label>Producto:</label>
+  <select th:field="*{producto.idProducto}" required>
+    <option value="" disabled selected>Seleccione un producto</option>
 
-      <!-- Selección de Producto -->
-      <label>Producto:</label>
-      <select th:field="*{producto.idProducto}" required>
-        <option value="" disabled selected>Seleccione un producto</option>
-        <option
-          th:each="p : ${productos}"
-          th:value="${p.idProducto}"
-          th:text="${p.precioUnit} + ' - ' + ${p.categoria.nombreCategoria}"
-          th:selected="${comida.producto != null} ? ${comida.producto.idProducto} == ${p.idProducto} : false"
-        ></option>
-      </select>
-      <br/><br/>
+    <option th:each="p : ${productos}"
+            th:value="${p.idProducto}"
+            th:text="${p.idProducto}">
+    </option>
+  </select>
 
-      <button type="submit">Guardar</button>
-    </form>
+  <br/><br/>
 
+  <!-- ORIGEN (many-to-many) -->
+  <label>Origen:</label><br/><br/>
+  <div th:each="o : ${origen}">
+    <input type="checkbox"
+          th:value="${o.idOrigen}"
+          th:field="*{origen}" />
+    <span th:text="${o.nombre}"></span>
     <br/>
-    <a th:href="@{/comida}">Regresar a la lista de comidas</a>
-  </body>
+  </div>
+
+  <br/>
+
+  <button type="submit">Guardar</button>
+</form>
+
+<br/>
+<a th:href="@{/comida}">Regresar a la lista de comidas</a>
+
+</body>
 </html>

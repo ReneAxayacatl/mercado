@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.rene.mercado.Modelo.Comida;
 import com.rene.mercado.Servicio.ServicioComida;
+import com.rene.mercado.Servicio.ServicioOrigen;
 import com.rene.mercado.Servicio.ServicioProductos;
 
 @Controller
@@ -32,6 +33,8 @@ public class ControladorComida {
     private ServicioProductos productoServicio;
     @Autowired
     private ServicioComida comidaService;
+    @Autowired
+    private ServicioOrigen origenServicio;
 
     @GetMapping
     public ModelAndView listar() {
@@ -56,6 +59,8 @@ public class ControladorComida {
         modelAndView = new ModelAndView();
         modelAndView.setViewName("comida/formulario");
         modelAndView.addObject("comida", new Comida());
+        modelAndView.addObject("productos", productoServicio.obtenerProductos());
+        modelAndView.addObject("origen", origenServicio.obtenerOrigen());
 
         return modelAndView;
     }
@@ -83,6 +88,7 @@ public class ControladorComida {
 
         modelAndView.addObject("comida", comidaService.buscarComidasPorId(id));
         modelAndView.addObject("productos", productoServicio.obtenerProductos());
+        modelAndView.addObject("origenes", origenServicio.obtenerOrigen());
 
         return modelAndView;
     }

@@ -20,13 +20,6 @@ public class Ropa {
     @JoinColumn(name = "id_producto")
     private Productos producto;
 
-    // @ManyToMany(fetch = FetchType.LAZY)
-    // @JoinTable(
-    // name = "ropa_talla",
-    // schema = "rene",
-    // joinColumns = @JoinColumn(name = "id_ropa"),
-    // inverseJoinColumns = @JoinColumn(name = "id_talla")
-    // ) private List < Talla > tallas;
     @OneToMany(mappedBy = "ropa", 
                 fetch = FetchType.LAZY,
                 cascade = CascadeType.ALL, 
@@ -39,16 +32,4 @@ public class Ropa {
                 joinColumns = @JoinColumn(name = "id_ropa"), 
                 inverseJoinColumns = @JoinColumn(name = "id_origen"))
     private List<Origen> origenes;
-
-    /*
-     * @ManyToMany
-     * 
-     * @JoinColumn(name = "id_talla")
-     * private Talla talla;
-     * 
-     * @ManyToMany
-     * 
-     * @JoinColumn(name = "id_origen")
-     * private Origen origen;
-     */
 }

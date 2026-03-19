@@ -1,0 +1,30 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Formulario de Talla</title>
+</head>
+<body bgcolor="#6c9eab" text="white">
+
+<h2>Formulario de Talla</h2>
+
+<form th:action="@{/talla/guardar}" th:object="${talla}" method="post">
+
+    <!-- ID -->
+    <input type="hidden" th:field="*{idTalla}" />
+
+    <!-- Tipo de talla -->
+    <label>Tipo de Talla:</label>
+    <input type="text" th:field="*{tipoTalla}" required />
+
+    <br/><br/>
+
+    <button type="submit">Guardar</button>
+
+</form>
+
+<br/>
+<a th:href="@{/talla}">Regresar a la lista</a>
+
+</body>
+</html>

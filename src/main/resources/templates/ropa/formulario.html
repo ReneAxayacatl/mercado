@@ -1,0 +1,46 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Formulario de Ropa</title>
+</head>
+<body bgcolor="#6c9eab" text="white">
+
+<h2>Formulario de Ropa</h2>
+
+<form th:action="@{/ropa/guardar}" th:object="${ropa}" method="post">
+
+    <!-- ID oculto -->
+    <input type="hidden" th:field="*{idRopa}" />
+
+    <!-- PRODUCTO -->
+    <label>Producto:</label>
+    <select th:field="*{producto.idProducto}" required>
+    <option value="" disabled selected>Seleccione un producto</option>
+
+    <option th:each="p : ${productos}"
+            th:value="${p.idProducto}"
+            th:text="${p.idProducto}">
+    </option>
+    </select>
+
+    <br/><br/>
+
+    <!-- ORIGEN -->
+    <label>Origen:</label><br/><br/>
+
+    <div th:each="o : ${origenes}">
+    <span th:text="${o.nombre}"></span><br/>
+    </div>
+
+    <br/>
+
+    <button type="submit">Guardar</button>
+
+</form>
+
+<br/>
+<a th:href="@{/ropa}">Regresar a la lista</a>
+
+</body>
+</html>

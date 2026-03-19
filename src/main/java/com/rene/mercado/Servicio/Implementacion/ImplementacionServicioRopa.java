@@ -1,7 +1,6 @@
 package com.rene.mercado.Servicio.Implementacion;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -24,8 +23,8 @@ public class ImplementacionServicioRopa implements ServicioRopa {
     }
 
     @Override
-    public Optional<Ropa> buscarRopasPorId(@NonNull Integer id) {
-        return ropaRepositorio.findById(id);
+    public Ropa buscarRopasPorId(@NonNull Integer id) {
+        return ropaRepositorio.buscarRopaPorId(id);
     }
 
     @Override

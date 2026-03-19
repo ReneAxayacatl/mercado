@@ -1,0 +1,62 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Ropa</title>
+</head>
+<body bgcolor="#6c9eab" text="white">
+
+<h2>Ropa</h2>
+
+<a th:href="@{/ropa/nuevo}">Nueva Ropa</a>
+<br/><br/>
+
+<table border="1" bgcolor="#4a4747">
+    <tr>
+    <th>ID</th>
+    <th>Producto</th>
+    <th>Origen</th>
+    <th>Editar</th>
+    <th>Eliminar</th>
+    </tr>
+
+    <tr th:each="r : ${listaRopa}" style="text-align: center;">
+    
+    <td th:text="${r.idRopa}"></td>
+
+    <!-- PRODUCTO -->
+    <td th:text="${r.producto != null ? r.producto.idProducto : 'Sin producto'}"></td>
+
+    <!-- ORIGEN -->
+    <td>
+        <span th:if="${r.origenes != null}">
+        <span th:each="o : ${r.origenes}" 
+                th:text="${o.nombre + ' '}">
+        </span>
+        </span>
+    </td>
+
+    <!-- EDITAR -->
+    <td>
+        <form th:action="@{/ropa/editar}" method="post">
+        <input type="hidden" name="id" th:value="${r.idRopa}" />
+        <button type="submit">Editar</button>
+    </form>
+    </td>
+
+    <!-- ELIMINAR -->
+    <td>
+    <form th:action="@{/ropa/eliminar}" method="post">
+        <input type="hidden" name="id" th:value="${r.idRopa}" />
+        <button type="submit">Eliminar</button>
+    </form>
+    </td>
+
+</tr>
+</table>
+
+<br/><br/>
+<a th:href="@{/}">Regresar al menú principal</a>
+
+</body>
+</html>

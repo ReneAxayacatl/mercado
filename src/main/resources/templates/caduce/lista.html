@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Caduce</title>
   </head>
-  <body>
+  <body bgcolor="#6c9eab" text="white">
     <h2>Caduce</h2>
 
     <a th:href="@{/caduce/nuevo}"> Nuevo </a><br /><br />
 
-    <table border="1">
+    <table border="1" bgcolor="#4a4747">
       <tr>
         <th>ID</th>
         <th>Tipo</th>
         <th>Eliminar</th>
       </tr>
 
-      <tr th:each="c:${listDatosCaduce}">
+      <tr th:each="c:${listDatosCaduce}" style="text-align: center;">
         <td th:text="${c.idCaduce}"></td>
 
         <td th:text="${c.caduce}"></td>

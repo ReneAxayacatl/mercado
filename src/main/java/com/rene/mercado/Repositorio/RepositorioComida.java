@@ -16,10 +16,8 @@ public interface RepositorioComida
                                                                                 // producto a categoria
         List<Comida> listarComida();
 
-        // @Query("SELECT c FROM Comida c LEFT JOIN c.producto p LEFT JOIN p.categoria
-        // cat")
+        // @Query("SELECT c FROM Comida c LEFT JOIN c.producto p LEFT JOIN p.categoria cat")
         // List<Comida> listarComida();
-
         @Query("SELECT com FROM Comida com WHERE com.idComida = :id")
         Comida buscarComidasPorId(@Param("id") Integer id);
 }

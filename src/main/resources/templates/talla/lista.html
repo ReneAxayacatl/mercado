@@ -1,0 +1,49 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Tallas</title>
+</head>
+<body bgcolor="#6c9eab" text="white">
+
+<h2>Tallas</h2>
+
+<a th:href="@{/talla/nuevo}">Nueva Talla</a>
+<br/><br/>
+
+<table border="1" bgcolor="#4a4747">
+    <tr>
+    <th>ID</th>
+    <th>Tipo de Talla</th>
+    <th>Editar</th>
+    <th>Eliminar</th>
+    </tr>
+
+    <tr th:each="t : ${listaTallas}" style="text-align: center;">
+    
+    <td th:text="${t.idTalla}"></td>
+
+    <td th:text="${t.tipoTalla}"></td>
+
+    <td>
+        <form th:action="@{/talla/editar}" method="post">
+            <input type="hidden" name="id" th:value="${t.idTalla}" />
+            <button type="submit">Editar</button>
+        </form>
+    </td>
+
+    <td>
+        <form th:action="@{/talla/eliminar}" method="post">
+            <input type="hidden" name="id" th:value="${t.idTalla}" />
+            <button type="submit">Eliminar</button>
+        </form>
+    </td>
+
+    </tr>
+</table>
+
+<br/><br/>
+<a th:href="@{/}">Regresar al menu principal</a>
+
+</body>
+</html>

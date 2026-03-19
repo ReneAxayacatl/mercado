@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulario de Caduce</title>
   </head>
-  <body>
+  <body bgcolor="#6c9eab" text="white">
     <form th:action="@{/caduce/guardar}" th:object="${caduce}" method="post">
       <label>ID Caduce</label>
       <input type="number" th:field="*{idCaduce}" />

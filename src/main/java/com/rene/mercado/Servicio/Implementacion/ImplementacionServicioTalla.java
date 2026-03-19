@@ -1,7 +1,6 @@
 package com.rene.mercado.Servicio.Implementacion;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -24,8 +23,8 @@ public class ImplementacionServicioTalla implements ServicioTalla {
     }
 
     @Override
-    public Optional<Talla> buscarTallaPorId(@NonNull Integer id) {
-        return tallaRepositorio.findById(id);
+    public Talla buscarTallaPorId(@NonNull Integer id) {
+        return tallaRepositorio.buscarTallaPorId(id);
     }
 
     @Override

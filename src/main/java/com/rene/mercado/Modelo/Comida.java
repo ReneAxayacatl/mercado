@@ -27,8 +27,4 @@ public class Comida {
             inverseJoinColumns=@JoinColumn(name="id_origen")
     )
     private List<Origen> origenes;
-
-    /* @ManyToMany
-    @JoinColumn(name = "id_origen")
-    private Origen origen; */
 }

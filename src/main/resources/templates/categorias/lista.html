@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Categorias</title>
   </head>
-  <body>
+  <body bgcolor="#6c9eab" text="white">
     <h2>Categorias</h2>
 
     <a th:href="@{/categoria/nuevo}"> Nueva Categoria </a><br /><br />
 
-    <table border="1">
+    <table border="1" bgcolor="#4a4747">
       <tr>
         <th>ID</th>
         <th>Nombre</th>
@@ -19,7 +19,7 @@
         <th>Eliminar</th>
       </tr>
 
-      <tr th:each="c:${categorias}">
+      <tr th:each="c:${categorias}" style="text-align: center;">
         <td th:text="${c.idCategoria}"></td>
 
         <td th:text="${c.nombreCategoria}"></td>

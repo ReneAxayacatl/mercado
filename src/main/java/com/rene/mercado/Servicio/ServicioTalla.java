@@ -1,7 +1,6 @@
 package com.rene.mercado.Servicio;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.lang.NonNull;
 
@@ -9,13 +8,13 @@ import com.rene.mercado.Modelo.Talla;
 
 public interface ServicioTalla {
 
-    Talla guardarTallas(@NonNull Talla Tallas);
+    public Talla guardarTallas(@NonNull Talla Tallas);
 
-    Optional<Talla> buscarTallaPorId(@NonNull Integer idInteger);
+    public Talla buscarTallaPorId(@NonNull Integer idInteger);
 
-    List<Talla> obtenerTallas();
+    public List<Talla> obtenerTallas();
 
-    Talla editarTallas(@NonNull Talla Talla);
+    public Talla editarTallas(@NonNull Talla Talla);
 
-    void eliminarTallasPorId(@NonNull Integer id);
+    public void eliminarTallasPorId(@NonNull Integer id);
 }
