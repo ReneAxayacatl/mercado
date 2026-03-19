@@ -71,8 +71,8 @@ public class ControladorTalla {
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista talla
         modelAndView = new ModelAndView();                                                      // Inicializacion de la variable de tipo ModelAndView
 
-        modelAndView.setViewName("talla/formulario");                                           // 
-        modelAndView.addObject("talla", tallaService.buscarTallaPorId(id));
+        modelAndView.setViewName("talla/formulario");                                           // Asignamos la vista de nuestro formulario para editar el registro seleccionado.
+        modelAndView.addObject("talla", tallaService.buscarTallaPorId(id));                // Obtenemos y asignamos el registro de Tallas por su id para el formulario de Tallas
 
         return modelAndView;
     } // Funcion que edita un registro de talla (BOTTOM)
@@ -80,12 +80,12 @@ public class ControladorTalla {
     @PostMapping("/eliminar") // Funcion que elimina un registro de talla (TOP)
     public ModelAndView eliminar(@NonNull @RequestParam Integer id) {
 
-        ModelAndView modelAndView = null;
+        ModelAndView modelAndView = null;                                                                 // Variable que almacena las operaciones de la vista tallas.
 
-        modelAndView = new ModelAndView();
-        tallaService.eliminarTallasPorId(id);
+        modelAndView = new ModelAndView();                                                                // Inicialización de la variable de tipo ModelAndView
+        tallaService.eliminarTallasPorId(id);                                                             // Eliminamos el registro de productos por su id.
 
-        modelAndView.setViewName("redirect:/talla");
+        modelAndView.setViewName("redirect:/talla");                                            // Definimos la vista para redireccionar a la lista de los registros de tallas después de eliminar un registro
 
         return modelAndView;
     } // Funcion que elimina un registro de talla (BOTTOM)

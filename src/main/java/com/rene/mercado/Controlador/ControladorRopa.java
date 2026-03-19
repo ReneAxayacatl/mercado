@@ -73,18 +73,6 @@ public class ControladorRopa {
         return modelAndView;
     } // Funcion que crea un nuevo registro de Ropa (BOTTOM)
 
-    // @PostMapping("/guardar")
-    // public ModelAndView guardar(@NonNull @ModelAttribute Ropa ropa) {
-
-    //     ModelAndView modelAndView = null;
-
-    //     modelAndView = new ModelAndView();
-    //     ropaServicio.guardarRopas(ropa);
-
-    //     modelAndView.setViewName("redirect:/ropa");
-
-    //     return modelAndView;
-    // }
     @PostMapping("/guardar") // Funcion que guarda un nuevo registro de Ropa (TOP)
     public ModelAndView guardar(@NonNull @ModelAttribute Ropa ropa, 
         @RequestParam(name = "idsTalla", required = false) List<Integer> idsTalla) {
