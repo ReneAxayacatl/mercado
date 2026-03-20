@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.rene.mercado.Modelo.Caduce;
+import com.rene.mercado.Entidad.EntidadCaduce;
 
 public interface RepositorioCaduce
-                extends JpaRepository<Caduce, Integer> {
-        @Query("SELECT c FROM Caduce c ORDER BY c.idCaduce") // Sentencia JPQL que obtiene Caduce y ordenada por ID
-        List<Caduce> listarCaduce();
+                extends JpaRepository<EntidadCaduce, Integer> {
+        @Query("SELECT c FROM EntidadCaduce c ORDER BY c.idCaduce") // Sentencia JPQL que obtiene Caduce y ordenada por ID
+        List<EntidadCaduce> listarCaduce();
 
-        @Query("SELECT c FROM Caduce c WHERE c.id = :id")
-        Caduce buscarCaducePorId(@Param("id") Integer id);
+        @Query("SELECT c FROM EntidadCaduce c WHERE c.id = :id")
+        EntidadCaduce buscarCaducePorId(@Param("id") Integer id);
 }

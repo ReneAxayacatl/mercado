@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import com.rene.mercado.Modelo.Origen;
+import com.rene.mercado.Entidad.EntidadOrigen;
 import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioOrigen;
 
 @Controller
@@ -29,12 +29,12 @@ public class ControladorOrigen {
     public ModelAndView listar() {
 
         ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista origen.
-        List<Origen> listaDatosOrigen = null;                                       // Variable que almacena la lista de informacion registrada de origen.
+        List<EntidadOrigen> listaDatosOrigen = null;                                       // Variable que almacena la lista de informacion registrada de origen.
 
         modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndView
         listaDatosOrigen = origenServicio.obtenerOrigen();                          // Obtener los datos registrado de origen.
 
-        modelAndView.setViewName("origen/lista");                           // Asignamos la vista de nuestra lista para visualizar los registros.
+        modelAndView.setViewName("origen/listaOrigen");                           // Asignamos la vista de nuestra lista para visualizar los registros.
         modelAndView.addObject("listaOrigen", listaDatosOrigen);      // Agregamos la lista de datos de origen que obtuvimos a la vista.
 
         return modelAndView;
@@ -46,13 +46,13 @@ public class ControladorOrigen {
         ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista origen
 
         modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndView
-        modelAndView.setViewName("origen/formulario");                    // Asigamos la vista de nuestro formulario para crear nuevos registros.
-        modelAndView.addObject("origen", new Origen());             // Creamos un nuevo registro al formulario de origen.
+        modelAndView.setViewName("origen/formularioOrigen");                    // Asigamos la vista de nuestro formulario para crear nuevos registros.
+        modelAndView.addObject("origen", new EntidadOrigen());             // Creamos un nuevo registro al formulario de origen.
         return modelAndView;
     } // Funcion que crea un nuevo registro de origen (BOTTOM)
 
     @PostMapping("/guardar") // Funcion que guarda un nuevo registro de origen (TOP)
-    public ModelAndView guardar(@NonNull @ModelAttribute Origen origen) {
+    public ModelAndView guardar(@NonNull @ModelAttribute EntidadOrigen origen) {
 
         ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista origen
 
@@ -70,7 +70,7 @@ public class ControladorOrigen {
         ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista origen
         modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndView 
 
-        modelAndView.setViewName("origen/formulario");                    // Asigamos la vista de nuestro formulario para editar registros.   
+        modelAndView.setViewName("origen/formularioOrigen");                    // Asigamos la vista de nuestro formulario para editar registros.   
         modelAndView.addObject("origen", origenServicio.buscarOrigenPorId(id)); // Buscamos el registro de origen por su id y lo agregamos al formulario para editarlo.
 
         return modelAndView;

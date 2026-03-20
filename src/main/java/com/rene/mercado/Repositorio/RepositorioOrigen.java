@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.rene.mercado.Modelo.Origen;
+import com.rene.mercado.Entidad.EntidadOrigen;
 
 public interface RepositorioOrigen
-                extends JpaRepository<Origen, Integer> {
-        @Query("SELECT o FROM Origen o ORDER BY o.nombreOrigen")        // Query JPQL que obtiene Origen y esta ordenado por Nombre de Origen
-        List<Origen> listarOrigen();
+                extends JpaRepository<EntidadOrigen, Integer> {
+        @Query("SELECT o FROM EntidadOrigen o ORDER BY o.idOrigen ASC")        // Query JPQL que obtiene Origen y esta ordenado por Nombre de Origen
+        List<EntidadOrigen> listarOrigen();
 
-        @Query("SELECT o FROM Origen o WHERE o.id = :id")
-        Origen buscarOrigenPorId(@Param("id") Integer id);
+        @Query("SELECT o FROM EntidadOrigen o WHERE o.id = :id")
+        EntidadOrigen buscarOrigenPorId(@Param("id") Integer id);
 }

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.rene.mercado.Modelo.Comida;
-import com.rene.mercado.Modelo.Origen;
+import com.rene.mercado.Entidad.EntidadComida;
+import com.rene.mercado.Entidad.EntidadOrigen;
 import com.rene.mercado.Servicio.ServicioComida;
 import com.rene.mercado.Servicio.ServicioOrigen;
 import com.rene.mercado.Servicio.ServicioProductos;
@@ -41,12 +41,12 @@ public class ControladorComida {
     public ModelAndView listar() {
 
         ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista comida
-        List<Comida> listaDatosComidas = null;                                      // Variable que almacena la lista de informacion registrada de comida.
+        List<EntidadComida> listaDatosComidas = null;                                      // Variable que almacena la lista de informacion registrada de comida.
 
         modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndView
         listaDatosComidas = comidaService.obtenerComidas();                         // Obtener los datos registrado de comida.
 
-        modelAndView.setViewName("comida/lista");                           // Asignamos la vista de nuestra lista para visualizar los registros.
+        modelAndView.setViewName("comida/listaComida");                           // Asignamos la vista de nuestra lista para visualizar los registros.
         modelAndView.addObject("listaComidas", listaDatosComidas);      // Agregamos la lista de datos de comida que obtuvimos y lo pasamos a la vista.
 
         return modelAndView;
@@ -58,29 +58,17 @@ public class ControladorComida {
         ModelAndView modelAndView = null;                                               // Variable que almacena las operaciones de la vista comida
 
         modelAndView = new ModelAndView();                                              // Inicialización de la variable de tipo ModelAndView
-        modelAndView.setViewName("comida/formulario");                          // Asignamos la vista de nuestro formulario para crear nuevos registros.
-        modelAndView.addObject("comida", new Comida());                    // Creamos un nuevo registro al formulario de comida.
+        modelAndView.setViewName("comida/formularioComida");                          // Asignamos la vista de nuestro formulario para crear nuevos registros.
+        modelAndView.addObject("comida", new EntidadComida());                    // Creamos un nuevo registro al formulario de comida.
         modelAndView.addObject("productos", productoServicio.obtenerProductos()); // Obtenemos y agregamos la lista de Datos de productos para el formulario de comida.
         modelAndView.addObject("origenes", origenServicio.obtenerOrigen());   // Obtenemos y agregamos la lista de Datos de origen para el formulario de comida.
 
         return modelAndView;
     } // Funcion que crea un nuevo registro de Comida (BOTTOM)
 
-    // @PostMapping("/guardar") // Funcion que guarda un nuevo registro de comida (TOP)
-    // public ModelAndView guardar(@NonNull @ModelAttribute Comida comida) {
-
-    //     ModelAndView modelAndView = null;                                               // Variable que almacena las operaciones de la vista comida
-
-    //     modelAndView = new ModelAndView();                                              // Inicialización de la variable de tipo ModelAndView
-    //     comidaService.guardarComidas(comida);                                           // Guardamos el dato del objeto comida que recibimos de los registros del formulario a través del servicio comida.
-
-    //     modelAndView.setViewName("redirect:/comida");                           // Definimos la vista para redireccionar a la lista de los registros de comida después de guardar un nuevo registro
-
-    //     return modelAndView;
-    // } // Funcion que guarda un nuevo registro de comida (TOP)
     @PostMapping("/guardar")
-public ModelAndView guardar(
-    @NonNull @ModelAttribute Comida comida,
+    public ModelAndView guardar(
+    @NonNull @ModelAttribute EntidadComida comida,
     @RequestParam(name = "idsOrigen", required = false) List<Integer> idsOrigen) {
 
     ModelAndView modelAndView = new ModelAndView();
@@ -90,7 +78,7 @@ public ModelAndView guardar(
     if (idsOrigen != null) {
         for (Integer id : idsOrigen) {
 
-            Origen origen = origenServicio.buscarOrigenPorId(id);
+            EntidadOrigen origen = origenServicio.buscarOrigenPorId(id);
 
             if (origen != null) {
                 comida.getOrigenes().add(origen);
@@ -110,7 +98,7 @@ public ModelAndView guardar(
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista comida
 
         modelAndView = new ModelAndView();                                                      // Inicialización de la variable de tipo ModelAndView
-        modelAndView.setViewName("comida/formulario");                                // Asignamos la vista de nuestro formulario para editar el registro seleccionado.
+        modelAndView.setViewName("comida/formularioComida");                                 // Asignamos la vista de nuestro formulario para editar el registro seleccionado.
 
         modelAndView.addObject("comida", comidaService.buscarComidasPorId(id));     // Obtenemos y asignamos el registro de comida por su id para el formulario de comida.
         modelAndView.addObject("productos", productoServicio.obtenerProductos());   // Obtenemos y agregamos la lista de Datos de productos para el formulario de comida.

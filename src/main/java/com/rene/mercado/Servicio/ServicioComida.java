@@ -3,17 +3,18 @@ package com.rene.mercado.Servicio;
 import java.util.List;
 
 import org.springframework.lang.NonNull;
-import com.rene.mercado.Modelo.Comida;
+
+import com.rene.mercado.Entidad.EntidadComida;
 
 public interface ServicioComida {
 
-    public Comida guardarComidas(@NonNull Comida Comidas);
+    public EntidadComida guardarComidas(@NonNull EntidadComida Comidas);
 
-    public Comida buscarComidasPorId(@NonNull Integer idInteger);
+    public EntidadComida buscarComidasPorId(@NonNull Integer idInteger);
 
-    public List<Comida> obtenerComidas();
+    public List<EntidadComida> obtenerComidas();
 
-    public Comida editarComidas(@NonNull Comida Comidas);
+    public EntidadComida editarComidas(@NonNull EntidadComida Comidas);
 
     public void eliminarComidasPorId(@NonNull Integer idInteger);
 }

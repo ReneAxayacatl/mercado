@@ -1,4 +1,4 @@
-package com.rene.mercado.Modelo;
+package com.rene.mercado.Entidad;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import lombok.*;
 @Data
 @Table(name = "categoria", schema = "rene")                                     // Anotacion para definir la tabla en la base de datos y el esquema al que pertenece
 
-public class Categoria {
+public class EntidadCategoria {
     @Id                                                                         // Anotacion para identificar PK de la entidad 'categoria'
     @GeneratedValue(strategy = GenerationType.IDENTITY)                         // Anotacion para definir el dato auto-incremental a la PK
     @Column(name = "id_categoria")                                              // Anotacion para definir el Id de la columna en la base de datos
@@ -20,8 +20,8 @@ public class Categoria {
 
     @ManyToOne(fetch = FetchType.LAZY)                                          // Anotacion para definir la relacion de muchos a uno entre Categoria y Caduce, y traer datos de forma secuencial (LAZY)
     @JoinColumn(name = "id_caduce")                                             // Anotacion para definir la llave foranea de la columna en la BD que se relaciona con la tabla 'caduce'
-    private Caduce caduce;                                                      // Variable de tipo Caduce para almacenar los datos de caduce asociado a una categoria
+    private EntidadCaduce caduce;                                                      // Variable de tipo Caduce para almacenar los datos de caduce asociado a una categoria
 
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)                                          // Anotacion para definir la relacion de uno a muchos entre Categoria y Productos
-    private List<Productos> productos;                                          // Lista de datos de los productos asociados a una categoria
+    private List<EntidadProductos> productos;                                          // Lista de datos de los productos asociados a una categoria
 }

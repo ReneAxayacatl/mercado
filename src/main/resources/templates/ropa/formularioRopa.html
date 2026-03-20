@@ -16,7 +16,7 @@
     <!-- PRODUCTO -->
     <label>Producto:</label>
     <select th:field="*{producto.idProducto}" required>
-        <option value="" disabled selected>Seleccione un producto</option>
+        <option value="" disabled>Seleccione un producto</option>
             <option th:each="p : ${productos}"
             th:value="${p.idProducto}"
             th:text="${p.idProducto}">
@@ -38,12 +38,8 @@
     <!-- ORIGEN -->
     <label>Origen:</label>
 
-    <select th:field="*{origenes}" required>
-        <option value="" disabled selected>Seleccione un Origen</option>
-        <option th:each="o : ${origenes}"
-            th:value="${o.idOrigen}"
-            th:text="${o.nombreOrigen}">
-        </option>
+    <select name="idsOrigen" multiple>
+    <option th:each="o : ${origenes}" th:value="${o.idOrigen}" th:text="${o.nombreOrigen}"></option>
     </select><br/><br/>
     <button type="submit">Guardar</button>
 </form>

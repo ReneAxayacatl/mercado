@@ -1,4 +1,4 @@
-package com.rene.mercado.Modelo;
+package com.rene.mercado.Entidad;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @Table(name = "origen", schema = "rene")
 
-public class Origen {
+public class EntidadOrigen {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +22,6 @@ public class Origen {
     @ManyToMany(mappedBy = "origenes", 
                 fetch = FetchType.LAZY,
                 cascade = CascadeType.ALL)       // relacion inversa que apunta a la entidad Comida
-    private List<Comida> comida;
+    private List<EntidadComida> comida;
 
 }

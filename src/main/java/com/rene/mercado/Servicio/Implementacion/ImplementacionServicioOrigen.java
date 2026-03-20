@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
-import com.rene.mercado.Modelo.Origen;
+import com.rene.mercado.Entidad.EntidadOrigen;
 import com.rene.mercado.Repositorio.RepositorioOrigen;
 import com.rene.mercado.Servicio.ServicioOrigen;
 
@@ -16,22 +16,22 @@ public class ImplementacionServicioOrigen implements ServicioOrigen {
     @Autowired
     private RepositorioOrigen origenRepositorio;
 
-    public Origen guardarOrigen(@NonNull Origen Origen) {
+    public EntidadOrigen guardarOrigen(@NonNull EntidadOrigen Origen) {
         return origenRepositorio.save(Origen);
     }
 
     @Override
-    public Origen buscarOrigenPorId(@NonNull Integer id) {
+    public EntidadOrigen buscarOrigenPorId(@NonNull Integer id) {
         return origenRepositorio.buscarOrigenPorId(id);
     }
 
     @Override
-    public List<Origen> obtenerOrigen() {
+    public List<EntidadOrigen> obtenerOrigen() {
         return origenRepositorio.listarOrigen();
     }
 
     @Override
-    public Origen editarOrigen(@NonNull Origen origen) {
+    public EntidadOrigen editarOrigen(@NonNull EntidadOrigen origen) {
         return origenRepositorio.saveAndFlush(origen);
     }
 

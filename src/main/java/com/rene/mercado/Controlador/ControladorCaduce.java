@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.rene.mercado.Modelo.Caduce;
+import com.rene.mercado.Entidad.EntidadCaduce;
 import com.rene.mercado.Servicio.ServicioCaduce;
 
 @Controller                                                           // Componente que regresa nuestras peticiones con vista Thymeleaf y ModelAndView
@@ -34,12 +34,12 @@ public class ControladorCaduce {
     public ModelAndView listar() {
 
         ModelAndView modelAndView = null;                            // Variable que almacena la vista y los datos que se van a mostrar en la vista 'caduce'
-        List<Caduce> listaDatosCaduce = null;                        // Variable que almacena la lista de informacion registrada de caduce.
+        List<EntidadCaduce> listaDatosCaduce = null;                        // Variable que almacena la lista de informacion registrada de caduce.
 
         modelAndView = new ModelAndView();                           // Inicialización de la variable de tipo ModelAndView
         listaDatosCaduce = caduceService.obtenerCaduce();            // Obtener los datos registrado de caduce.
 
-        modelAndView.setViewName("caduce/lista");                    // Asignamos la vista de nuestra lista para visualizar los registros.
+        modelAndView.setViewName("caduce/listaCaduce");                    // Asignamos la vista de nuestra lista para visualizar los registros.
         modelAndView.addObject("listDatosCaduce", listaDatosCaduce); // Obtenemos la lista de Caduce para nuestro atributo listDatosCaduce.
 
         return modelAndView;
@@ -51,14 +51,14 @@ public class ControladorCaduce {
         ModelAndView modelAndView = null;                            // Variable que almacena las operaciones de la vista de caduce
 
         modelAndView = new ModelAndView();                           // Inicialización de la variable de tipo ModelAndView
-        modelAndView.setViewName("caduce/formulario");               // Definimos la vista para mostrar el formulario de registro de caduce
-        modelAndView.addObject("caduce", new Caduce());              // Agregamos un nuevo objeto de tipo Caduce para el formulario de registro
+        modelAndView.setViewName("caduce/formularioCaduce");               // Definimos la vista para mostrar el formulario de registro de caduce
+        modelAndView.addObject("caduce", new EntidadCaduce());              // Agregamos un nuevo objeto de tipo Caduce para el formulario de registro
 
         return modelAndView;
     }// Funcion que crea un nuevo registro de caducidad (BOTTOM)
 
     @PostMapping("/guardar") // Funcion que guarda los registros de caducidad (TOP)
-    public ModelAndView guardar(@NonNull @ModelAttribute Caduce caduce) {
+    public ModelAndView guardar(@NonNull @ModelAttribute EntidadCaduce caduce) {
 
         ModelAndView modelAndView = null;                            // Variable que almacena las operaciones de la vista caduce
 

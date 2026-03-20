@@ -1,4 +1,4 @@
-package com.rene.mercado.Modelo;
+package com.rene.mercado.Entidad;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @Table(name = "talla", schema = "rene")
 
-public class Talla {
+public class EntidadTalla {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +30,6 @@ public class Talla {
                                                                                                             // entidad
                                                                                                             // intermedia
                                                                                                             // 'RopaTalla'
-    private List<RopaTalla> ropasAsignadas;
+    private List<EntidadRopaTalla> ropasAsignadas;
 
 }

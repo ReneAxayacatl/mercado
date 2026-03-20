@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
-import com.rene.mercado.Modelo.Ropa;
+import com.rene.mercado.Entidad.EntidadRopa;
 import com.rene.mercado.Repositorio.RepositorioRopa;
 import com.rene.mercado.Servicio.ServicioRopa;
 
@@ -18,22 +18,22 @@ public class ImplementacionServicioRopa implements ServicioRopa {
     private RepositorioRopa ropaRepositorio;
 
     @Override
-    public Ropa guardarRopas(@NonNull Ropa ropas) {
+    public EntidadRopa guardarRopas(@NonNull EntidadRopa ropas) {
         return ropaRepositorio.save(ropas);
     }
 
     @Override
-    public Ropa buscarRopasPorId(@NonNull Integer id) {
+    public EntidadRopa buscarRopasPorId(@NonNull Integer id) {
         return ropaRepositorio.buscarRopaPorId(id);
     }
 
     @Override
-    public List<Ropa> obtenerRopas() {
+    public List<EntidadRopa> obtenerRopas() {
         return ropaRepositorio.listarRopa();
     }
 
     @Override
-    public Ropa editarRopas(@NonNull Ropa tallas) {
+    public EntidadRopa editarRopas(@NonNull EntidadRopa tallas) {
         return ropaRepositorio.saveAndFlush(tallas);
     }
 

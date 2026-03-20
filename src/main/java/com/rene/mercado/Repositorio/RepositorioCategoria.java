@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.rene.mercado.Modelo.Categoria;
+import com.rene.mercado.Entidad.EntidadCategoria;
 
 public interface RepositorioCategoria
-                extends JpaRepository<Categoria, Integer> {
-        @Query("SELECT c FROM Categoria c JOIN c.caduce d ORDER BY idCategoria ASC") 
-        List<Categoria> listarCategorias();
+                extends JpaRepository<EntidadCategoria, Integer> {
+        @Query("SELECT c FROM EntidadCategoria c JOIN c.caduce d ORDER BY idCategoria ASC") 
+        List<EntidadCategoria> listarCategorias();
 
-        @Query("SELECT cat FROM Categoria cat WHERE cat.id = :id ")
-        Categoria buscarCategoriaPorId(@Param("id") Integer id);
+        @Query("SELECT cat FROM EntidadCategoria cat WHERE cat.id = :id ")
+        EntidadCategoria buscarCategoriaPorId(@Param("id") Integer id);
 }

@@ -6,18 +6,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.rene.mercado.Modelo.Comida;
+import com.rene.mercado.Entidad.EntidadComida;
 
 public interface RepositorioComida
-                extends JpaRepository<Comida, Integer> {
+                extends JpaRepository<EntidadComida, Integer> {
         // @Query("SELECT c FROM Comida c JOIN c.producto p")
-        @Query("SELECT c FROM Comida c JOIN c.producto p JOIN p.categoria cat") // Query JPQL que obtiene Comida que
+        @Query("SELECT c FROM EntidadComida c JOIN c.producto p JOIN p.categoria cat") // Query JPQL que obtiene Comida que
                                                                                 // tenga relacion con producto y
                                                                                 // producto a categoria
-        List<Comida> listarComida();
+        List<EntidadComida> listarComida();
 
         // @Query("SELECT c FROM Comida c LEFT JOIN c.producto p LEFT JOIN p.categoria cat")
         // List<Comida> listarComida();
-        @Query("SELECT com FROM Comida com WHERE com.idComida = :id")
-        Comida buscarComidasPorId(@Param("id") Integer id);
+        @Query("SELECT com FROM EntidadComida com WHERE com.idComida = :id")
+        EntidadComida buscarComidasPorId(@Param("id") Integer id);
 }

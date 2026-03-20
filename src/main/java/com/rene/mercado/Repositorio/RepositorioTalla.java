@@ -7,15 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.rene.mercado.Modelo.Categoria;
-import com.rene.mercado.Modelo.Talla;
+import com.rene.mercado.Entidad.EntidadTalla;
 
 @Repository
 public interface RepositorioTalla
-                extends JpaRepository<Talla, Integer> {
-        @Query("SELECT t FROM Talla t ORDER BY t.tipoTalla")    // Query JPQL que obtiene Tallas y esta ordenada por Tipo de Talla
-        List<Talla> listarTallas();
+                extends JpaRepository<EntidadTalla, Integer> {
+        @Query("SELECT t FROM EntidadTalla t ORDER BY t.idTalla ASC")    // Query JPQL que obtiene Tallas y esta ordenada por Tipo de Talla
+        List<EntidadTalla> listarTallas();
 
-        @Query("SELECT t FROM Talla t WHERE t.id = :id ")
-        Talla buscarTallaPorId(@Param("id") Integer id);
+        @Query("SELECT t FROM EntidadTalla t WHERE t.id = :id ")
+        EntidadTalla buscarTallaPorId(@Param("id") Integer id);
 }

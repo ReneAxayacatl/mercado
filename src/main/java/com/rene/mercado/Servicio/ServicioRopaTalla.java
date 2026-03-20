@@ -5,18 +5,18 @@ import java.util.Optional;
 
 import org.springframework.lang.NonNull;
 
-import com.rene.mercado.Modelo.RopaTalla;
-import com.rene.mercado.Modelo.RopaTallaPK;
+import com.rene.mercado.Entidad.EntidadRopaTalla;
+import com.rene.mercado.Entidad.EntidadRopaTallaPK;
 
 public interface ServicioRopaTalla {
 
-    RopaTalla guardarRopaTallas(@NonNull RopaTalla RopaTallas);
+    EntidadRopaTalla guardarRopaTallas(@NonNull EntidadRopaTalla RopaTallas);
 
-    Optional<RopaTalla> buscarRopaTallaPorId(@NonNull RopaTallaPK idInteger);
+    Optional<EntidadRopaTalla> buscarRopaTallaPorId(@NonNull EntidadRopaTallaPK idInteger);
 
-    List<RopaTalla> obtenerRopaTalla();
+    List<EntidadRopaTalla> obtenerRopaTalla();
 
-    RopaTalla editarRopaTalla(@NonNull RopaTalla Talla);
+    EntidadRopaTalla editarRopaTalla(@NonNull EntidadRopaTalla Talla);
 
-    void eliminarRopaTallaPorId(@NonNull RopaTallaPK id);
+    void eliminarRopaTallaPorId(@NonNull EntidadRopaTallaPK id);
 }

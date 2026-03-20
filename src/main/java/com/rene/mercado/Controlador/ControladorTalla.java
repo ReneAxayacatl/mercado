@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import com.rene.mercado.Modelo.Talla;
+import com.rene.mercado.Entidad.EntidadTalla;
 import com.rene.mercado.Servicio.ServicioTalla;
 
 @Controller
@@ -29,12 +29,12 @@ public class ControladorTalla {
     public ModelAndView listar() {
 
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista talla
-        List<Talla> listaDatosTallas = null;                                                    // Variable que almacena la lista de informacion registrada de talla.
+        List<EntidadTalla> listaDatosTallas = null;                                                    // Variable que almacena la lista de informacion registrada de talla.
 
         modelAndView = new ModelAndView();                                                      // Inicialización de la variable de tipo ModelAndView
         listaDatosTallas = tallaService.obtenerTallas();                                        // Obtener los datos registrado de tallas.
 
-        modelAndView.setViewName("talla/lista");                                      // Asignamos la vista de nuestra lista para visualizar los registros.
+        modelAndView.setViewName("talla/listaTalla");                                      // Asignamos la vista de nuestra lista para visualizar los registros.
         modelAndView.addObject("listaTallas", listaDatosTallas);                 // Agregamos la lista de datos de talla que obtuvimos a la vista.     
 
         return modelAndView;
@@ -46,14 +46,14 @@ public class ControladorTalla {
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista talla
         modelAndView = new ModelAndView();                                                      // Inicialización de la variable de tipo ModelAndView
 
-        modelAndView.setViewName("talla/formulario");                                 // Asignamos la vista de nuestro formulario para crear nuevos registros.
-        modelAndView.addObject("talla", new Talla());                            // Creamos un nuevo registro al formulario de talla.
+        modelAndView.setViewName("talla/formularioTalla");                                 // Asignamos la vista de nuestro formulario para crear nuevos registros.
+        modelAndView.addObject("talla", new EntidadTalla());                            // Creamos un nuevo registro al formulario de talla.
 
         return modelAndView;
     } // Funcion que crea un nuevo registro de talla (BOTTOM)
 
     @PostMapping("/guardar") // Funcion que guarda un nuevo registro de talla (TOP)
-    public ModelAndView guardar(@NonNull @ModelAttribute Talla talla) {
+    public ModelAndView guardar(@NonNull @ModelAttribute EntidadTalla talla) {
 
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista talla
 
@@ -71,7 +71,7 @@ public class ControladorTalla {
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista talla
         modelAndView = new ModelAndView();                                                      // Inicializacion de la variable de tipo ModelAndView
 
-        modelAndView.setViewName("talla/formulario");                                           // Asignamos la vista de nuestro formulario para editar el registro seleccionado.
+        modelAndView.setViewName("talla/formularioTalla");                                           // Asignamos la vista de nuestro formulario para editar el registro seleccionado.
         modelAndView.addObject("talla", tallaService.buscarTallaPorId(id));                // Obtenemos y asignamos el registro de Tallas por su id para el formulario de Tallas
 
         return modelAndView;

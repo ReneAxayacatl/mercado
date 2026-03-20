@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
-import com.rene.mercado.Modelo.Talla;
+import com.rene.mercado.Entidad.EntidadTalla;
 import com.rene.mercado.Repositorio.RepositorioTalla;
 import com.rene.mercado.Servicio.ServicioTalla;
 
@@ -18,22 +18,22 @@ public class ImplementacionServicioTalla implements ServicioTalla {
     private RepositorioTalla tallaRepositorio;
 
     @Override
-    public Talla guardarTallas(@NonNull Talla tallas) {
+    public EntidadTalla guardarTallas(@NonNull EntidadTalla tallas) {
         return tallaRepositorio.save(tallas);
     }
 
     @Override
-    public Talla buscarTallaPorId(@NonNull Integer id) {
+    public EntidadTalla buscarTallaPorId(@NonNull Integer id) {
         return tallaRepositorio.buscarTallaPorId(id);
     }
 
     @Override
-    public List<Talla> obtenerTallas() {
+    public List<EntidadTalla> obtenerTallas() {
         return tallaRepositorio.listarTallas();
     }
 
     @Override
-    public Talla editarTallas(@NonNull Talla tallas) {
+    public EntidadTalla editarTallas(@NonNull EntidadTalla tallas) {
         return tallaRepositorio.saveAndFlush(tallas);
     }
 

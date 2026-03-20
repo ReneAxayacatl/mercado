@@ -1,4 +1,4 @@
-package com.rene.mercado.Modelo;
+package com.rene.mercado.Entidad;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import lombok.*;
 @Data
 @Table(name = "ropa", schema = "rene")
 
-public class Ropa {
+public class EntidadRopa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,18 +18,18 @@ public class Ropa {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto")
-    private Productos producto;
+    private EntidadProductos producto;
 
     @OneToMany(mappedBy = "ropa", 
                 fetch = FetchType.LAZY,
                 cascade = CascadeType.ALL, 
                 orphanRemoval = true)       // relacion que apunta a la entidad intermedia 'RopaTalla'
-    private List<RopaTalla> tallasAsignadas;
+    private List<EntidadRopaTalla> tallasAsignadas;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "ropa_origen", 
                 schema = "rene", 
                 joinColumns = @JoinColumn(name = "id_ropa"), 
                 inverseJoinColumns = @JoinColumn(name = "id_origen"))
-    private List<Origen> origenes;
+    private List<EntidadOrigen> origenes;
 }

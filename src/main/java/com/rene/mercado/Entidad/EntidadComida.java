@@ -1,4 +1,4 @@
-package com.rene.mercado.Modelo;
+package com.rene.mercado.Entidad;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import lombok.*;
 @Data
 @Table(name = "comida", schema = "rene")
 
-public class Comida {
+public class EntidadComida {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_comida")
@@ -17,7 +17,7 @@ public class Comida {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto")
-    private Productos producto;
+    private EntidadProductos producto;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -26,5 +26,5 @@ public class Comida {
             joinColumns=@JoinColumn(name="id_comida"),
             inverseJoinColumns=@JoinColumn(name="id_origen")
     )
-    private List<Origen> origenes;
+    private List<EntidadOrigen> origenes;
 }

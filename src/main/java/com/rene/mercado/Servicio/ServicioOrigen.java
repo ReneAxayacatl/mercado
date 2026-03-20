@@ -4,16 +4,16 @@ import java.util.List;
 
 import org.springframework.lang.NonNull;
 
-import com.rene.mercado.Modelo.Origen;
+import com.rene.mercado.Entidad.EntidadOrigen;
 
 public interface ServicioOrigen {
-    Origen guardarOrigen(@NonNull Origen Origen);
+    EntidadOrigen guardarOrigen(@NonNull EntidadOrigen Origen);
 
-    Origen buscarOrigenPorId(@NonNull Integer idInteger);
+    EntidadOrigen buscarOrigenPorId(@NonNull Integer idInteger);
 
-    List<Origen> obtenerOrigen();
+    List<EntidadOrigen> obtenerOrigen();
 
-    Origen editarOrigen(@NonNull Origen Origen);
+    EntidadOrigen editarOrigen(@NonNull EntidadOrigen Origen);
 
     void eliminarOrigenPorId(@NonNull Integer idInteger);
 }

@@ -4,17 +4,17 @@ import java.util.List;
 
 import org.springframework.lang.NonNull;
 
-import com.rene.mercado.Modelo.Ropa;
+import com.rene.mercado.Entidad.EntidadRopa;
 
 public interface ServicioRopa {
 
-    Ropa guardarRopas(@NonNull Ropa Ropas);
+    EntidadRopa guardarRopas(@NonNull EntidadRopa Ropas);
 
-    Ropa buscarRopasPorId(@NonNull Integer idInteger);
+    EntidadRopa buscarRopasPorId(@NonNull Integer idInteger);
 
-    List<Ropa> obtenerRopas();
+    List<EntidadRopa> obtenerRopas();
 
-    Ropa editarRopas(@NonNull Ropa Ropa);
+    EntidadRopa editarRopas(@NonNull EntidadRopa Ropa);
 
     void eliminarRopasPorId(@NonNull Integer idInteger);
 }

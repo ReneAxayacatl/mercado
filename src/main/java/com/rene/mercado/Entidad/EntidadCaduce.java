@@ -1,4 +1,4 @@
-package com.rene.mercado.Modelo;
+package com.rene.mercado.Entidad;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "caduce", schema = "rene")                                        // Anotacion para definir la tabla en la base de datos y el esquema al que pertenece
-public class Caduce {
+public class EntidadCaduce {
 
     @Id                                                                         // Anotacion para identificar PK de la entidad 'caduce'
     @Column(name = "id_caduce")                                                 // Anotacion para definir el Id de la columna en la base de datos
@@ -19,5 +19,5 @@ public class Caduce {
     private String caduce;                                                      // Variable de tipo cadena(String) para almacenar el tipo de caducidad
 
     @OneToMany(mappedBy = "caduce", cascade = CascadeType.ALL, orphanRemoval = true)// Anotacion para definir la relacion de uno a muchos entre Caduce y Categoria
-    private List<Categoria> categorias;                                         // Lista de datos de las categorias asociadas a un caduce
+    private List<EntidadCategoria> categorias;                                         // Lista de datos de las categorias asociadas a un caduce
 }

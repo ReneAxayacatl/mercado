@@ -5,17 +5,17 @@ import java.util.Optional;
 
 import org.springframework.lang.NonNull;
 
-import com.rene.mercado.Modelo.Productos;
+import com.rene.mercado.Entidad.EntidadProductos;
 
 public interface ServicioProductos {
 
-    public Productos guardarProductos(@NonNull Productos Productos);            // Metodo para guardar datos de Productos.
+    public EntidadProductos guardarProductos(@NonNull EntidadProductos Productos);            // Metodo para guardar datos de Productos.
 
-    public Productos buscarProductosPorId(@NonNull Integer idInteger);          // Metodo para buscar por su ID ya definido con jpql en el repositorio.
+    public EntidadProductos buscarProductosPorId(@NonNull Integer idInteger);          // Metodo para buscar por su ID ya definido con jpql en el repositorio.
 
-    public List<Productos> obtenerProductos();                                  // Metodo para obtener una lista de datos de Productos ya definido con jpql en el repositorio.                              
+    public List<EntidadProductos> obtenerProductos();                                  // Metodo para obtener una lista de datos de Productos ya definido con jpql en el repositorio.                              
 
-    public Productos editarProductos(@NonNull Productos Producto);              // Metodo para editar datos de Productos.
+    public EntidadProductos editarProductos(@NonNull EntidadProductos Producto);              // Metodo para editar datos de Productos.
 
     public void eliminarProductosPorId(@NonNull Integer idInteger);             // Metodo para eliminar por su ID.
 }
