@@ -48,12 +48,12 @@ public class ControladorRopa {
     public ModelAndView listar() {
 
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista Ropa.
-        List<EntidadRopa> listaDatosRopa = null;                                                       // Variable que almacena la lista de informacion registrada de Ropa
+        List<EntidadRopa> listaDatosRopa = null;                                                // Variable que almacena la lista de informacion registrada de Ropa
 
         modelAndView = new ModelAndView();                                                      // Inicialización de la variable de tipo ModelAndView
         listaDatosRopa = ropaServicio.obtenerRopas();                                           // Obtener los datos registrado de Ropa.
 
-        modelAndView.setViewName("ropa/listaRopa");                                       // Asignamos la vista de nuestra lista para visualizar los registros.
+        modelAndView.setViewName("ropa/listaRopa");                                   // Asignamos la vista de nuestra lista para visualizar los registros.
         modelAndView.addObject("listaRopa", listaDatosRopa);                     // Agregamos la lista de datos de Ropa que obtuvimos a la vista.
 
         return modelAndView;
@@ -65,8 +65,8 @@ public class ControladorRopa {
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista Ropa.
         modelAndView = new ModelAndView();                                                      // Variable que almacena la lista de informacion registrada de Ropa.
 
-        modelAndView.setViewName("ropa/formularioRopa");                                  // Asignamos la vista de nuestro formulario para crear nuevos registros.
-        modelAndView.addObject("ropa", new EntidadRopa());                              // Creamos un nuevo registro al formulario de Ropa.
+        modelAndView.setViewName("ropa/formularioRopa");                              // Asignamos la vista de nuestro formulario para crear nuevos registros.
+        modelAndView.addObject("ropa", new EntidadRopa());                       // Creamos un nuevo registro al formulario de Ropa.
         modelAndView.addObject("productos", productoServicio.obtenerProductos());// Obtenemos y agregamos la lista de Datos de productos para el formulario de Ropa.
         modelAndView.addObject("origenes", origenServicio.obtenerOrigen());      // Obtenemos y agregamos la lista de Datos de origen para el formulario de Ropa.
         modelAndView.addObject("tallas", tallaServicio.obtenerTallas());         // Obtenemos y agregamos la lista de Datos de tallas para el formulario de Ropa.
@@ -74,58 +74,61 @@ public class ControladorRopa {
         return modelAndView;
     } // Funcion que crea un nuevo registro de Ropa (BOTTOM)
 
-    @PostMapping("/guardar") 
-public ModelAndView guardar(@NonNull @ModelAttribute EntidadRopa ropa, 
-                            @RequestParam(name = "idsTalla", required = false) List<Integer> idsTalla, 
-                            @RequestParam(name = "idsOrigen", required = false) List<Integer> idsOrigen) {
+    @PostMapping("/guardar") // Funcion que guarda un nuevo registro de Ropa (TOP)
+    public ModelAndView guardar(@NonNull @ModelAttribute EntidadRopa ropa, 
+                            @RequestParam(name = "idsTalla", required = false) List<Integer> idsTalla,     // variable que almacena la lista de datos de tipo id que vengan de la Entidad Tallas
+                            @RequestParam(name = "idsOrigen", required = false) List<Integer> idsOrigen) { // variable que almacena la lista de datos de tipo id que vengan de la Entidad Origen
 
-    ModelAndView modelAndView = new ModelAndView();
+    ModelAndView modelAndView = null;                                                                      // variable que almacena las operaciones de la vista Ropa.
+    modelAndView = new ModelAndView();                                                                     // Inicializacion de la vrriable de tipo ModelAndView.
 
-    // Inicializamos la lista de tallas asignadas
-    ropa.setTallasAsignadas(new ArrayList<>());
+                                                                                                            // Inicializamos la lista de tallas asignadas
+    ropa.setTallasAsignadas(new ArrayList<>());                                                             // asiganmos un arreglo de listas apra los datos que vengan a ropa
 
     // Asignar tallas
-    if (idsTalla != null) {
-        for (Integer idTalla : idsTalla) {
-            EntidadTalla talla = tallaServicio.buscarTallaPorId(idTalla);
-            if (talla != null) {
+    if (idsTalla != null) {                                                                                 // validamos que exista un dato en la llave primaria de la tabla intermedia de ropa -> talla
+        for (Integer idTalla : idsTalla) {                                                                  // rrecoremos y asiganmos cada id que venga de talla hacia nuestra llave primaria para la columna idsTalla
 
-                // Verificar manualmente si ya existe la relación
-                boolean existe = false;
-                for (EntidadRopaTalla rtExistente : ropa.getTallasAsignadas()) {
-                    if (rtExistente.getTalla().getIdTalla().equals(idTalla)) {
-                        existe = true;
+            EntidadTalla talla = null;                                                                      // variable que almacena las operaciones para nuestra entidad talla para el registro de datos en ropa
+            talla = tallaServicio.buscarTallaPorId(idTalla);                                                // variable que almacena los registro de busqueda de talla por id
+            if (talla != null) {                                                                            // validacion de que exista una talla
+
+                boolean existe = false;                                                                     // Verificar manualmente si ya existe la relación
+                for (EntidadRopaTalla ropaTallaExistente : ropa.getTallasAsignadas()) {                     // asignacion de datos traidos a nuestro arreglo de ropa por cada relacion que existe con talla (tabla intermedia RopaTalla)
+                    if (ropaTallaExistente.getTalla().getIdTalla().equals(idTalla)) {                       // validacion para traer aquellas tallas que concuerdes con su id de su entidad Talla
+                        existe = true;                                                                      // Varificar que ahora ya existe una relacion con datos
                         break;
                     }
                 }
 
-                if (!existe) {
-                    EntidadRopaTalla rt = new EntidadRopaTalla();
-                    EntidadRopaTallaPK pk = new EntidadRopaTallaPK();
-                    pk.setIdRopa(ropa.getIdRopa());  // Muy importante
-                    pk.setIdTalla(idTalla);
-                    rt.setId(pk);
-                    rt.setRopa(ropa);
-                    rt.setTalla(talla);
-                    ropa.getTallasAsignadas().add(rt);
+                if (existe == false) {                                                                      // varificar que no exista un registro o dato
+                    EntidadRopaTalla ropaTalla = null;                                                      // variable que creara la relacion entre ropa y talla 
+                    EntidadRopaTallaPK llavePrimaria = null;                                                // variable para la llave primaria compuesta (idRopa + idTalla)
+
+                    ropaTalla = new EntidadRopaTalla();                                                     // variable para almacena el obejto de la entidad intermedia RopaTalla
+                    llavePrimaria = new EntidadRopaTallaPK();                                               // variable que almacena la llave compuesta
+
+                    llavePrimaria.setIdRopa(ropa.getIdRopa());                                              // asignamos nuestra id de ropa a nuestra llave compuesta 
+                    llavePrimaria.setIdTalla(idTalla);                                                      // asiganmos nuestra id de talla a nuestra llave compuesta 
+                    ropaTalla.setId(llavePrimaria);                                                         // asignamos las llaves compuestas a nuestro objeto de entidad intermedia (RopaTalla)
+                    ropaTalla.setRopa(ropa);                                                                // asiganmos la relacion de Muchos a Uno a la entidad Ropa
+                    ropaTalla.setTalla(talla);                                                              // asiganmos la relacion de Muchos a Uno a la entidad Talla
+                    ropa.getTallasAsignadas().add(ropaTalla);                                               // Agregamos esta relación a la lista de tallas de la ropa
                 }
             }
         }
     }
 
-    // Asignar origenes
-    ropa.setOrigenes(new ArrayList<>());
-    if (idsOrigen != null) {
-        for (Integer id : idsOrigen) {
-            EntidadOrigen o = origenServicio.buscarOrigenPorId(id);
-            if (o != null) ropa.getOrigenes().add(o);
+    ropa.setOrigenes(new ArrayList<>());                                                                    // Inicializamos la lista de origenes asignados
+    if (idsOrigen != null) {                                                                                // Verificamos que sí se hayan enviado IDs de origen desde el formulario y que eisten
+        for (Integer id : idsOrigen) {                                                                      // recorremos cada id de Origen seleccionado 
+            EntidadOrigen origen = null;                                                                    // variable para almacenar el origen encontrado
+            origen = origenServicio.buscarOrigenPorId(id);                                                  // asignamos los datos de otigen buscados por su id.
+            if (origen != null) ropa.getOrigenes().add(origen);                                             // Si el origen existe, lo agregamos a la lista de orígenes de la ropa
         }
     }
-
-    // Guardar ropa (tanto nueva como editada)
-    ropaServicio.guardarRopas(ropa);
-
-    modelAndView.setViewName("redirect:/ropa");
+    ropaServicio.guardarRopas(ropa);                                                                        // Guardar ropa (tanto nueva como editada)
+    modelAndView.setViewName("redirect:/ropa");                                                   // Redireccionar a la lista de Ropa después de guardar un registro
     return modelAndView;
 } // Funcion que guarda un nuevo registro de Ropa (BOTTOM)
 
@@ -135,7 +138,7 @@ public ModelAndView guardar(@NonNull @ModelAttribute EntidadRopa ropa,
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista Ropa.
 
         modelAndView = new ModelAndView();                                                      // Inicialización de la variable de tipo ModelAndView
-        modelAndView.setViewName("ropa/formularioRopa");                                  // Asignamos la vista de nuestro formulario para editar el registro seleccionado.
+        modelAndView.setViewName("ropa/formularioRopa");                              // Asignamos la vista de nuestro formulario para editar el registro seleccionado.
 
         modelAndView.addObject("ropa", ropaServicio.buscarRopasPorId(id));       // Obtenemos y asignamos el registro de Ropa por su id para el formulario de Ropa.
         modelAndView.addObject("productos", productoServicio.obtenerProductos());// Obtenemos y agregamos la lista de Datos de productos para el formulario de Ropa.

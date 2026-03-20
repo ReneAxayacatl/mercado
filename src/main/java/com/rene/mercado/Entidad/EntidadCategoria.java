@@ -20,8 +20,8 @@ public class EntidadCategoria {
 
     @ManyToOne(fetch = FetchType.LAZY)                                          // Anotacion para definir la relacion de muchos a uno entre Categoria y Caduce, y traer datos de forma secuencial (LAZY)
     @JoinColumn(name = "id_caduce")                                             // Anotacion para definir la llave foranea de la columna en la BD que se relaciona con la tabla 'caduce'
-    private EntidadCaduce caduce;                                                      // Variable de tipo Caduce para almacenar los datos de caduce asociado a una categoria
+    private EntidadCaduce caduce;                                               // Variable de tipo Caduce para almacenar los datos de caduce asociado a una categoria
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)                                          // Anotacion para definir la relacion de uno a muchos entre Categoria y Productos
-    private List<EntidadProductos> productos;                                          // Lista de datos de los productos asociados a una categoria
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)               // Anotacion para definir la relacion de uno a muchos entre Categoria y Productos
+    private List<EntidadProductos> productos;                                   // Lista de datos de los productos asociados a una categoria
 }

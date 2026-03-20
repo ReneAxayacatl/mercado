@@ -18,6 +18,6 @@ public class EntidadCaduce {
     @Column(name = "caduce")                                                    // Anotacion para definir el nombre de la columna en la base de datos
     private String caduce;                                                      // Variable de tipo cadena(String) para almacenar el tipo de caducidad
 
-    @OneToMany(mappedBy = "caduce", cascade = CascadeType.ALL, orphanRemoval = true)// Anotacion para definir la relacion de uno a muchos entre Caduce y Categoria
+    @OneToMany(mappedBy = "caduce", cascade = CascadeType.ALL, orphanRemoval = true)    // Anotacion para definir la relacion de uno a muchos entre Caduce y Categoria
     private List<EntidadCategoria> categorias;                                         // Lista de datos de las categorias asociadas a un caduce
 }

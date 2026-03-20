@@ -11,6 +11,4 @@ public class EntidadRopaTallaPK implements Serializable{
 
     private Integer idRopa;     // Declaramos nuestra llave compuesta idRopa
     private Integer idTalla;    // Declaramos nuestra llace compuesta idTalla
-
-    // @Data ya incluye: Getters, Setters, equals() y hashCode()
 }

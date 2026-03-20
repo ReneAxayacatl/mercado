@@ -23,11 +23,11 @@ public class EntidadProductos {
 
     @ManyToOne(fetch = FetchType.LAZY)                                      // Anotacion para definir la relacion de muchos a uno entre Productos y Categoria, y traer datos de forma secuencial (LAZY)
     @JoinColumn(name = "id_categoria")                                      // Anotacion para definir el nombre de la llave foranea de la columna en la BD que se relaciona con la tabla 'categoria'
-    private EntidadCategoria categoria;                                            // Variable de tipo Categoria para almacenar los datos de categoria asociado a un producto
+    private EntidadCategoria categoria;                                     // Variable de tipo Categoria para almacenar los datos de categoria asociado a un producto
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    private List<EntidadRopa> ropas;                                               // Lista de datos de las ropas asociados a un producto
+    private List<EntidadRopa> ropas;                                        // Lista de datos de las ropas asociados a un producto
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    private List<EntidadComida> comidas;                                           // Lista de datos de las comidas asociados a un producto
+    private List<EntidadComida> comidas;                                    // Lista de datos de las comidas asociados a un producto
 }

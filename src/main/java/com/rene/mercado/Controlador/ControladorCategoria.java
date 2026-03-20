@@ -52,9 +52,9 @@ public class ControladorCategoria {
     @GetMapping("/nuevo")// Funcion que crea un nuevo registro de categoria (TOP)
     public ModelAndView nuevo() {
 
-        ModelAndView modelAndView = null;                           // Variable que almacena las operaciones de la vista categorias
+        ModelAndView modelAndView = null;                                                   // Variable que almacena las operaciones de la vista categorias
 
-        modelAndView = new ModelAndView();                          // Inicialización de la variable de tipo ModelAndView
+        modelAndView = new ModelAndView();                                                  // Inicialización de la variable de tipo ModelAndView
         modelAndView.setViewName("categorias/formularioCategoria");          // Asignamos la vista de nuestro formulario para crear nuevos registros.
 
         modelAndView.addObject("categorias", new EntidadCategoria());      // Creamos un nuevo registro al formulario de categoria.

@@ -18,11 +18,11 @@ public class EntidadRopaTalla {
 
     @ManyToOne                      // Relacion Muchos a Uno con Ropa
     @MapsId("idRopa")               // Mapea y establece conexion con la Tabla Ropa (id_ropa).
-    @JoinColumn(name = "id_ropa")
-    private EntidadRopa ropa;
+    @JoinColumn(name = "id_ropa")   // Anotacion para definir la llave foranea de la columna en la BD que se relaciona con la entidad Ropa
+    private EntidadRopa ropa;       // Variable de tipo ropa asociado con la entidad Ropa
 
     @ManyToOne                      // Relacion Muchos a Uno con Talla
     @MapsId("idTalla")              // Mapea y establece conexion con la Tabla Talla (id_talla).
-    @JoinColumn(name = "id_talla")
-    private EntidadTalla talla;
+    @JoinColumn(name = "id_talla")  // Anotacion para definir la llave foranea de la columna en la BD que se relaciona con la entidad Talla
+    private EntidadTalla talla;     // Variable de tipo ropa asociado con la entidad Talla
 }
