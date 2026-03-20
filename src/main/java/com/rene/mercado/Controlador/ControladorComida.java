@@ -1,5 +1,6 @@
 package com.rene.mercado.Controlador;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,29 +67,29 @@ public class ControladorComida {
         return modelAndView;
     } // Funcion que crea un nuevo registro de Comida (BOTTOM)
 
-    @PostMapping("/guardar")
+    @PostMapping("/guardar") // Funcion que guarda un nuevo registro de Comida (BOTTOM)
     public ModelAndView guardar(
     @NonNull @ModelAttribute EntidadComida comida,
     @RequestParam(name = "idsOrigen", required = false) List<Integer> idsOrigen) {
 
-    ModelAndView modelAndView = new ModelAndView();
+    ModelAndView modelAndView = null;                                                           // Variable que almacena las operaciones de la vista comida
+    modelAndView = new ModelAndView();                                                          // Inicializacion de la variable de tipo ModelAndView
 
-    comida.setOrigenes(new java.util.ArrayList<>());
+    comida.setOrigenes(new ArrayList<>());                                                      // Asinamos los datos de comida en una arreglo de listas
 
-    if (idsOrigen != null) {
-        for (Integer id : idsOrigen) {
+    if (idsOrigen != null) {                                                                    // validamos si hay campos con datos con id de origen
+        for (Integer id : idsOrigen) {                                                          // rrecoremos y asiganmos cada id que venga de origen hacia nuestra llave primaria para la columna idsOrigen
 
-            EntidadOrigen origen = origenServicio.buscarOrigenPorId(id);
+            EntidadOrigen origen = null;                                                        // variable que almacena la consulta por busqueda por id
+            origen = origenServicio.buscarOrigenPorId(id);                                      // variable que almacena lo datos de origen traidos por ID
 
-            if (origen != null) {
-                comida.getOrigenes().add(origen);
+            if (origen != null) {                                                               // validacion de que exista un dato traido de origen
+                comida.getOrigenes().add(origen);                                               // asignamos los datos de origen al 
             }
         }
     }
-
-    comidaService.guardarComidas(comida);
-
-    modelAndView.setViewName("redirect:/comida");
+    comidaService.guardarComidas(comida);                                                       // guardamos los datos para comida
+    modelAndView.setViewName("redirect:/comida");                                      // redireccionamos a la vista principal una vez guardamos los datos de comida
     return modelAndView;
 }
 
