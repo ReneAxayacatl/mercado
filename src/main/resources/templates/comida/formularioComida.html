@@ -25,11 +25,11 @@
 
   <br/><br/>
 
-  <!-- ORIGEN (FIX IMPORTANTE) -->
+  <!-- ORIGEN -->
   <label>Origen:</label>
 
-    <select name="idsOrigen" multiple>
-        <option value="" disabled selected>Seleccione un Origen</option>
+    <select name="idsOrigen" required>
+        <option value="" disabled>Seleccione un Origen</option>
         <option th:each="o : ${origenes}"
             th:value="${o.idOrigen}"
             th:text="${o.nombreOrigen}">

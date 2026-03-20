@@ -10,7 +10,7 @@
 
 <form th:action="@{/ropa/guardar}" th:object="${ropa}" method="post">
 
-    <!-- ID oculto -->
+    <!-- ID -->
     <input type="hidden" th:field="*{idRopa}" />
 
     <!-- PRODUCTO -->
@@ -33,13 +33,15 @@
                 th:value="${t.idTalla}" />
         <span th:text="${t.tipoTalla}"></span>
         <br/>
-    </div><br/><br/>
+    </div><br/>
 
     <!-- ORIGEN -->
     <label>Origen:</label>
 
-    <select name="idsOrigen" multiple>
-    <option th:each="o : ${origenes}" th:value="${o.idOrigen}" th:text="${o.nombreOrigen}"></option>
+    <select name="idsOrigen" required>
+        <option value="" disabled>Seleccione un Origen</option>
+    <option th:each="o : ${origenes}" th:value="${o.idOrigen}" th:text="${o.nombreOrigen}">
+    </option>
     </select><br/><br/>
     <button type="submit">Guardar</button>
 </form>

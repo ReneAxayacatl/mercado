@@ -24,7 +24,7 @@ public class ExcepcionValidacion extends ResponseEntityExceptionHandler {
             @NonNull HttpStatusCode status,                         // clases del modulo de Spring-web, gestiona codigos de estado
             @NonNull WebRequest request) {                          // clases del modulo de Spring-web, gestiona detalles de peticion original
 
-        // Construye(mapea) un mensaje detallado con todos los errores
+                                                                    // Construye(mapea) un mensaje detallado con todos los errores
         Map<String, String> erroresDetallados = new HashMap<>();    // variable 'erroresDetallados' para mapear aquellos errores que salgan
 
         ex.getBindingResult().getFieldErrors().forEach(errorValidcaion -> erroresDetallados.put( // Traer la lista de errores y los ingresamos a 'erroresDetallados'
