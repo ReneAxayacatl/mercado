@@ -13,6 +13,6 @@ public interface RepositorioRopa
         @Query("SELECT r FROM EntidadRopa r JOIN r.producto p JOIN p.categoria cat")  // Query JPQL que obtiene Ropa que tiene producto y este tenga categoria
         List<EntidadRopa> listarRopa();
 
-        @Query("SELECT rop FROM EntidadRopa rop WHERE rop.idRopa = :id")
-        EntidadRopa buscarRopaPorId(@Param("id") Integer id);
+        @Query("SELECT rop FROM EntidadRopa rop WHERE rop.idRopa = :id")                // Sentencia para traer los datos de ropa que coincidan con su id.
+        EntidadRopa buscarRopaPorId(@Param("id") Integer id);                           // metodo para traer sus datos con su id y traer sus datos coincidentes
 }

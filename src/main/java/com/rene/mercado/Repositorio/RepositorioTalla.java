@@ -15,6 +15,6 @@ public interface RepositorioTalla
         @Query("SELECT t FROM EntidadTalla t ORDER BY t.idTalla ASC")    // Query JPQL que obtiene Tallas y esta ordenada por Tipo de Talla
         List<EntidadTalla> listarTallas();
 
-        @Query("SELECT t FROM EntidadTalla t WHERE t.id = :id ")
-        EntidadTalla buscarTallaPorId(@Param("id") Integer id);
+        @Query("SELECT t FROM EntidadTalla t WHERE t.id = :id ")        // Sentencia para traer los datos de talla que coincidan con su id.
+        EntidadTalla buscarTallaPorId(@Param("id") Integer id);         // metodo para traer sus datos con su id y traer sus datos coincidentes
 }

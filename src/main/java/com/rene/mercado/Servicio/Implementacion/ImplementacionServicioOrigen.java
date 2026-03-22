@@ -14,29 +14,29 @@ import com.rene.mercado.Servicio.ServicioOrigen;
 
 public class ImplementacionServicioOrigen implements ServicioOrigen {
     @Autowired
-    private RepositorioOrigen origenRepositorio;
+    private RepositorioOrigen origenRepositorio;                                // Inyeccion de dependencia para desarrollar metodos ya definidos en la interfaz ServicioOrigen 
 
-    public EntidadOrigen guardarOrigen(@NonNull EntidadOrigen Origen) {
-        return origenRepositorio.save(Origen);
+    public EntidadOrigen guardarOrigen(@NonNull EntidadOrigen Origen) {         // Metodo para guardar datos de origen.
+        return origenRepositorio.save(Origen);                                  // Metodo propio de JPA para guardar datos.
     }
 
     @Override
-    public EntidadOrigen buscarOrigenPorId(@NonNull Integer id) {
-        return origenRepositorio.buscarOrigenPorId(id);
+    public EntidadOrigen buscarOrigenPorId(@NonNull Integer id) {               // Metodo para buscar datos por su Id.
+        return origenRepositorio.buscarOrigenPorId(id);                         // Metodo definido con JQPL en el repositori para traer datos por su coincidencia de Id.
     }
 
     @Override
-    public List<EntidadOrigen> obtenerOrigen() {
-        return origenRepositorio.listarOrigen();
+    public List<EntidadOrigen> obtenerOrigen() {                                // Metodo para obtener una lista de datos de origen.
+        return origenRepositorio.listarOrigen();                                // Metodo definido con JPQL en el repositorio para traer una lista de datos de origen.                     
     }
 
     @Override
-    public EntidadOrigen editarOrigen(@NonNull EntidadOrigen origen) {
-        return origenRepositorio.saveAndFlush(origen);
+    public EntidadOrigen editarOrigen(@NonNull EntidadOrigen origen) {          // Metodo para editar/actualizar datos de origen
+        return origenRepositorio.saveAndFlush(origen);                          // Metodo propio de JPA para editar/actualizar los datos de origen
     }
 
     @Override
-    public void eliminarOrigenPorId(@NonNull Integer id) {
-        origenRepositorio.deleteById(id);
+    public void eliminarOrigenPorId(@NonNull Integer id) {                      // Metodo para eliminar aquellos datos por su Id.
+        origenRepositorio.deleteById(id);                                       // Metodo propio de JPA para eliminar datos por su id.
     }
 }

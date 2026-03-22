@@ -16,6 +16,6 @@ public interface RepositorioProductos
                                                                                // caducidad
         List<EntidadProductos> listarProductos();
 
-        @Query("SELECT p FROM EntidadProductos p WHERE p.id = :id ")
-        EntidadProductos buscarProductosPorId(@Param("id") Integer id);
+        @Query("SELECT p FROM EntidadProductos p WHERE p.id = :id ")                    // Sentencia para traer los datos de productos que coincidan con su id.
+        EntidadProductos buscarProductosPorId(@Param("id") Integer id);                 // metodo para traer sus datos con su id y traer sus datos coincidentes
 }

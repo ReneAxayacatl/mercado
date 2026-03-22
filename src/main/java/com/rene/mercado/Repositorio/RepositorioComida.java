@@ -18,6 +18,6 @@ public interface RepositorioComida
 
         // @Query("SELECT c FROM Comida c LEFT JOIN c.producto p LEFT JOIN p.categoria cat")
         // List<Comida> listarComida();
-        @Query("SELECT com FROM EntidadComida com WHERE com.idComida = :id")
-        EntidadComida buscarComidasPorId(@Param("id") Integer id);
+        @Query("SELECT com FROM EntidadComida com WHERE com.idComida = :id")            // Sentencia para traer los datos de comida que coincidan con su id.
+        EntidadComida buscarComidasPorId(@Param("id") Integer id);                      // metodo para traer sus datos con su id y traer sus datos coincidentes
 }
