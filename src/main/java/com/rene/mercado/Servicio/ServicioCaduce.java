@@ -15,5 +15,5 @@ public interface ServicioCaduce {
 
     public EntidadCaduce editarCaduce(@NonNull EntidadCaduce Caduce);         // Metodo para editar datos de Caduce.
 
-    public void eliminarCaducePorId(@NonNull Integer id);       // Metodo para eliminar por su ID.
+    public void eliminarCaducePorId(@NonNull Integer id);               // Metodo para eliminar por su ID.
 }
