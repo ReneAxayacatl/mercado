@@ -2,13 +2,19 @@ package com.rene.mercado.Entidad;
 
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "talla", schema = "rene")
 
 public class EntidadTalla {
@@ -26,6 +32,18 @@ public class EntidadTalla {
                 fetch = FetchType.LAZY, 
                 cascade = CascadeType.ALL, 
                 orphanRemoval = true)                                                        
-    private List<EntidadRopaTalla> ropasAsignadas;              // Lista de datos que almacena las relaciones entre ropa y talla
+    private Set<EntidadRopaTalla> ropasAsignadas = new HashSet<>();              // Lista de datos que almacena las relaciones entre ropa y talla
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EntidadTalla)) return false;
+        EntidadTalla that = (EntidadTalla) o;
+        return Objects.equals(idTalla, that.idTalla);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idTalla);
+    }
 }

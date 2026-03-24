@@ -15,6 +15,7 @@
     <tr>
     <th>ID</th>
     <th>Producto</th>
+    <th>Categoría</th>
     <th>Tallas</th>
     <th>Origen</th>
     <th>Editar</th>
@@ -27,6 +28,8 @@
 
     <!-- PRODUCTO -->
     <td th:text="${r.producto != null ? r.producto.idProducto : 'Sin producto'}"></td>
+    <!-- CATEGORIA -->
+    <td th:text="${r.producto != null && r.producto.categoria != null ? r.producto.categoria.nombreCategoria : 'Sin categoría'}"></td>
     <!-- TALLAS -->
     <td>
         <span th:each="rt : ${r.tallasAsignadas}">

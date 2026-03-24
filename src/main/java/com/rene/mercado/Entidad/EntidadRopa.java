@@ -1,12 +1,17 @@
 package com.rene.mercado.Entidad;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "ropa", schema = "rene")
 
 public class EntidadRopa {
@@ -24,12 +29,25 @@ public class EntidadRopa {
                 fetch = FetchType.LAZY,
                 cascade = CascadeType.ALL, 
                 orphanRemoval = true)                       // relacion que apunta a la entidad intermedia 'RopaTalla'
-    private List<EntidadRopaTalla> tallasAsignadas;
+    private List<EntidadRopaTalla> tallasAsignadas = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)                     // Anotacion para definir la relacion 
     @JoinTable(name = "ropa_origen", 
                 schema = "rene", 
                 joinColumns = @JoinColumn(name = "id_ropa"), 
                 inverseJoinColumns = @JoinColumn(name = "id_origen"))
-    private List<EntidadOrigen> origenes;                   // Lista de datos de origen asociados a Ropa
+    private Set<EntidadOrigen> origenes = new HashSet<>();                   // Lista de datos de origen asociados a Ropa
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EntidadRopa)) return false;
+        EntidadRopa that = (EntidadRopa) o;
+        return Objects.equals(idRopa, that.idRopa);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idRopa);
+    }
 }

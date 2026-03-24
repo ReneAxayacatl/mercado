@@ -14,6 +14,7 @@
   <tr>
     <th>ID</th>
     <th>Producto</th>
+    <th>Categoría</th>
     <th>Origen</th>
     <th>Editar</th>
     <th>Eliminar</th>
@@ -27,6 +28,8 @@
     <!-- PRODCUTOS -->
     
     <td th:text="${c.producto != null ? c.producto.idProducto : 'Sin producto'}"></td>
+    <!-- CATEGORIA -->
+  <td th:text="${c.producto != null && c.producto.categoria != null ? c.producto.categoria.nombreCategoria : 'Sin categoría'}"></td>
     <!-- ORIGEN -->
     <td>
   <span th:if="${c.origenes == null || #lists.isEmpty(c.origenes)}">
