@@ -12,9 +12,9 @@ import com.rene.mercado.Entidad.EntidadTalla;
 @Repository
 public interface RepositorioTalla
                 extends JpaRepository<EntidadTalla, Integer> {
-        @Query("SELECT t FROM EntidadTalla t ORDER BY t.idTalla ASC")    // Query JPQL que obtiene Tallas y esta ordenada por Tipo de Talla
-        List<EntidadTalla> listarTallas();
+        @Query("SELECT t FROM EntidadTalla t ORDER BY t.idTalla ASC")   // Sentencia JPQL que obtiene los datos de talla ordenados por ID
+        List<EntidadTalla> listarTallas();                              // Funcion que regresa los registros almacenados de talla en la base de datos.
 
-        @Query("SELECT t FROM EntidadTalla t WHERE t.id = :id ")        // Sentencia para traer los datos de talla que coincidan con su id.
-        EntidadTalla buscarTallaPorId(@Param("id") Integer id);         // metodo para traer sus datos con su id y traer sus datos coincidentes
+        @Query("SELECT t FROM EntidadTalla t WHERE t.id = :id ")        // Sentencia JPQL que obtiene el registro de talla por el identificador indicado
+        EntidadTalla buscarTallaPorId(@Param("id") Integer id);         // Funcion que busca los registros de talla por el identificador indicado.
 }

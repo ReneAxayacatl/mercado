@@ -8,26 +8,26 @@ import lombok.*;
 
 @Entity
 @Data
-@Table(name = "productos", schema = "rene")                                 // Anotacion para definir la tabla en la base de datos y el esquema al que pertenece
+@Table(name = "productos", schema = "rene")                                 // Anotacion para definir la tabla y el esquema al que pertenece
 
 public class EntidadProductos {
 
-    @Id                                                                     // Anotacion para identificar PK de la entidad 'productos'
-    @GeneratedValue(strategy = GenerationType.IDENTITY)                     // Anotacion para definir el dato auto-incremental a la PK
+    @Id                                                                     // Anotacion para identificar la llave primaria de la entidad producto
+    @GeneratedValue(strategy = GenerationType.IDENTITY)                     // Anotacion para definir el dato auto-incremental a la llave primaria
     @Column(name = "id_producto")                                           // Anotacion para definir el Id de la columna en la base de datos
-    private Integer idProducto;                                             // Variable de tipo entero para almacenar el Id del producto
+    private Integer idProducto;                                             // Variable para manejar el Id de producto de la BD
 
     @NotNull(message = "El Precio Unitario es Obligatrio")                  // Anotacion para validar que el precio unitario no sea nulo, y mostrar mensaje de error personalizado
-    @Column(name = "precio_unit")                                           // Anotacion para definir le precio unitario como valor decimal de la columna en la base de datos
-    private BigDecimal precioUnit;                                          // Variable de tipo decimal para almacenar el precio unitario del producto
+    @Column(name = "precio_unit")                                           // Anotacion para definir el precio del producto de la BD
+    private BigDecimal precioUnit;                                          // Variable para manejar el precio del producto.
 
-    @ManyToOne(fetch = FetchType.LAZY)                                      // Anotacion para definir la relacion de muchos a uno entre Productos y Categoria, y traer datos de forma secuencial (LAZY)
-    @JoinColumn(name = "id_categoria")                                      // Anotacion para definir el nombre de la llave foranea de la columna en la BD que se relaciona con la tabla 'categoria'
-    private EntidadCategoria categoria;                                     // Variable de tipo Categoria para almacenar los datos de categoria asociado a un producto
+    @ManyToOne(fetch = FetchType.LAZY)                                      // Anotacion que apuntamos a la relacion de muchos a uno entre Categoria y producto, y carga los datos de la entidad principal (LAZY)
+    @JoinColumn(name = "id_categoria")                                      // Anotacion para referirnos a la llave foranea que se relaciona con la tabla categoria
+    private EntidadCategoria categoria;                                     // Variable para almacenar los datos de categoria asociado a un producto
 
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    private List<EntidadRopa> ropas;                                        // Lista de datos de las ropas asociados a un producto
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)            // Anotacion que indica que la relación está controlada desde la otra clase (Ropa), y no desde esta
+    private List<EntidadRopa> ropas;                                        // lista para almacenar los objetos EntidadRopa relacionados o asociados a producto
 
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    private List<EntidadComida> comidas;                                    // Lista de datos de las comidas asociados a un producto
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)            // Anotacion que indica que la relación está controlada desde la otra clase (Comida), y no desde esta
+    private List<EntidadComida> comidas;                                    // lista para almacenar los objetos EntidadComida relacionados o asociados a producto
 }

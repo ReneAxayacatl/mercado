@@ -11,11 +11,9 @@ import com.rene.mercado.Entidad.EntidadProductos;
 public interface RepositorioProductos
                 extends JpaRepository<EntidadProductos, Integer> {
         // @Query("SELECT p FROM Productos p JOIN p.categoria c")
-        @Query("SELECT p FROM EntidadProductos p JOIN p.categoria c JOIN c.caduce d ORDER BY p.idProducto ASC") // Query JPQL que obtiene Productos que
-                                                                               // tenga categoria y esta tenga o no
-                                                                               // caducidad
-        List<EntidadProductos> listarProductos();
+        @Query("SELECT p FROM EntidadProductos p JOIN p.categoria c JOIN c.caduce d ORDER BY p.idProducto ASC") // Sentencia JPQL que obtiene los datos de producto ordenados por ID
+        List<EntidadProductos> listarProductos();                                                               // Funcion que regresa los registros almacenados de producto en la base de datos.
 
-        @Query("SELECT p FROM EntidadProductos p WHERE p.id = :id ")                    // Sentencia para traer los datos de productos que coincidan con su id.
-        EntidadProductos buscarProductosPorId(@Param("id") Integer id);                 // metodo para traer sus datos con su id y traer sus datos coincidentes
+        @Query("SELECT p FROM EntidadProductos p WHERE p.id = :id ")                                            // Sentencia JPQL que obtiene el registro de producto por el identificador indicado
+        EntidadProductos buscarProductosPorId(@Param("id") Integer id);                                         // Funcion que busca los registros de producto por el identificador indicado.
 }

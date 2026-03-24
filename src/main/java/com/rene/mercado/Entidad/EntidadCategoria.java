@@ -7,21 +7,21 @@ import lombok.*;
 
 @Entity
 @Data
-@Table(name = "categoria", schema = "rene")                                     // Anotacion para definir la tabla en la base de datos y el esquema al que pertenece
+@Table(name = "categoria", schema = "rene")                                     // Anotacion para definir la tabla y el esquema al que pertenece
 
 public class EntidadCategoria {
-    @Id                                                                         // Anotacion para identificar PK de la entidad 'categoria'
-    @GeneratedValue(strategy = GenerationType.IDENTITY)                         // Anotacion para definir el dato auto-incremental a la PK
+    @Id                                                                         // Anotacion para identificar la llave primaria de la entidad categoria
+    @GeneratedValue(strategy = GenerationType.IDENTITY)                         // Anotacion para definir el dato auto-incremental a la llave primaria
     @Column(name = "id_categoria")                                              // Anotacion para definir el Id de la columna en la base de datos
-    private Integer idCategoria;                                                // Variable de tipo entero para almacenar el Id de la categoria
+    private Integer idCategoria;                                                // Variable para manejar el Id de la categoria de la BD
 
-    @Column(name = "nombre_categoria")                                          // Anotacion para definir el nombre de categoria de la columna en la base de datos
-    private String nombreCategoria;                                             // Variable de tipo String para almacenar el nombre de la categoria
+    @Column(name = "nombre_categoria")                                          // Anotacion para definir el nombre de la categoria de la columna en la base de datos
+    private String nombreCategoria;                                             // Variable para manejar el nombre de la categoria
 
-    @ManyToOne(fetch = FetchType.LAZY)                                          // Anotacion para definir la relacion de muchos a uno entre Categoria y Caduce, y traer datos de forma secuencial (LAZY)
-    @JoinColumn(name = "id_caduce")                                             // Anotacion para definir la llave foranea de la columna en la BD que se relaciona con la tabla 'caduce'
-    private EntidadCaduce caduce;                                               // Variable de tipo Caduce para almacenar los datos de caduce asociado a una categoria
+    @ManyToOne(fetch = FetchType.LAZY)                                          // Anotacion que apuntamos a la relacion de muchos a uno entre Categoria y Caduce, y carga los datos de la entidad principal (LAZY)
+    @JoinColumn(name = "id_caduce")                                             // Anotacion para referirnos a la llave foranea que se relaciona con la tabla caduce
+    private EntidadCaduce caduce;                                               // Variable para almacenar los datos de caduce asociado a una categoria
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)               // Anotacion para definir la relacion de uno a muchos entre Categoria y Productos
-    private List<EntidadProductos> productos;                                   // Lista de datos de los productos asociados a una categoria
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)               // Anotacion que indica que la relación está controlada desde la otra clase (Producto), y no desde esta
+    private List<EntidadProductos> productos;                                   // lista para almacenar los objetos EntidadProductos relacionados o asociados a categoria
 }

@@ -26,80 +26,80 @@ import org.springframework.web.bind.annotation.PostMapping;
         RequestMethod.DELETE,
         RequestMethod.PUT,
 })
-@RequestMapping("/categoria")                                                           // Ruta global base que manejara toda la clase ControladorCategoria 
+@RequestMapping("/categoria")                                                           // Permite gestionar operaciones relacionadas con Categoria.
 public class ControladorCategoria {
 
     @Autowired
-    private ServicioCategoria categoriaService;                                         // Inyeccion de servicio categoria.
+    private ServicioCategoria categoriaService;                                         // Variable que almacena las operaciones definidas para el contexto de categoria.
     @Autowired
-    private ServicioCaduce caduceService;                                               // Inyeccion de servicio caduce.
+    private ServicioCaduce caduceService;                                               // Variable que almacena las operaciones definidas para el contexto de caducidad.
 
-    @GetMapping // Funcion que muestra la lista de los registros de categoria registrados (TOP)
+    @GetMapping 
     public ModelAndView listar() {
-
-        ModelAndView modelAndView = null;                                               // Variable que almacena las operaciones de la vista categorias
+        // Funcion que muestra la lista de los datos registros de categoria (TOP)
+        ModelAndView modelAndView = null;                                               // Variable que almacena las operaciones de la vista categoria.
         List<EntidadCategoria> listaDatosCategorias = null;                             // Variable que almacena la lista de informacion registrada de categoria.
 
-        modelAndView = new ModelAndView();                                              // Inicialización de la variable de tipo ModelAndView
-        listaDatosCategorias = categoriaService.obtenerCategorias();                    // Obtener los datos registrado de categorias.
+        modelAndView = new ModelAndView();                                              // Inicialización de la variable que almacena el objeto ModelAndView de la lista categoria.
+        listaDatosCategorias = categoriaService.obtenerCategorias();                    // Almacenamos los datos de la lista que obtuvimos de categoria.
 
-        modelAndView.setViewName("categorias/listaCategoria");                // Asignamos la vista de nuestra lista para visualizar los registros.
-        modelAndView.addObject("categorias", listaDatosCategorias);      // Agregamos la lista de datos de categoria que obtuvimos a la vista.
+        modelAndView.setViewName("categorias/listaCategoria");                // Se define la direccion de la vista categoria.
+        modelAndView.addObject("categorias", listaDatosCategorias);      // Agregamos la lista con los datos obtenidos a la vista. 
 
         return modelAndView;
-    } // Funcion que muestra la lista de los registros de categoria registrados (BOTTOM)
+    }// Funcion que muestra la lista de los datos registros de categoria (BOTTOM)
 
-    @GetMapping("/nuevo")// Funcion que crea un nuevo registro de categoria (TOP)
+    @GetMapping("/nuevo")
     public ModelAndView nuevo() {
+        // Funcion que crea un nuevo registro de categoria (TOP)
+        ModelAndView modelAndView = null;                                               // Variable que almacena las operaciones de la vista categoria
 
-        ModelAndView modelAndView = null;                                               // Variable que almacena las operaciones de la vista categorias
+        modelAndView = new ModelAndView();                                              // Inicialización de la variable que almacena el objeto ModelAndView para un nuevo registo categoria.
+        modelAndView.setViewName("categorias/formularioCategoria");           // Definimos la direccion del formulario con los datos del contexto a nuestra vista categoria
 
-        modelAndView = new ModelAndView();                                              // Inicialización de la variable de tipo ModelAndView
-        modelAndView.setViewName("categorias/formularioCategoria");           // Asignamos la vista de nuestro formulario para crear nuevos registros.
-
-        modelAndView.addObject("categorias", new EntidadCategoria());    // Creamos un nuevo registro al formulario de categoria.
-        modelAndView.addObject("caduces", caduceService.obtenerCaduce());// Obtenemos y agregamos la lista de Datos de caduce para el formulario de categoria..
+        modelAndView.addObject("categorias", new EntidadCategoria());    // Agregamos un nuevo registro para nuestro contexto de categoria.
+        modelAndView.addObject("caduces", caduceService.obtenerCaduce());// Agregamos la lista de Datos de nuestros contexto caduce para la categoria..
 
         return modelAndView;
     } // Funcion que crea un nuevo registro de categoria (BOTTOM)
 
-    @PostMapping("/guardar") // Funcion que guarda un nuevo registro de categoria (TOP)
+    @PostMapping("/guardar") 
     public ModelAndView guardar(@NonNull @ModelAttribute EntidadCategoria categoria) {
-
+        // Funcion para guardar un nuevo registro de categoria (TOP)
         ModelAndView modelAndView = null;                                               // Variable que almacena las operaciones de la vista categorias
     
-        modelAndView = new ModelAndView();                                              // Inicialización de la variable de tipo ModelAndView
-        categoriaService.guardarCategorias(categoria);                                  // Guardamos el objeto categoria que recibimos del formulario de los registros
+        modelAndView = new ModelAndView();                                              // Inicialización de la variable que almacena el objeto ModelAndView de categoria.
+        categoriaService.guardarCategorias(categoria);                                  // Guarda los datos de categoria en la base de datos
 
-        modelAndView.setViewName("redirect:/categoria");                      // Definimos la vista para redireccionar a la lista de los registros de categoria después de guardar un nuevo registro
+        modelAndView.setViewName("redirect:/categoria");                      // Definimos la redireccion a la lista de los registros de categoria.
 
         return modelAndView;
-    } // Funcion que guarda un nuevo registro de categoria (BOTTOM)
+    } // Funcion para guardar un nuevo registro de categoria (BOTTOM)
 
-    @PostMapping("/editar") // Funcion que edita un registro de categoria (TOP)
+    @PostMapping("/editar") 
     public ModelAndView editar(@NonNull @RequestParam Integer id) {
-        
+        // Funcion que edita un registro de categoria (TOP)
         ModelAndView modelAndView = null;                                               // Variable que almacena las operaciones de la vista categorias
 
-        modelAndView = new ModelAndView();                                              // Inicialización de la variable de tipo ModelAndView
-        modelAndView.setViewName("categorias/formularioCategoria");           // Asignamos la vista de nuestro formulario para editar el registro seleccionado.
+        modelAndView = new ModelAndView();                                              // Inicialización de la variable que almacena el objeto ModelAndView de categoria.
+        modelAndView.setViewName("categorias/formularioCategoria");           // Definimos la direccion del formulario con los datos del contexto a nuestra vista categoria.
 
-        modelAndView.addObject("categorias", categoriaService.buscarCategoriasPorId(id));// Obtenemos y asignamos el registro de categoria por su id para el formulario de categoria.
-        modelAndView.addObject("caduces", caduceService.obtenerCaduce());               // Obtenemos la listad de Datos de caduce para el formulario de categoria.
+        modelAndView.addObject("categorias", categoriaService.buscarCategoriasPorId(id));// Agregamos los datos que se obtuvieron por el Id correspondiente de categoria.
+        modelAndView.addObject("caduces", caduceService.obtenerCaduce());                // Agregamos la lista de Datos de nuestros contexto caduce para la categoria..
 
         return modelAndView;
     } // Funcion que edita un registro de categoria (BOTTOM)
 
-    @PostMapping("/eliminar") // Funcion que elimina un registro de categoria (TOP)
+    @PostMapping("/eliminar") 
     public ModelAndView eliminar(@NonNull @RequestParam Integer id) {
-
+        // Funcion que elimina los registro de categoria (TOP)
         ModelAndView modelAndView = null;                                               // Variable que almacena las operaciones de la vista categorias
         
-        modelAndView = new ModelAndView();                                              // Inicialización de la variable de tipo ModelAndView
-        categoriaService.eliminarCategoriasPorId(id);                                   // Metodo para Eliminar el registro de categoria por su id
+        modelAndView = new ModelAndView();                                              // Inicialización de la variable que almacena el objeto ModelAndView de categoria.
+        categoriaService.eliminarCategoriasPorId(id);                                   // Eliminamos el registro de categoria por el ID correspondiente en la base de datos.
 
-        modelAndView.setViewName("redirect:/categoria");                      // Definimos la vista para redireccionar a la lista de los registros de categoria después de eliminar un registro
+        modelAndView.setViewName("redirect:/categoria");                      // Definimos para redireccionar a la lista de los registros de categoria.
 
         return modelAndView;
-    } // Funcion que elimina un registro de categoria (BOTTOM)
+    } // Funcion que elimina los registro de categoria (BOTTOM)
 }

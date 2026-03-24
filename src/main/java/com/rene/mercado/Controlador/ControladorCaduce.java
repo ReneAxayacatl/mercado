@@ -32,53 +32,53 @@ public class ControladorCaduce {
 
     @GetMapping 
     public ModelAndView listar() {
-    // Funcion que muestra la lista de los registros de caducidad registrados (TOP)
-        ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista.
-        List<EntidadCaduce> listaDatosCaduce = null;                                // Variable que almacena la lista de informacion registrada de caduce.
+        // Funcion que muestra la lista de los datos registrados de caducidad (TOP)
+        ModelAndView modelAndView = null;                                                   // Variable que almacena las operaciones de la vista caduce.
+        List<EntidadCaduce> listaDatosCaduce = null;                                        // Variable que almacena la lista de informacion registrada de caduce.
 
-        modelAndView = new ModelAndView();                                          // Inicialización de la variable 
-        listaDatosCaduce = caduceService.obtenerCaduce();                           // Asiganmos los datos obetenidos de Caduce.
+        modelAndView = new ModelAndView();                                                  // Inicialización de la variable que almacena el objeto ModelAndView de la lista caduce.
+        listaDatosCaduce = caduceService.obtenerCaduce();                                   // Almacenamos los datos de la lista que obtuvimos de caduce.
 
-        modelAndView.setViewName("caduce/listaCaduce");                   // Asignamos la vista de nuestra lista.
-        modelAndView.addObject("listDatosCaduce", listaDatosCaduce); // Enviamos la lista con los datos obtenidos a la vista. 
+        modelAndView.setViewName("caduce/listaCaduce");                            // Se define la direccion de la vista caduce.
+        modelAndView.addObject("listDatosCaduce", listaDatosCaduce);          // Agregamos la lista con los datos obtenidos a la vista. 
 
         return modelAndView;
-    } // Funcion que muestra la lista de los registros de caducidad registrados (BOTTOM)
+    }   // Funcion que muestra la lista de los datos registrados de caducidad (BOTTOM)
 
-    @GetMapping("/nuevo") // Funcion que crea un nuevo registro de caducidad (TOP)
+    @GetMapping("/nuevo") 
     public ModelAndView nuevo() {
+        // Funcion que crea un nuevo registro de caducidad (TOP)
+        ModelAndView modelAndView = null;                                                   // Variable que almacena las operaciones de la vista caduce.
 
-        ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista.
-
-        modelAndView = new ModelAndView();                                          // Inicialización de la variable de tipo ModelAndView
-        modelAndView.setViewName("caduce/formularioCaduce");              // Definimos la vista para mostrar el formulario de registro de caduce
-        modelAndView.addObject("caduce", new EntidadCaduce());       // Agregamos un nuevo objeto de tipo Caduce para el formulario de registro
+        modelAndView = new ModelAndView();                                                  // Inicialización de la variable que almacena el objeto ModelAndView para un nuevo registo caduce.
+        modelAndView.setViewName("caduce/formularioCaduce");                      // Definimos la direccion del formulario con los datos del contexto a nuestra vista caduce.
+        modelAndView.addObject("caduce", new EntidadCaduce());               // Agregamos un nuevo registro para nuestro contexto de Caduce.
 
         return modelAndView;
-    }// Funcion que crea un nuevo registro de caducidad (BOTTOM)
+    }   // Funcion que crea un nuevo registro de caducidad (BOTTOM)
 
-    @PostMapping("/guardar") // Funcion que guarda los registros de caducidad (TOP)
+    @PostMapping("/guardar") 
     public ModelAndView guardar(@NonNull @ModelAttribute EntidadCaduce caduce) {
+        // Funcion para guardar los registros de caducidad (TOP)
+        ModelAndView modelAndView = null;                                                   // Variable que almacena las operaciones de la vista caduce
 
-        ModelAndView modelAndView = null;                            // Variable que almacena las operaciones de la vista caduce
+        modelAndView = new ModelAndView();                                                  // Inicialización de la variable que almacena el objeto ModelAndView de caduce.
+        caduceService.guardarCaduce(caduce);                                                // Guarda los datos de caduce en la base de datos
 
-        modelAndView = new ModelAndView();                          // Inicialización de la variable de tipo ModelAndView
-        caduceService.guardarCaduce(caduce);                        // Guardamos el objeto caduce que recibimos del formulario de los registros a través del servicio caduceService
-
-        modelAndView.setViewName("redirect:/caduce");               // Definimos la vista para redireccionar a la lista de los registros de caducidad después de guardar un nuevo registro
+        modelAndView.setViewName("redirect:/caduce");                             // Definimos la redireccion a la lista de los registros de caducidad.
 
         return modelAndView;
-    } // Funcion que guarda los registros de caducidad (BOTTOM)
+    } // Funcion para guardar los registros de caducidad (BOTTOM)
 
-    @PostMapping("/eliminar") // Funcion que elimina los registros de caducidad (TOP)
+    @PostMapping("/eliminar") 
     public ModelAndView eliminar(@NonNull @RequestParam Integer id) {
+        // Funcion que elimina los registros de caducidad (TOP)
+        ModelAndView modelAndView = null;                                                   // Variable que almacena las operaciones de la vista caduce
 
-        ModelAndView modelAndView = null;                           // Variable que almacena las operaciones de la vista caduce
+        modelAndView = new ModelAndView();                                                  // Inicialización de la variable que almacena el objeto ModelAndView de caduce.
+        caduceService.eliminarCaducePorId(id);                                              // Eliminamos el registro de caducidad por el ID correspondiente en la base de datos.
 
-        modelAndView = new ModelAndView();                          // Inicialización de la variable de tipo ModelAndView
-        caduceService.eliminarCaducePorId(id);                      // Eliminamos el registro de caducidad por su id a través del servicio caduceService
-
-        modelAndView.setViewName("redirect:/caduce");               // Definimos la vista para redireccionar a la lista de los registros de caducidad después de eliminar un registro
+        modelAndView.setViewName("redirect:/caduce");                             // Definimos para redireccionar a la lista de los registros de caducidad.
         return modelAndView;
     } // Funcion que elimina los registros de caducidad (BOTTOM)
 }

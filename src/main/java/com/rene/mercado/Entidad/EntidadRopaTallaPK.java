@@ -10,11 +10,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Embeddable         // Clase embebida dentro de otra clase (RopaTalla)
+@Embeddable         
 public class EntidadRopaTallaPK implements Serializable{
 
-    private Integer idRopa;     // Declaramos nuestra llave compuesta idRopa
-    private Integer idTalla;    // Declaramos nuestra llace compuesta idTalla
+    private Integer idRopa;     
+    private Integer idTalla;    
 
     @Override
     public boolean equals(Object o) {

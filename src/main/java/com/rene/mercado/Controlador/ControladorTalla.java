@@ -19,73 +19,73 @@ import com.rene.mercado.Servicio.ServicioTalla;
         RequestMethod.DELETE,
         RequestMethod.PUT,
 })
-@RequestMapping("/talla")                                                                       // Ruta global base que manejara toda la clase ControladorTalla
+@RequestMapping("/talla")                                                                       // Permite gestionar operaciones relacionadas con Talla
 public class ControladorTalla {
 
     @Autowired
-    private ServicioTalla tallaService;                                                         // Inyeccion de servicio talla.
+    private ServicioTalla tallaService;                                                         // Variable que almacena las operaciones definidas para el contexto de talla
 
-    @GetMapping // Funcion que muestra la lista de los registros de talla registrados (TOP)
+    @GetMapping 
     public ModelAndView listar() {
-
+        // Funcion que muestra la lista de los datos registrados de talla (TOP)
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista talla
-        List<EntidadTalla> listaDatosTallas = null;                                                    // Variable que almacena la lista de informacion registrada de talla.
+        List<EntidadTalla> listaDatosTallas = null;                                             // Variable que almacena la lista de informacion registrada de talla.
 
-        modelAndView = new ModelAndView();                                                      // Inicialización de la variable de tipo ModelAndView
-        listaDatosTallas = tallaService.obtenerTallas();                                        // Obtener los datos registrado de tallas.
+        modelAndView = new ModelAndView();                                                      // Inicialización de la variable que almacena el objeto ModelAndView de la lista talla.
+        listaDatosTallas = tallaService.obtenerTallas();                                        // Almacenamos los datos de la lista que obtuvimos de talla.
 
-        modelAndView.setViewName("talla/listaTalla");                                      // Asignamos la vista de nuestra lista para visualizar los registros.
-        modelAndView.addObject("listaTallas", listaDatosTallas);                 // Agregamos la lista de datos de talla que obtuvimos a la vista.     
+        modelAndView.setViewName("talla/listaTalla");                                 // Se define la direccion de la vista talla.
+        modelAndView.addObject("listaTallas", listaDatosTallas);                 // Agregamos la lista con los datos obtenidos a la vista. 
 
         return modelAndView;
-    } // Funcion que muestra la lista de los registros de talla registrados (BOTTOM)
+    } // Funcion que muestra la lista de los datos registrados de talla (BOTTOM)
 
-    @GetMapping("/nuevo") // Funcion que crea un nuevo registro de talla (TOP)
+    @GetMapping("/nuevo") 
     public ModelAndView nuevo() {
-
+        // Funcion que crea un nuevo registro de talla (TOP)
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista talla
-        modelAndView = new ModelAndView();                                                      // Inicialización de la variable de tipo ModelAndView
+        modelAndView = new ModelAndView();                                                      // Inicialización de la variable que almacena el objeto ModelAndView de la lista talla.
 
-        modelAndView.setViewName("talla/formularioTalla");                                 // Asignamos la vista de nuestro formulario para crear nuevos registros.
-        modelAndView.addObject("talla", new EntidadTalla());                            // Creamos un nuevo registro al formulario de talla.
+        modelAndView.setViewName("talla/formularioTalla");                            // Definimos la direccion del formulario con los datos del contexto a nuestra vista talla.
+        modelAndView.addObject("talla", new EntidadTalla());                     // Agregamos un nuevo registro para nuestro contexto de talla.
 
         return modelAndView;
     } // Funcion que crea un nuevo registro de talla (BOTTOM)
 
-    @PostMapping("/guardar") // Funcion que guarda un nuevo registro de talla (TOP)
+    @PostMapping("/guardar") 
     public ModelAndView guardar(@NonNull @ModelAttribute EntidadTalla talla) {
+        // Funcion que guarda un nuevo registro de talla (TOP)
+        ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista talla.
 
-        ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista talla
+        modelAndView = new ModelAndView();                                                      // Inicialización de la variable que almacena el objeto ModelAndView de talla
+        tallaService.guardarTallas(talla);                                                      // Guarda los datos de talla en la base de datos.
 
-        modelAndView = new ModelAndView();                                                      // Inicialización de la variable de tipo ModelAndView
-        tallaService.guardarTallas(talla);                                                      // Guardamos el objeto talla que recibimos del formulario de los registros
-
-        modelAndView.setViewName("redirect:/talla");                                  // Definimos la vista para redireccionar a la lista de los registros de talla después de guardar un nuevo registro
+        modelAndView.setViewName("redirect:/talla");                                  // Definimos la redireccion a la lista de los registros de talla
 
         return modelAndView;
     } // Funcion que guarda un nuevo registro de talla (BOTTOM)
 
-    @PostMapping("/editar") // Funcion que edita un registro de talla (TOP)
+    @PostMapping("/editar") 
     public ModelAndView editar(@NonNull @RequestParam Integer id) {
-
+        // Funcion que edita un registro de talla (TOP)
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista talla
-        modelAndView = new ModelAndView();                                                      // Inicializacion de la variable de tipo ModelAndView
+        modelAndView = new ModelAndView();                                                      // Inicialización de la variable que almacena el objeto ModelAndView de talla
 
-        modelAndView.setViewName("talla/formularioTalla");                                           // Asignamos la vista de nuestro formulario para editar el registro seleccionado.
-        modelAndView.addObject("talla", tallaService.buscarTallaPorId(id));                // Obtenemos y asignamos el registro de Tallas por su id para el formulario de Tallas
+        modelAndView.setViewName("talla/formularioTalla");                            // Definimos la direccion del formulario con los datos del contexto a nuestra vista talla.
+        modelAndView.addObject("talla", tallaService.buscarTallaPorId(id));      // Agregamos los datos que se obtuvieron por el Id correspondiente de talla
 
         return modelAndView;
     } // Funcion que edita un registro de talla (BOTTOM)
 
-    @PostMapping("/eliminar") // Funcion que elimina un registro de talla (TOP)
+    @PostMapping("/eliminar") 
     public ModelAndView eliminar(@NonNull @RequestParam Integer id) {
+        // Funcion que elimina un registro de talla (TOP)
+        ModelAndView modelAndView = null;                                                                 // Variable que almacena las operaciones de la vista talla
 
-        ModelAndView modelAndView = null;                                                                 // Variable que almacena las operaciones de la vista tallas.
+        modelAndView = new ModelAndView();                                                                // Inicialización de la variable que almacena el objeto ModelAndView de talla
+        tallaService.eliminarTallasPorId(id);                                                             // Eliminamos el registro de talla por el ID correspondiente en la base de datos.
 
-        modelAndView = new ModelAndView();                                                                // Inicialización de la variable de tipo ModelAndView
-        tallaService.eliminarTallasPorId(id);                                                             // Eliminamos el registro de productos por su id.
-
-        modelAndView.setViewName("redirect:/talla");                                            // Definimos la vista para redireccionar a la lista de los registros de tallas después de eliminar un registro
+        modelAndView.setViewName("redirect:/talla");                                            // Definimos para redireccionar a la lista de los registros de talla.
 
         return modelAndView;
     } // Funcion que elimina un registro de talla (BOTTOM)

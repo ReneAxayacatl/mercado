@@ -10,9 +10,9 @@ import com.rene.mercado.Entidad.EntidadCaduce;
 
 public interface RepositorioCaduce
                 extends JpaRepository<EntidadCaduce, Integer> {
-        @Query("SELECT cad FROM EntidadCaduce cad ORDER BY cad.idCaduce")       // Sentencia JPQL que obtiene los datos de Caduce y ordenada por ID
-        List<EntidadCaduce> listarCaduce();                                     // metodo que almacena una Lista de datos que viene de la entidad caduce
+        @Query("SELECT cad FROM EntidadCaduce cad ORDER BY cad.idCaduce")       // Sentencia JPQL que obtiene los datos de Caduce ordenados por ID
+        List<EntidadCaduce> listarCaduce();                                     // Funcion que regresa los registros almacenados de caduce en la base de datos.
 
-        @Query("SELECT cad FROM EntidadCaduce cad WHERE cad.id = :id")          // Sentencia JPQL que obtiene aquellos datos que su id oincidan con el id que pida el metodo como parametro
-        EntidadCaduce buscarCaducePorId(@Param("id") Integer id);               // metodo que busca por id y usa como anotacion para pasar el id para validar y pasar el id que coincida
+        @Query("SELECT cad FROM EntidadCaduce cad WHERE cad.id = :id")          // Sentencia JPQL que obtiene el registro de caduce por el identificador indicado
+        EntidadCaduce buscarCaducePorId(@Param("id") Integer id);               // Funcion que busca los registros de caduce por el identificador indicado.
 }

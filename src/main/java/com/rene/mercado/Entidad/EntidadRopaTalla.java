@@ -14,22 +14,22 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity                             // Definimos nuestra clase como Entidad.
-@Table(name = "ropa_talla", schema = "rene") //Representamos nuestra entidad de la Tabla 'ropa_talla' y esquema 'rene'
+@Entity                             
+@Table(name = "ropa_talla", schema = "rene")                // Anotacion para definir la tabla y el esquema al que pertenece
 public class EntidadRopaTalla {
 
-    @EmbeddedId                     // Define nuestra PK como llave compuesta de nuestra clase embebida 'RopaTallaPK'
+    @EmbeddedId                                             // Anotacion que define una llave compuesta, por mas campos
     private EntidadRopaTallaPK id;
 
-    @ManyToOne                      // Relacion Muchos a Uno con Ropa
-    @MapsId("idRopa")               // Mapea y establece conexion con la Tabla Ropa (id_ropa).
-    @JoinColumn(name = "id_ropa")   // Anotacion para definir la llave foranea de la columna en la BD que se relaciona con la entidad Ropa
-    private EntidadRopa ropa;       // Variable de tipo ropa asociado con la entidad Ropa
+    @ManyToOne                                              // Anotacion que apuntamos a la relacion de muchos a uno entre ropa y talla
+    @MapsId("idRopa")                                       // Mapea y establece conexion con la Tabla Ropa (id_ropa).
+    @JoinColumn(name = "id_ropa")                           // Anotacion para definir la llave foranea de la columna en la BD que se relaciona con la entidad Ropa
+    private EntidadRopa ropa;                               // Variable que es asociado con la entidad Ropa
 
-    @ManyToOne                      // Relacion Muchos a Uno con Talla
-    @MapsId("idTalla")              // Mapea y establece conexion con la Tabla Talla (id_talla).
-    @JoinColumn(name = "id_talla")  // Anotacion para definir la llave foranea de la columna en la BD que se relaciona con la entidad Talla
-    private EntidadTalla talla;     // Variable de tipo ropa asociado con la entidad Talla
+    @ManyToOne                                              // Anotacion que apuntamos a la relacion de muchos a uno entre ropa y talla
+    @MapsId("idTalla")                                      // Mapea y establece conexion con la Tabla talla (id_talla).
+    @JoinColumn(name = "id_talla")                          // Anotacion para definir la llave foranea de la columna en la BD que se relaciona con la entidad Talla
+    private EntidadTalla talla;                             // Variable que es asociado con la entidad Talla
 
     @Override
     public boolean equals(Object o) {

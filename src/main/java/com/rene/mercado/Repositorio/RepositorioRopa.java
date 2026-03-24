@@ -10,9 +10,9 @@ import com.rene.mercado.Entidad.EntidadRopa;
 
 public interface RepositorioRopa
                 extends JpaRepository<EntidadRopa, Integer> {
-        @Query("SELECT r FROM EntidadRopa r JOIN r.producto p JOIN p.categoria cat")  // Query JPQL que obtiene Ropa que tiene producto y este tenga categoria
-        List<EntidadRopa> listarRopa();
+        @Query("SELECT r FROM EntidadRopa r JOIN r.producto p JOIN p.categoria cat")    // Sentencia JPQL que obtiene los datos de ropa ordenados por ID
+        List<EntidadRopa> listarRopa();                                                 // Funcion que regresa los registros almacenados de ropa en la base de datos.
 
-        @Query("SELECT rop FROM EntidadRopa rop WHERE rop.idRopa = :id")                // Sentencia para traer los datos de ropa que coincidan con su id.
-        EntidadRopa buscarRopaPorId(@Param("id") Integer id);                           // metodo para traer sus datos con su id y traer sus datos coincidentes
+        @Query("SELECT rop FROM EntidadRopa rop WHERE rop.idRopa = :id")                // Sentencia JPQL que obtiene el registro de ropa por el identificador indicado
+        EntidadRopa buscarRopaPorId(@Param("id") Integer id);                           // Funcion que busca los registros de ropa por el identificador indicado.
 }

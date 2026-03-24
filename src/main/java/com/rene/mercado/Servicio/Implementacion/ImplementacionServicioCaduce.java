@@ -14,31 +14,31 @@ import com.rene.mercado.Servicio.ServicioCaduce;
 public class ImplementacionServicioCaduce implements ServicioCaduce {
 
     @Autowired
-    private RepositorioCaduce caduceRepositorio;                            // Inyeccion de dependencia para desarrollar metodos ya definidos en la interfaz ServicioCaduce
+    private RepositorioCaduce caduceRepositorio;                            // Variable que almacena las operaciones definidas para el contexto de caduce
 
     @Override
-    public EntidadCaduce guardarCaduce(@NonNull EntidadCaduce Caduce) {     // Metodo para guardar datos de Caduce.
-        return caduceRepositorio.save(Caduce);                              // Metodo propio de JPA para guardar los datos.
+    public EntidadCaduce guardarCaduce(@NonNull EntidadCaduce Caduce) {     // Funcion para guardar nuevos registros de caducidad.
+        return caduceRepositorio.save(Caduce);                              // Funcion propio de JPA para guardar los datos de caducidad.
     }
 
     @Override
-    public EntidadCaduce buscarCaducePorId(@NonNull Integer id) {           // Metodo para buscar datos por su Id.
-        return caduceRepositorio.buscarCaducePorId(id);                     // Metodo definido con JQPL en el repositori para traer datos por su coincidencia de Id.
+    public EntidadCaduce buscarCaducePorId(@NonNull Integer id) {           // Funcion para buscar datos de caducidad por su identificador
+        return caduceRepositorio.buscarCaducePorId(id);                     // Funcion definido con JQPL para traer datos por su coincidencia de Id.
     }
 
     @Override
-    public List<EntidadCaduce> obtenerCaduce() {                            // Metodo para obtener una lista de datos de caduce.
-        return caduceRepositorio.listarCaduce();                            // Metodo definido con JPQL en el repositori para traer una lista de datos de caduce.
+    public List<EntidadCaduce> obtenerCaduce() {                            // Funcion para obtener la lista de datos de caduce.
+        return caduceRepositorio.listarCaduce();                            // Funcion definido con JPQL para traer una lista de datos de caduce.
     }
 
     @Override
-    public EntidadCaduce editarCaduce(@NonNull EntidadCaduce Caduce) {      // Metodo para editar datos de Caduce.
-        return caduceRepositorio.saveAndFlush(Caduce);                      // Metodo propio de JPA para editar/actualizar los datos de caduce
+    public EntidadCaduce editarCaduce(@NonNull EntidadCaduce Caduce) {      // Funcion para editar datos de los registros de caducidad.
+        return caduceRepositorio.saveAndFlush(Caduce);                      // Funcion propio de JPA para editar/actualizar los datos de caduce
     }
 
     @Override
-    public void eliminarCaducePorId(@NonNull Integer id) {                  // Metodo para eliminar por su ID.
-        caduceRepositorio.deleteById(id);                                    // Metodo propio de JPA para eliminar datos por su id.
+    public void eliminarCaducePorId(@NonNull Integer id) {                  // Funcion para eliminar datos de los registros por su identificador.
+        caduceRepositorio.deleteById(id);                                   // Funcion propio de JPA para eliminar datos por su identificador.
     }
 
 }

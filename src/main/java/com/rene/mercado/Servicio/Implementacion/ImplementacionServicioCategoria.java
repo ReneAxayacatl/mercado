@@ -15,31 +15,31 @@ import com.rene.mercado.Servicio.ServicioCategoria;
 public class ImplementacionServicioCategoria implements ServicioCategoria {
 
     @Autowired
-    private RepositorioCategoria categoriaRepositorio;                                  // Inyeccion de dependencia para desarrollar metodos ya definidos en la interfaz ServicioCategoria
+    private RepositorioCategoria categoriaRepositorio;                                  // Variable que almacena las operaciones definidas para el contexto de categoria
 
     @Override
-    public EntidadCategoria guardarCategorias(@NonNull EntidadCategoria Categorias) {   // Metodo para guardar datos de categoria.
-        return categoriaRepositorio.save(Categorias);                                   // Metodo propio de JPA para guardar datos.
+    public EntidadCategoria guardarCategorias(@NonNull EntidadCategoria Categorias) {   // Funcion para guardar nuevos registros de categoria.
+        return categoriaRepositorio.save(Categorias);                                   // Funcion propio de JPA para guardar los datos de categoria.
     }
 
     @Override
-    public EntidadCategoria buscarCategoriasPorId(Integer id) {                // Metodo para buscar datos por su Id.
-        return categoriaRepositorio.buscarCategoriaPorId(id);                           // Metodo definido con JQPL en el repositori para traer datos por su coincidencia de Id.
+    public EntidadCategoria buscarCategoriasPorId(Integer id) {                         // Funcion para buscar datos de categoria por su identificador
+        return categoriaRepositorio.buscarCategoriaPorId(id);                           // Funcion definido con JQPL para traer datos por su coincidencia de Id.
     }
 
     @Override
-    public List<EntidadCategoria> obtenerCategorias() {                                 // Metodo para obtener una lista de datos de categoria
-        return categoriaRepositorio.listarCategorias();                                 // Metodo definido con JPQL en el repositori para traer una lista de datos de categoria.
+    public List<EntidadCategoria> obtenerCategorias() {                                 // Funcion para obtener la lista de datos de categoria.
+        return categoriaRepositorio.listarCategorias();                                 // Funcion definido con JPQL para traer una lista de datos de categoria.
     }
 
     @Override
-    public EntidadCategoria editarCategorias(@NonNull EntidadCategoria Categorias) {    // Metodo para editar/actualizar datos de categoria.
-        return categoriaRepositorio.saveAndFlush(Categorias);                           // Metodo propio de JPA para editar/actualizar los datos de categoria
+    public EntidadCategoria editarCategorias(@NonNull EntidadCategoria Categorias) {    // Funcion para editar datos de los registros de categoria.
+        return categoriaRepositorio.saveAndFlush(Categorias);                           // Funcion propio de JPA para editar/actualizar los datos de categoria
     }
 
     @Override
-    public void eliminarCategoriasPorId(@NonNull Integer id) {                          // Metodo para eliminar por su ID.
-        categoriaRepositorio.deleteById(id);                                            // Metodo propio de JPA para eliminar datos por su id.
+    public void eliminarCategoriasPorId(@NonNull Integer id) {                          // Funcion para eliminar datos de los registros por su identificador.
+        categoriaRepositorio.deleteById(id);                                            // Funcion propio de JPA para eliminar datos por su identificador.
     }
 
 }

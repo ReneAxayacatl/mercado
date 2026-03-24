@@ -10,14 +10,10 @@ import com.rene.mercado.Entidad.EntidadComida;
 
 public interface RepositorioComida
                 extends JpaRepository<EntidadComida, Integer> {
-        // @Query("SELECT c FROM Comida c JOIN c.producto p")
-        @Query("SELECT c FROM EntidadComida c JOIN c.producto p JOIN p.categoria cat") // Query JPQL que obtiene Comida que
-                                                                                // tenga relacion con producto y
-                                                                                // producto a categoria
-        List<EntidadComida> listarComida();
 
-        // @Query("SELECT c FROM Comida c LEFT JOIN c.producto p LEFT JOIN p.categoria cat")
-        // List<Comida> listarComida();
-        @Query("SELECT com FROM EntidadComida com WHERE com.idComida = :id")            // Sentencia para traer los datos de comida que coincidan con su id.
-        EntidadComida buscarComidasPorId(@Param("id") Integer id);                      // metodo para traer sus datos con su id y traer sus datos coincidentes
+        @Query("SELECT c FROM EntidadComida c JOIN c.producto p JOIN p.categoria cat")  // Sentencia JPQL que obtiene los datos de comida ordenados por ID
+        List<EntidadComida> listarComida();                                             // Funcion que regresa los registros almacenados de comida en la base de datos.
+
+        @Query("SELECT com FROM EntidadComida com WHERE com.idComida = :id")            // Sentencia JPQL que obtiene el registro de comida por el identificador indicado
+        EntidadComida buscarComidasPorId(@Param("id") Integer id);                      // Funcion que busca los registros de comida por el identificador indicado.
 }

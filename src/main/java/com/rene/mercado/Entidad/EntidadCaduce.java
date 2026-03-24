@@ -7,17 +7,17 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "caduce", schema = "rene")                                        // Anotacion para definir la tabla en la base de datos y el esquema al que pertenece
+@Table(name = "caduce", schema = "rene")                                        // Anotacion para definir la tabla y el esquema al que pertenece
 public class EntidadCaduce {
 
-    @Id                                                                         // Anotacion para identificar PK de la entidad 'caduce'
+    @Id                                                                         // Anotacion para identificar la llave primaria de la entidad caduce
     @Column(name = "id_caduce")                                                 // Anotacion para definir el Id de la columna en la base de datos
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCaduce;                                                   // Variable de tipo entero para almacenar el Id del caduce
+    private Integer idCaduce;                                                   // Variable para manejar el Id de caduce de la BD
 
     @Column(name = "caduce")                                                    // Anotacion para definir el nombre de la columna en la base de datos
-    private String caduce;                                                      // Variable de tipo cadena(String) para almacenar el tipo de caducidad
+    private String caduce;                                                      // Variable para manejar el tipo de caducidad de la BD
 
-    @OneToMany(mappedBy = "caduce", cascade = CascadeType.ALL, orphanRemoval = true)    // Anotacion para definir la relacion de uno a muchos entre Caduce y Categoria
-    private List<EntidadCategoria> categorias;                                         // Lista de datos de las categorias asociadas a un caduce
+    @OneToMany(mappedBy = "caduce", cascade = CascadeType.ALL, orphanRemoval = true) // Anotacion que indica que la relación está controlada desde la otra clase (Categoria), no desde esta
+    private List<EntidadCategoria> categorias;                                  // lista inicializada vacía para almacenar los objetos EntidadCategoria relacionados o asociados a caduce
 }

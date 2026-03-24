@@ -10,9 +10,9 @@ import com.rene.mercado.Entidad.EntidadOrigen;
 
 public interface RepositorioOrigen
                 extends JpaRepository<EntidadOrigen, Integer> {
-        @Query("SELECT o FROM EntidadOrigen o ORDER BY o.idOrigen ASC")        // Query JPQL que obtiene Origen y esta ordenado por Nombre de Origen
-        List<EntidadOrigen> listarOrigen();
+        @Query("SELECT o FROM EntidadOrigen o ORDER BY o.idOrigen ASC")         // Sentencia JPQL que obtiene los datos de origen ordenados por ID
+        List<EntidadOrigen> listarOrigen();                                     // Funcion que regresa los registros almacenados de origen en la base de datos.
 
-        @Query("SELECT o FROM EntidadOrigen o WHERE o.id = :id")                // Sentencia para traer los datos de origen que coincidan con su id.
-        EntidadOrigen buscarOrigenPorId(@Param("id") Integer id);               // metodo para traer sus datos con su id y traer sus datos coincidentes
+        @Query("SELECT o FROM EntidadOrigen o WHERE o.id = :id")                // Sentencia JPQL que obtiene el registro de origen por el identificador indicado
+        EntidadOrigen buscarOrigenPorId(@Param("id") Integer id);               // Funcion que busca los registros de origen por el identificador indicado.
 }
