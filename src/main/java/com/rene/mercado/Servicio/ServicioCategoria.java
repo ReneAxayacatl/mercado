@@ -7,13 +7,13 @@ import org.springframework.lang.NonNull;
 import com.rene.mercado.Entidad.EntidadCategoria;
 
 public interface ServicioCategoria {
-    public EntidadCategoria guardarCategorias(@NonNull EntidadCategoria Categorias);                     // Metodo para guardar datos de categoria. 
+    public EntidadCategoria guardarCategorias(@NonNull EntidadCategoria Categorias);              // Funcion para guardar datos registrados de categoria.
 
-    public EntidadCategoria buscarCategoriasPorId(Integer id);                                    // Metodo para buscar por su ID ya definido con jpql en el repositorio.
+    public EntidadCategoria buscarCategoriasPorId(Integer id);                                    // Funcion para buscar los registros de categoria por su identificador.
 
-    public List<EntidadCategoria> obtenerCategorias();                                            // Metodo para obtener una lista de datos de categoria ya definido con jpql en el repositorio.
+    public List<EntidadCategoria> obtenerCategorias();                                            // Funcion para obtener la lista de datos de categoria.
 
-    public EntidadCategoria editarCategorias(@NonNull EntidadCategoria Categorias);                      // Metodo para editar datos de categoria.
+    public EntidadCategoria editarCategorias(@NonNull EntidadCategoria Categorias);               // Funcion para editar los registros de categoria.
 
-    public void eliminarCategoriasPorId(@NonNull Integer idInteger);                       // Metodo para eliminar por su ID.
+    public void eliminarCategoriasPorId(@NonNull Integer idInteger);                              // Funcion para eliminar los registro por su identificador.
 }

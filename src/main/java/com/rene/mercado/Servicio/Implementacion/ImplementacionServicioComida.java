@@ -30,13 +30,13 @@ public class ImplementacionServicioComida implements ServicioComida {
     }
 
     @Override
-    public List<EntidadComida> obtenerComidas() {                                   // Funcion para obtener la lista de datos de caduce.
-        return comidaRepositorio.listarComida();                                    // Funcion definido con JPQL para traer una lista de datos de caduce.
+    public List<EntidadComida> obtenerComidas() {                                   // Funcion para obtener la lista de datos de comida.
+        return comidaRepositorio.listarComida();                                    // Funcion definido con JPQL para traer una lista de datos de comida.
     }
 
     @Override
     public EntidadComida editarComidas(@NonNull EntidadComida Comidas) {            // Funcion para editar datos de los registros de comida.
-        return comidaRepositorio.saveAndFlush(Comidas);                             // Funcion propio de JPA para editar/actualizar los datos de caduce
+        return comidaRepositorio.saveAndFlush(Comidas);                             // Funcion propio de JPA para editar/actualizar los datos de comida
     }
 
     @Override

@@ -8,13 +8,14 @@ import com.rene.mercado.Entidad.EntidadComida;
 
 public interface ServicioComida {
 
-    public EntidadComida buscarComidasPorId(@NonNull Integer idInteger);        // Metodo para bscr por su ID ya definicdo con JPQL en el repositorio
+    public void guardarComida(EntidadComida comida, List<Integer> idsOrigen);   // Funcion para guardar datos registrados de comida.
 
-    public List<EntidadComida> obtenerComidas();                                // Metodo para obtener una lista de datos de Comida ya definido en con JPQL en el repositorio
+    public EntidadComida buscarComidasPorId(@NonNull Integer idInteger);        // Funcion para buscar los registros de comida por su identificador.
 
-    public EntidadComida editarComidas(@NonNull EntidadComida Comidas);         // Metodo para editar datos de comida.
+    public List<EntidadComida> obtenerComidas();                                // Funcion para obtener la lista de datos de comida.
 
-    public void eliminarComidasPorId(@NonNull Integer idInteger);               // Metodo para eliminar datos por su ID.
+    public EntidadComida editarComidas(@NonNull EntidadComida Comidas);         // Funcion para editar los registros de comida.
 
-    public void guardarComida(EntidadComida comida, List<Integer> idsOrigen);
+    public void eliminarComidasPorId(@NonNull Integer idInteger);               // Funcion para eliminar los registro por su identificador.
+
 }

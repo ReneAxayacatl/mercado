@@ -7,13 +7,13 @@ import org.springframework.lang.NonNull;
 import com.rene.mercado.Entidad.EntidadOrigen;
 
 public interface ServicioOrigen {
-    public EntidadOrigen guardarOrigen(@NonNull EntidadOrigen Origen);         // Metodo para guardar datos de Origen.
+    public EntidadOrigen guardarOrigen(@NonNull EntidadOrigen Origen);         // Funcion para guardar datos registrados de origen.
 
-    public EntidadOrigen buscarOrigenPorId(@NonNull Integer idInteger);        // Metodo para buscar por su ID ya definido con jpql en el repositorio.
+    public EntidadOrigen buscarOrigenPorId(@NonNull Integer idInteger);        // Funcion para buscar los registros de origen por su identificador.
 
-    public List<EntidadOrigen> obtenerOrigen();                                // Metodo para obtener una lista de datos de Origen ya definido con jpql en el repositorio.
+    public List<EntidadOrigen> obtenerOrigen();                                // Funcion para obtener la lista de datos de origen.
 
-    public EntidadOrigen editarOrigen(@NonNull EntidadOrigen Origen);          // Metodo para editar datos de Origen.
+    public EntidadOrigen editarOrigen(@NonNull EntidadOrigen Origen);          // Funcion para editar los registros de origen.
 
-    public void eliminarOrigenPorId(@NonNull Integer idInteger);               // Metodo para eliminar datos por su ID.
+    public void eliminarOrigenPorId(@NonNull Integer idInteger);               // Funcion para eliminar los registro por su identificador.
 }

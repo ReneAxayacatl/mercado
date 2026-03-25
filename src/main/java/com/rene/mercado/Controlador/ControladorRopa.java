@@ -62,9 +62,10 @@ public class ControladorRopa {
 
         modelAndView.setViewName("ropa/formularioRopa");                              // Definimos la direccion del formulario con los datos del contexto a nuestra vista ropa
         modelAndView.addObject("ropa", new EntidadRopa());                       // Agregamos un nuevo registro para nuestro contexto de ropa
-        modelAndView.addObject("productos", productoServicio.obtenerProductos());// Agregamos la lista de Datos de nuestros contexto productos para comida.
-        modelAndView.addObject("origenes", origenServicio.obtenerOrigen());      // Agregamos la lista de Datos de nuestros contexto origen para comida.
-        modelAndView.addObject("tallas", tallaServicio.obtenerTallas());         // Agregamos la lista de Datos de nuestros contexto talla para comida.
+        modelAndView.addObject("productos", productoServicio.obtenerProductosFiltrados("Ropa")); // Agregamos la lista de Datos de nuestros contexto productos para ropa.
+        // modelAndView.addObject("productos", productoServicio.obtenerProductos());// Agregamos la lista de Datos de nuestros contexto productos para comida.
+        modelAndView.addObject("origenes", origenServicio.obtenerOrigen());      // Agregamos la lista de Datos de nuestros contexto origen para ropa.
+        modelAndView.addObject("tallas", tallaServicio.obtenerTallas());         // Agregamos la lista de Datos de nuestros contexto talla para ropa.
 
         return modelAndView;
     } // Funcion que crea un nuevo registro de Ropa (BOTTOM)
@@ -91,7 +92,8 @@ public class ControladorRopa {
         modelAndView.setViewName("ropa/formularioRopa");                              // Definimos la direccion del formulario con los datos del contexto a nuestra vista ropa
 
         modelAndView.addObject("ropa", ropaServicio.buscarRopasPorId(id));       // Agregamos los datos que se obtuvieron por el Id correspondiente de ropa
-        modelAndView.addObject("productos", productoServicio.obtenerProductos());/// Agregamos la lista de Datos de nuestros contexto producto para ropa
+        modelAndView.addObject("productos", productoServicio.obtenerProductosFiltrados("Ropa"));
+        // modelAndView.addObject("productos", productoServicio.obtenerProductos());/// Agregamos la lista de Datos de nuestros contexto producto para ropa
         modelAndView.addObject("origenes", origenServicio.obtenerOrigen());      // Agregamos la lista de Datos de nuestros contexto origen para ropa
         modelAndView.addObject("tallas", tallaServicio.obtenerTallas());         // Agregamos la lista de Datos de nuestros contexto talla para ropa
 

@@ -1,5 +1,6 @@
 package com.rene.mercado.Servicio.Implementacion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,31 +16,47 @@ import com.rene.mercado.Servicio.ServicioProductos;
 public class ImplementacionServicioProductos implements ServicioProductos {
 
     @Autowired
-    private RepositorioProductos productosRepositorio;                                  // Inyeccion de dependencia para desarrollar metodos ya definidos en la interfaz ServicioProductos
+    private RepositorioProductos productosRepositorio;                                  // Variable que almacena las operaciones definidas para el contexto de producto.
 
     @Override
-    public EntidadProductos guardarProductos(@NonNull EntidadProductos producto) {      // Metodo para guardar datos de Productos.
-        return productosRepositorio.save(producto);                                     // Utilizamos el Metodo 'save' del repositorio para guardar el objeto Productos en la Base de Datos.
+    public EntidadProductos guardarProductos(@NonNull EntidadProductos producto) {      // Funcion para guardar nuevos registros de producto.
+        return productosRepositorio.save(producto);                                     // Funcion propio de JPA para guardar los datos de producto.
     }
 
     @Override
-    public EntidadProductos buscarProductosPorId(@NonNull Integer id) {                 // Metodo para buscar por su ID ya definido con jpql en el repositorio.
-        return productosRepositorio.buscarProductosPorId(id);                           // Utilizamos el Metodo 'buscarProductosPorId' del repositorio para buscar el objeto Productos por su ID en la Base de Datos.
+    public EntidadProductos buscarProductosPorId(@NonNull Integer id) {                 // Funcion para buscar datos de producto por su identificador
+        return productosRepositorio.buscarProductosPorId(id);                           // Funcion definido con JQPL para traer datos por su coincidencia de Id.
     }
 
     @Override
-    public List<EntidadProductos> obtenerProductos() {                                  // Metodo para obtener una lista de datos de Productos ya definido con jpql en el repositorio.
-        return productosRepositorio.listarProductos();                                  // Utilizamos el Metodo 'listarProductos' del repositorio para obtener una lista de objetos Productos ordenados por su ID en la Base de Datos.
+    public List<EntidadProductos> obtenerProductos() {                                  // Funcion para obtener la lista de datos de producto.
+        return productosRepositorio.listarProductos();                                  // Funcion definido con JPQL para traer una lista de datos de producto.
     }
 
     @Override
-    public EntidadProductos editarProductos(@NonNull EntidadProductos producto) {        // Metodo para editar datos de Productos.
-        return productosRepositorio.saveAndFlush(producto);                             // Utilizamos el Metodo 'saveAndFlush' del repositorio para actualizar el objeto Productos en la Base de Datos.
+    public EntidadProductos editarProductos(@NonNull EntidadProductos producto) {        // Funcion para editar datos de los registros de producto.
+        return productosRepositorio.saveAndFlush(producto);                             // Funcion propio de JPA para editar/actualizar los datos de producto
     }
 
     @Override
-    public void eliminarProductosPorId(@NonNull Integer id) {                           // Metodo para eliminar por su ID.
-        productosRepositorio.deleteById(id);                                            // Utilizamos el Metodo 'deleteById' del repositorio para eliminar el objeto Productos por su ID en la Base de Datos.
+    public void eliminarProductosPorId(@NonNull Integer id) {                           // Funcion para eliminar datos de los registros por su identificador.
+        productosRepositorio.deleteById(id);                                            // Funcion propio de JPA para eliminar datos por su identificador.
     }
 
+    @Override
+    public List<EntidadProductos> obtenerProductosFiltrados(String nombreCategoria) {
+    List<EntidadProductos> todosProductos = null;
+    List<EntidadProductos> productosFiltrado = null;
+    todosProductos = obtenerProductos();                                                // Trae todos los productos
+    productosFiltrado = new ArrayList<>();                                              // Lista vacía para filtrar
+    // Filtrar productos por categoría (TOP)
+    for (EntidadProductos producto : todosProductos) {                                  // Recorremos cada producto disponible para determinar si pertenece a la categoría
+        if (producto.getIdProducto() != null && nombreCategoria.equals(producto.getCategoria().getNombreCategoria())) { // Solo traemos aquel identificador coincida con el nombre de su categoria
+            productosFiltrado.add(producto);                                            // Agregamos a la lista el regitro del producto que haya tenido su coincidencia con su identificador.
+        }
+    }// Filtrar productos por categoría (BOTTOM)
+    return productosFiltrado;                                        
+    }
+
+    
 }

@@ -7,13 +7,13 @@ import com.rene.mercado.Entidad.EntidadCaduce;
 
 public interface ServicioCaduce {
 
-    public EntidadCaduce guardarCaduce(@NonNull EntidadCaduce Caduce);        // Metodo para guardar datos de Caduce.
+    public EntidadCaduce guardarCaduce(@NonNull EntidadCaduce Caduce);      // Funcion para guardar datos registrados de Caduce.
 
-    public EntidadCaduce buscarCaducePorId(@NonNull Integer id);       // Metodo para buscar por su ID ya definido con jpql en el repositorio.
+    public EntidadCaduce buscarCaducePorId(@NonNull Integer id);            // Funcion para buscar los registros de caduce por su identificador.
 
-    public List<EntidadCaduce> obtenerCaduce();                        // Metodo para obtener una lista de datos de Caduce ya definido con jpql en el repositorio.                     
+    public List<EntidadCaduce> obtenerCaduce();                             // Funcion para obtener la lista de datos de caduce.
 
-    public EntidadCaduce editarCaduce(@NonNull EntidadCaduce Caduce);         // Metodo para editar datos de Caduce.
+    public EntidadCaduce editarCaduce(@NonNull EntidadCaduce Caduce);       // Funcion para editar los registros de caduce.
 
-    public void eliminarCaducePorId(@NonNull Integer id);               // Metodo para eliminar por su ID.
+    public void eliminarCaducePorId(@NonNull Integer id);                   // Funcion para eliminar los registro por su identificador.
 }

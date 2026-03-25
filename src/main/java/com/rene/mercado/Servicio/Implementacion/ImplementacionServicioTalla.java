@@ -18,28 +18,28 @@ public class ImplementacionServicioTalla implements ServicioTalla {
     private RepositorioTalla tallaRepositorio;                                      // Inyeccion de dependencia para desarrollar metodos ya definidos en la interfaz ServicioTalla
 
     @Override
-    public EntidadTalla guardarTallas(@NonNull EntidadTalla tallas) {               // Metodo para guardar datos de talla
-        return tallaRepositorio.save(tallas);                                       // Metodo propio de JPA para guardar datos.
+    public EntidadTalla guardarTallas(@NonNull EntidadTalla tallas) {               // Funcion para guardar nuevos registros de talla.
+        return tallaRepositorio.save(tallas);                                       // Funcion propio de JPA para guardar los datos de talla.
     }
 
     @Override
-    public EntidadTalla buscarTallaPorId(@NonNull Integer id) {                     // Metodo para buscar datos por su Id.
-        return tallaRepositorio.buscarTallaPorId(id);                               // Metodo definido con JQPL en el repositorio para traer datos por su coincidencia de Id.
+    public EntidadTalla buscarTallaPorId(@NonNull Integer id) {                     // Funcion para buscar datos de talla por su identificador
+        return tallaRepositorio.buscarTallaPorId(id);                               // Funcion definido con JQPL para traer datos por su coincidencia de Id.
     }
 
     @Override
-    public List<EntidadTalla> obtenerTallas() {                                     // Metodo definido con JPQL en el repositorio para traer una lista de datos de talla.
-        return tallaRepositorio.listarTallas();                                     // Metodo para obtener una lista de datos de talla.
+    public List<EntidadTalla> obtenerTallas() {                                     // Funcion para obtener la lista de datos de talla.
+        return tallaRepositorio.listarTallas();                                     // Funcion definido con JPQL para traer una lista de datos de talla.
     }
 
     @Override
-    public EntidadTalla editarTallas(@NonNull EntidadTalla tallas) {                // Metodo para editar/actualizar datos de talla.
-        return tallaRepositorio.saveAndFlush(tallas);                               // Metodo propio de JPA para editar/actualizar los datos de talla
+    public EntidadTalla editarTallas(@NonNull EntidadTalla tallas) {                // Funcion para editar datos de los registros de talla.
+        return tallaRepositorio.saveAndFlush(tallas);                               // Funcion propio de JPA para editar/actualizar los datos de talla
     }
 
     @Override
-    public void eliminarTallasPorId(@NonNull Integer id) {                          // Metodo para eliminar aquellos datos por su Id.
-        tallaRepositorio.deleteById(id);                                            // Metodo propio de JPA para eliminar datos por su id.
+    public void eliminarTallasPorId(@NonNull Integer id) {                          // Funcion para eliminar datos de los registros por su identificador.
+        tallaRepositorio.deleteById(id);                                            // Funcion propio de JPA para eliminar datos por su identificador.
     }
 
 }

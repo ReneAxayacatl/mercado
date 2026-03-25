@@ -60,7 +60,8 @@ public class ControladorComida {
         
         modelAndView.setViewName("comida/formularioComida");                  // Definimos la direccion del formulario con los datos del contexto a nuestra vista comida.
         modelAndView.addObject("comida", new EntidadComida());           // Agregamos un nuevo registro para nuestro contexto de comida.
-        modelAndView.addObject("productos", productoServicio.obtenerProductos()); // Agregamos la lista de Datos de nuestros contexto productos para comida.
+        // modelAndView.addObject("productos", productoServicio.obtenerProductos()); // Agregamos la lista de Datos de nuestros contexto productos para comida.
+        modelAndView.addObject("productos", productoServicio.obtenerProductosFiltrados("Comida")); // Agregamos la lista de Datos de nuestros contexto productos para comida.
         modelAndView.addObject("origenes", origenServicio.obtenerOrigen());       // Agregamos la lista de Datos de nuestros contexto origen para nuestro contexto de comida.
 
         return modelAndView;
@@ -88,7 +89,8 @@ public class ControladorComida {
         modelAndView.setViewName("comida/formularioComida");                             // Definimos la direccion del formulario con los datos del contexto a nuestra vista comida.
 
         modelAndView.addObject("comida", comidaService.buscarComidasPorId(id));     // Agregamos los datos que se obtuvieron por el Id correspondiente de comida
-        modelAndView.addObject("productos", productoServicio.obtenerProductos());   // Agregamos la lista de Datos de nuestros contexto producto para comida.
+        modelAndView.addObject("productos", productoServicio.obtenerProductosFiltrados("Comida")); // Agregamos la lista de Datos de nuestros contexto productos para comida.
+        // modelAndView.addObject("productos", productoServicio.obtenerProductos());   // Agregamos la lista de Datos de nuestros contexto producto para comida.
         modelAndView.addObject("origenes", origenServicio.obtenerOrigen());         // Agregamos la lista de Datos de nuestros contexto origen para la comida.
 
         return modelAndView;

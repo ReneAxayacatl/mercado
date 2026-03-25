@@ -10,13 +10,13 @@ import com.rene.mercado.Entidad.EntidadRopaTallaPK;
 
 public interface ServicioRopaTalla {
 
-    public EntidadRopaTalla guardarRopaTallas(@NonNull EntidadRopaTalla RopaTallas);                   // Metodo para guardar datos de RopaTalla.
+    public EntidadRopaTalla guardarRopaTallas(@NonNull EntidadRopaTalla RopaTallas);                   // Funcion para guardar datos registrados de RopaTalla.
 
-    public Optional<EntidadRopaTalla> buscarRopaTallaPorId(@NonNull EntidadRopaTallaPK idInteger);     // Metodo para buscar por su ID.
+    public Optional<EntidadRopaTalla> buscarRopaTallaPorId(@NonNull EntidadRopaTallaPK idInteger);     // Funcion para buscar los registros de RopaTalla por su identificador.
 
-    public List<EntidadRopaTalla> obtenerRopaTalla();                                                  // Metodo para obtener una lista de datos de RopaTalla.
+    public List<EntidadRopaTalla> obtenerRopaTalla();                                                  // Funcion para obtener la lista de datos de RopaTalla.
 
-    public EntidadRopaTalla editarRopaTalla(@NonNull EntidadRopaTalla Talla);                          // Metodo para editar datos de RopaTalla.
+    public EntidadRopaTalla editarRopaTalla(@NonNull EntidadRopaTalla Talla);                          // Funcion para editar los registros de RopaTalla.
 
-    public void eliminarRopaTallaPorId(@NonNull EntidadRopaTallaPK id);                                // Metodo para eliminar datos por su ID.
+    public void eliminarRopaTallaPorId(@NonNull EntidadRopaTallaPK id);                                // Funcion para eliminar los registro por su identificador.
 }

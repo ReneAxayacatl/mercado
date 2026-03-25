@@ -8,13 +8,14 @@ import com.rene.mercado.Entidad.EntidadRopa;
 
 public interface ServicioRopa {
 
-    public EntidadRopa buscarRopasPorId(@NonNull Integer idInteger);       // Metodo para buscar por su ID ya definido con jpql en el repositorio.
+    public void guardarRopa(EntidadRopa ropa, List<Integer> idsTalla, List<Integer> idsOrigen); // Funcion para guardar datos registrados de ropa.
 
-    public List<EntidadRopa> obtenerRopas();                               // Metodo para obtener una lista de datos de Ropa ya definido con jpql en el repositorio.                     
+    public EntidadRopa buscarRopasPorId(@NonNull Integer idInteger);                            // Funcion para buscar los registros de ropa por su identificador.
 
-    public EntidadRopa editarRopas(@NonNull EntidadRopa Ropa);             // Metodo para editar datos de ropa.
+    public List<EntidadRopa> obtenerRopas();                                                    // Funcion para obtener la lista de datos de ropa.
 
-    public void eliminarRopasPorId(@NonNull Integer idInteger);            // Metodo para eliminar por su ID.
+    public EntidadRopa editarRopas(@NonNull EntidadRopa Ropa);                                  // Funcion para editar los registros de ropa.
 
-    public void guardarRopa(EntidadRopa ropa, List<Integer> idsTalla, List<Integer> idsOrigen);
+    public void eliminarRopasPorId(@NonNull Integer idInteger);                                 // Funcion para eliminar los registro por su identificador.
+
 }

@@ -8,13 +8,13 @@ import com.rene.mercado.Entidad.EntidadTalla;
 
 public interface ServicioTalla {
 
-    public EntidadTalla guardarTallas(@NonNull EntidadTalla Tallas);            // Metodo para guardar datos de Talla.
+    public EntidadTalla guardarTallas(@NonNull EntidadTalla Tallas);            // Funcion para guardar datos registrados de talla.
 
-    public EntidadTalla buscarTallaPorId(@NonNull Integer idInteger);           // Metodo para buscar por su ID ya definido con jpql en el repositorio.
+    public EntidadTalla buscarTallaPorId(@NonNull Integer idInteger);           // Funcion para buscar los registros de talla por su identificador.
 
-    public List<EntidadTalla> obtenerTallas();                                  // Metodo para obtener una lista de datos de Talla ya definido con jpql en el repositorio.                     
+    public List<EntidadTalla> obtenerTallas();                                  // Funcion para obtener la lista de datos de talla.
 
-    public EntidadTalla editarTallas(@NonNull EntidadTalla Talla);              // Metodo para editar datos de Talla.
+    public EntidadTalla editarTallas(@NonNull EntidadTalla Talla);              // Funcion para editar los registros de talla.
 
-    public void eliminarTallasPorId(@NonNull Integer id);                       // Metodo para eliminar por su ID.       
+    public void eliminarTallasPorId(@NonNull Integer id);                       // Funcion para eliminar los registro por su identificador.
 }
