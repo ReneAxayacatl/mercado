@@ -92,8 +92,8 @@ public class ControladorRopa {
         modelAndView.setViewName("ropa/formularioRopa");                              // Definimos la direccion del formulario con los datos del contexto a nuestra vista ropa
 
         modelAndView.addObject("ropa", ropaServicio.buscarRopasPorId(id));       // Agregamos los datos que se obtuvieron por el Id correspondiente de ropa
-        modelAndView.addObject("productos", productoServicio.obtenerProductosFiltrados("Ropa"));
-        // modelAndView.addObject("productos", productoServicio.obtenerProductos());/// Agregamos la lista de Datos de nuestros contexto producto para ropa
+        modelAndView.addObject("productos", productoServicio.obtenerProductosFiltrados("Ropa")); // Agregamos aquellos datos que obtuvios de producto que sean unicamente ropa
+        // modelAndView.addObject("productos", productoServicio.obtenerProductos()); 
         modelAndView.addObject("origenes", origenServicio.obtenerOrigen());      // Agregamos la lista de Datos de nuestros contexto origen para ropa
         modelAndView.addObject("tallas", tallaServicio.obtenerTallas());         // Agregamos la lista de Datos de nuestros contexto talla para ropa
 
