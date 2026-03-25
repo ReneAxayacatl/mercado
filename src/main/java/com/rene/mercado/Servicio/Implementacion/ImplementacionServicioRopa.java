@@ -31,22 +31,30 @@ public class ImplementacionServicioRopa implements ServicioRopa {
 
     @Override
     public EntidadRopa buscarRopasPorId(@NonNull Integer id) {              // Metodo para buscar datos por su Id.
+        // Funcion que busca el registro de ropa por su identificador (TOP)
         return ropaRepositorio.buscarRopaPorId(id);                         // Metodo definido con JQPL en el repositorio para traer datos por su coincidencia de Id.
+        // Funcion que busca el registro de ropa por su identificador (BOTTOM)
     }
 
     @Override
     public List<EntidadRopa> obtenerRopas() {                               // Metodo para obtener una lista de datos de ropa
+        // Funcion que obtiene la lista de datos de nuestro contexto de ropa (TOP)
         return ropaRepositorio.listarRopa();                                // Metodo definido con JPQL en el repositorio para traer una lista de datos de ropa.
+        // Funcion que obtiene la lista de datos de nuestro contexto de ropa (BOTTOM)
     }
 
     @Override
     public void editarRopas(@NonNull EntidadRopa tallas) {           // Metodo para editar/actualizar datos de ropa
+        // Funcion que edita el registro de datos de ropa (TOP)
         this.ropaRepositorio.saveAndFlush(tallas);                        // Metodo propio de JPA para editar/actualizar los datos de ropa
+        // Funcion que edita el registro de datos de ropa (BOTTOM)
     }
 
     @Override
     public void eliminarRopasPorId(@NonNull Integer id) {                   // Metodo para eliminar aquellos datos por su Id.
+        // Funcion que eliminar el registro de datos de ropa por su identificador (TOP)
         ropaRepositorio.deleteById(id);                                     // Metodo propio de JPA para eliminar datos por su id.
+        // Funcion que eliminar el registro de datos de ropa por su identificador (BOTTOM)
     }
 
     @Override

@@ -26,22 +26,30 @@ public class ImplementacionServicioComida implements ServicioComida {
 
     @Override
     public EntidadComida buscarComidasPorId(@NonNull Integer id) {                  // Funcion para buscar datos de comida por su identificador
+        // Funcion que busca el registro de comida por su identificador (TOP)
         return comidaRepositorio.buscarComidasPorId(id);                            // Funcion definido con JQPL para traer datos por su coincidencia de Id.
+        // Funcion que busca el registro de comida por su identificador (BOTTOM)
     }
 
     @Override
     public List<EntidadComida> obtenerComidas() {                                   // Funcion para obtener la lista de datos de comida.
+        // Funcion que obtiene la lista de datos de nuestro contexto de comida (TOP)
         return comidaRepositorio.listarComida();                                    // Funcion definido con JPQL para traer una lista de datos de comida.
+        // Funcion que obtiene la lista de datos de nuestro contexto de comida (BOTTOM)
     }
 
     @Override
     public void editarComidas(@NonNull EntidadComida Comidas) {                     // Funcion para editar datos de los registros de comida.
+        // Funcion que edita el registro de comida (TOP)
         this.comidaRepositorio.saveAndFlush(Comidas);                             // Funcion propio de JPA para editar/actualizar los datos de comida
+        // Funcion que edita el registro de comida (BOTTOM)
     }
 
     @Override
     public void eliminarComidasPorId(@NonNull Integer id) {                         // Funcion para eliminar datos de los registros por su identificador.
+        // Funcion que elimina el registro de comida por su identificador (TOP)
         this.comidaRepositorio.deleteById(id);                                      // Funcion propio de JPA para eliminar datos por su identificador.
+        // Funcion que elimina el registro de comida por su identificador (BOTTOM)
     }
 
     @Override
