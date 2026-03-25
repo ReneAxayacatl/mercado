@@ -14,7 +14,7 @@ public interface ServicioRopa {
 
     public List<EntidadRopa> obtenerRopas();                                                    // Funcion para obtener la lista de datos de ropa.
 
-    public EntidadRopa editarRopas(@NonNull EntidadRopa Ropa);                                  // Funcion para editar los registros de ropa.
+    public void editarRopas(@NonNull EntidadRopa Ropa);                                  // Funcion para editar los registros de ropa.
 
     public void eliminarRopasPorId(@NonNull Integer idInteger);                                 // Funcion para eliminar los registro por su identificador.
 

@@ -14,7 +14,7 @@ public interface ServicioComida {
 
     public List<EntidadComida> obtenerComidas();                                // Funcion para obtener la lista de datos de comida.
 
-    public EntidadComida editarComidas(@NonNull EntidadComida Comidas);         // Funcion para editar los registros de comida.
+    public void editarComidas(@NonNull EntidadComida Comidas);         // Funcion para editar los registros de comida.
 
     public void eliminarComidasPorId(@NonNull Integer idInteger);               // Funcion para eliminar los registro por su identificador.
 

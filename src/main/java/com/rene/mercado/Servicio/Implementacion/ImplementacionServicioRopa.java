@@ -40,8 +40,8 @@ public class ImplementacionServicioRopa implements ServicioRopa {
     }
 
     @Override
-    public EntidadRopa editarRopas(@NonNull EntidadRopa tallas) {           // Metodo para editar/actualizar datos de ropa
-        return ropaRepositorio.saveAndFlush(tallas);                        // Metodo propio de JPA para editar/actualizar los datos de ropa
+    public void editarRopas(@NonNull EntidadRopa tallas) {           // Metodo para editar/actualizar datos de ropa
+        this.ropaRepositorio.saveAndFlush(tallas);                        // Metodo propio de JPA para editar/actualizar los datos de ropa
     }
 
     @Override

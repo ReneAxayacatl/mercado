@@ -17,8 +17,8 @@ public class ImplementacionServicioCaduce implements ServicioCaduce {
     private RepositorioCaduce caduceRepositorio;                            // Variable que almacena las operaciones definidas para el contexto de caduce
 
     @Override
-    public EntidadCaduce guardarCaduce(@NonNull EntidadCaduce Caduce) {     // Funcion para guardar nuevos registros de caducidad.
-        return caduceRepositorio.save(Caduce);                              // Funcion propio de JPA para guardar los datos de caducidad.
+    public void guardarCaduce(@NonNull EntidadCaduce Caduce) {              // Funcion para guardar nuevos registros de caducidad.
+        this.caduceRepositorio.save(Caduce);                              // Funcion propio de JPA para guardar los datos de caducidad.
     }
 
     @Override
@@ -32,13 +32,13 @@ public class ImplementacionServicioCaduce implements ServicioCaduce {
     }
 
     @Override
-    public EntidadCaduce editarCaduce(@NonNull EntidadCaduce Caduce) {      // Funcion para editar datos de los registros de caducidad.
-        return caduceRepositorio.saveAndFlush(Caduce);                      // Funcion propio de JPA para editar/actualizar los datos de caduce
+    public void editarCaduce(@NonNull EntidadCaduce Caduce) {               // Funcion para editar datos de los registros de caducidad.
+        this.caduceRepositorio.saveAndFlush(Caduce);                      // Funcion propio de JPA para editar/actualizar los datos de caduce
     }
 
     @Override
     public void eliminarCaducePorId(@NonNull Integer id) {                  // Funcion para eliminar datos de los registros por su identificador.
-        caduceRepositorio.deleteById(id);                                   // Funcion propio de JPA para eliminar datos por su identificador.
+        this.caduceRepositorio.deleteById(id);                                   // Funcion propio de JPA para eliminar datos por su identificador.
     }
 
 }

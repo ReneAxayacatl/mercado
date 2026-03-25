@@ -18,8 +18,8 @@ public class ImplementacionServicioCategoria implements ServicioCategoria {
     private RepositorioCategoria categoriaRepositorio;                                  // Variable que almacena las operaciones definidas para el contexto de categoria
 
     @Override
-    public EntidadCategoria guardarCategorias(@NonNull EntidadCategoria Categorias) {   // Funcion para guardar nuevos registros de categoria.
-        return categoriaRepositorio.save(Categorias);                                   // Funcion propio de JPA para guardar los datos de categoria.
+    public void guardarCategorias(@NonNull EntidadCategoria Categorias) {   // Funcion para guardar nuevos registros de categoria.
+        this.categoriaRepositorio.save(Categorias);                                   // Funcion propio de JPA para guardar los datos de categoria.
     }
 
     @Override
@@ -33,13 +33,13 @@ public class ImplementacionServicioCategoria implements ServicioCategoria {
     }
 
     @Override
-    public EntidadCategoria editarCategorias(@NonNull EntidadCategoria Categorias) {    // Funcion para editar datos de los registros de categoria.
-        return categoriaRepositorio.saveAndFlush(Categorias);                           // Funcion propio de JPA para editar/actualizar los datos de categoria
+    public void editarCategorias(@NonNull EntidadCategoria Categorias) {    // Funcion para editar datos de los registros de categoria.
+        this.categoriaRepositorio.saveAndFlush(Categorias);                           // Funcion propio de JPA para editar/actualizar los datos de categoria
     }
 
     @Override
     public void eliminarCategoriasPorId(@NonNull Integer id) {                          // Funcion para eliminar datos de los registros por su identificador.
-        categoriaRepositorio.deleteById(id);                                            // Funcion propio de JPA para eliminar datos por su identificador.
+        this.categoriaRepositorio.deleteById(id);                                            // Funcion propio de JPA para eliminar datos por su identificador.
     }
 
 }

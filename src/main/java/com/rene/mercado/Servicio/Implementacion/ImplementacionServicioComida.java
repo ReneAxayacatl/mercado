@@ -35,13 +35,13 @@ public class ImplementacionServicioComida implements ServicioComida {
     }
 
     @Override
-    public EntidadComida editarComidas(@NonNull EntidadComida Comidas) {            // Funcion para editar datos de los registros de comida.
-        return comidaRepositorio.saveAndFlush(Comidas);                             // Funcion propio de JPA para editar/actualizar los datos de comida
+    public void editarComidas(@NonNull EntidadComida Comidas) {                     // Funcion para editar datos de los registros de comida.
+        this.comidaRepositorio.saveAndFlush(Comidas);                             // Funcion propio de JPA para editar/actualizar los datos de comida
     }
 
     @Override
     public void eliminarComidasPorId(@NonNull Integer id) {                         // Funcion para eliminar datos de los registros por su identificador.
-        comidaRepositorio.deleteById(id);                                           // Funcion propio de JPA para eliminar datos por su identificador.
+        this.comidaRepositorio.deleteById(id);                                      // Funcion propio de JPA para eliminar datos por su identificador.
     }
 
     @Override
@@ -67,7 +67,6 @@ public class ImplementacionServicioComida implements ServicioComida {
             }
         }
     }  // Asignar nuevos orígenes seleccionados (BOTTOM)
-
     comidaRepositorio.save(comida);                                                 // Guardamos la comida con su lista de orígenes.
     }   // Funcion para guardar nuevos registros de comida junto con su origen (BOTTOM).
 }

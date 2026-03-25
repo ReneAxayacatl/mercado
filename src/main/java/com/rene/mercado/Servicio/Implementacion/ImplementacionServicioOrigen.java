@@ -16,8 +16,8 @@ public class ImplementacionServicioOrigen implements ServicioOrigen {
     @Autowired
     private RepositorioOrigen origenRepositorio;                                // Variable que almacena las operaciones definidas para el contexto de origen
 
-    public EntidadOrigen guardarOrigen(@NonNull EntidadOrigen Origen) {         // Funcion para guardar nuevos registros de origen.
-        return origenRepositorio.save(Origen);                                  // Funcion propio de JPA para guardar los datos de origen.
+    public void guardarOrigen(@NonNull EntidadOrigen Origen) {         // Funcion para guardar nuevos registros de origen.
+        this.origenRepositorio.save(Origen);                                  // Funcion propio de JPA para guardar los datos de origen.
     }
 
     @Override
@@ -31,8 +31,8 @@ public class ImplementacionServicioOrigen implements ServicioOrigen {
     }
 
     @Override
-    public EntidadOrigen editarOrigen(@NonNull EntidadOrigen origen) {          // Funcion para editar datos de los registros de origen.
-        return origenRepositorio.saveAndFlush(origen);                          // Funcion propio de JPA para editar/actualizar los datos de origen
+    public void editarOrigen(@NonNull EntidadOrigen origen) {          // Funcion para editar datos de los registros de origen.
+        this.origenRepositorio.saveAndFlush(origen);                          // Funcion propio de JPA para editar/actualizar los datos de origen
     }
 
     @Override
