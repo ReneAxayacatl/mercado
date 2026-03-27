@@ -1,11 +1,13 @@
 package com.rene.mercado.Servicio.Implementacion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import com.rene.mercado.DTO.DTOOrigen;
 import com.rene.mercado.Entidad.EntidadOrigen;
 import com.rene.mercado.Repositorio.RepositorioOrigen;
 import com.rene.mercado.Servicio.ServicioOrigen;
@@ -34,6 +36,21 @@ public class ImplementacionServicioOrigen implements ServicioOrigen {
         // Funcion que obtiene la lista de datos de nuestro contexto de origen (TOP)
         return origenRepositorio.listarOrigen();                                // Funcion definido con JPQL para traer una lista de datos de origen.
         // Funcion que obtiene la lista de datos de nuestro contexto de origen (BOTTOM)
+    }
+
+    @Override
+    public List<DTOOrigen> obtenerOrigenDTO(){
+        List<EntidadOrigen> origenes = origenRepositorio.listarOrigen();
+        List<DTOOrigen> listaDTO = new ArrayList<>();
+
+    for (EntidadOrigen o : origenes) {
+        DTOOrigen dto = new DTOOrigen();
+        dto.setIdOrigen(o.getIdOrigen());
+        dto.setNombreOrigen(o.getNombreOrigen());
+        listaDTO.add(dto);
+    }
+
+    return listaDTO;
     }
 
     @Override

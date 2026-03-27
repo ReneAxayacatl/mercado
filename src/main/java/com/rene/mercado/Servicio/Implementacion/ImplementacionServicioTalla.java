@@ -1,11 +1,13 @@
 package com.rene.mercado.Servicio.Implementacion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import com.rene.mercado.DTO.DTOTalla;
 import com.rene.mercado.Entidad.EntidadTalla;
 import com.rene.mercado.Repositorio.RepositorioTalla;
 import com.rene.mercado.Servicio.ServicioTalla;
@@ -36,6 +38,21 @@ public class ImplementacionServicioTalla implements ServicioTalla {
         // Funcion que obtiene la lista de datos de nuestro contexto de talla (TOP)
         return tallaRepositorio.listarTallas();                                     // Funcion definido con JPQL para traer una lista de datos de talla.
         // Funcion que obtiene la lista de datos de nuestro contexto de talla (BOTTOM)
+    }
+
+    @Override
+    public List<DTOTalla> obtenerTallasDTO(){
+        List<EntidadTalla> tallas = tallaRepositorio.listarTallas();
+        List<DTOTalla> listaDTO = new ArrayList<>();
+
+        for (EntidadTalla t : tallas) {
+            DTOTalla dto = new DTOTalla();
+            dto.setIdTalla(t.getIdTalla());
+            dto.setTipoTalla(t.getTipoTalla());
+            listaDTO.add(dto);
+        }
+
+        return listaDTO;
     }
 
     @Override

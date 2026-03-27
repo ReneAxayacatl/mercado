@@ -1,10 +1,12 @@
 package com.rene.mercado.Servicio.Implementacion;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.lang.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rene.mercado.DTO.DTOCaduce;
 import com.rene.mercado.Entidad.EntidadCaduce;
 import com.rene.mercado.Repositorio.RepositorioCaduce;
 import com.rene.mercado.Servicio.ServicioCaduce;
@@ -35,6 +37,21 @@ public class ImplementacionServicioCaduce implements ServicioCaduce {
         // Funcion que obtiene la lista de datos de nuestro contexto de caduce (TOP)
         return caduceRepositorio.listarCaduce();                            // Funcion definido con JPQL para traer una lista de datos de caduce.
         // Funcion que obtiene la lista de datos de nuestro contexto de caduce (BOTTOM)
+    }
+
+    @Override
+    public List<DTOCaduce> obtenerCaducesDTO(){
+        List<EntidadCaduce> caduces = caduceRepositorio.listarCaduce();
+        List<DTOCaduce> listaDTO = new ArrayList<>();
+
+        for (EntidadCaduce c : caduces) {
+            DTOCaduce dto = new DTOCaduce();
+            dto.setIdCaduce(c.getIdCaduce());
+            dto.setCaduce(c.getCaduce());
+            listaDTO.add(dto);
+        }
+
+        return listaDTO;
     }
 
     @Override

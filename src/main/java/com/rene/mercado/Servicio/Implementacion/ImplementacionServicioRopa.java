@@ -1,13 +1,13 @@
 package com.rene.mercado.Servicio.Implementacion;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import com.rene.mercado.DTO.DTORopa;
 import com.rene.mercado.Entidad.EntidadOrigen;
 import com.rene.mercado.Entidad.EntidadRopa;
 import com.rene.mercado.Entidad.EntidadRopaTalla;
@@ -41,6 +41,36 @@ public class ImplementacionServicioRopa implements ServicioRopa {
         // Funcion que obtiene la lista de datos de nuestro contexto de ropa (TOP)
         return ropaRepositorio.listarRopa();                                // Metodo definido con JPQL en el repositorio para traer una lista de datos de ropa.
         // Funcion que obtiene la lista de datos de nuestro contexto de ropa (BOTTOM)
+    }
+
+    @Override
+    public List<DTORopa> obtenerRopaDTO(){
+        List<EntidadRopa> ropas = ropaRepositorio.findAll();
+        List<DTORopa> listaDTO = new ArrayList<>();
+
+        for (EntidadRopa ropa : ropas) {
+            DTORopa dto = new DTORopa();
+            dto.setIdRopa(ropa.getIdRopa());
+            dto.setIdProducto(ropa.getProducto() != null ? ropa.getProducto().getIdProducto() : null);
+            dto.setNombreCategoria(
+                ropa.getProducto() != null && ropa.getProducto().getCategoria() != null 
+                    ? ropa.getProducto().getCategoria().getNombreCategoria() 
+                    : "Sin categoría"
+            );
+
+            // Tallas
+            for (EntidadRopaTalla rt : ropa.getTallasAsignadas()) {
+                dto.getTallas().add(rt.getTalla().getTipoTalla());
+            }
+
+            // Origenes
+            for (EntidadOrigen o : ropa.getOrigenes()) {
+                dto.getOrigenes().add(o.getNombreOrigen());
+            }
+
+            listaDTO.add(dto);
+        }
+        return listaDTO;
     }
 
     @Override

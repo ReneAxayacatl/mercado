@@ -8,6 +8,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import com.rene.mercado.Entidad.EntidadProductos;
+import com.rene.mercado.DTO.DTOProducto;
 import com.rene.mercado.Repositorio.RepositorioProductos;
 import com.rene.mercado.Servicio.ServicioProductos;
 
@@ -38,6 +39,39 @@ public class ImplementacionServicioProductos implements ServicioProductos {
         return productosRepositorio.listarProductos();                                  // Funcion definido con JPQL para traer una lista de datos de producto.
         // Funcion que obtiene la lista de datos de nuestro contexto de productos (BOTTOM)
     }
+    @Override
+    public List<DTOProducto> obtenerProductosDTO() {
+
+    List<EntidadProductos> lista = productosRepositorio.listarProductos();
+    List<DTOProducto> listaDTO = new ArrayList<>();
+
+    for (EntidadProductos producto : lista) {
+
+        DTOProducto dto = new DTOProducto();
+
+        dto.setIdProducto(producto.getIdProducto());
+        dto.setPrecioUnit(producto.getPrecioUnit());
+
+        // Categoria
+        if (producto.getCategoria() != null) {
+
+            dto.setNombreCategoria(
+                producto.getCategoria().getNombreCategoria()
+            );
+
+            // Caduce
+            if (producto.getCategoria().getCaduce() != null) {
+                dto.setNombreCaduce(
+                    producto.getCategoria().getCaduce().getCaduce()
+                );
+            }
+        }
+
+        listaDTO.add(dto);
+    }
+
+    return listaDTO;
+}
 
     @Override
     public void editarProductos(@NonNull EntidadProductos producto) {        // Funcion para editar datos de los registros de producto.
@@ -68,6 +102,4 @@ public class ImplementacionServicioProductos implements ServicioProductos {
     }// Filtrar productos por categoría (BOTTOM)
     return productosFiltrado;                                        
     } // Funcion que obtiene la lista de datos de nuestro contexto de productos por su categoria que corresponde (BOTTOM)
-
-    
 }

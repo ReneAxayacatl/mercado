@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rene.mercado.DTO.DTORopa;
 import com.rene.mercado.Entidad.EntidadRopa;
 import com.rene.mercado.Servicio.ServicioOrigen;
 import com.rene.mercado.Servicio.ServicioProductos;
@@ -43,10 +44,11 @@ public class ControladorRopa {
     public ModelAndView listar() {
         // Funcion que muestra la lista de los datos registrados de ropa (TOP)
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista ropa.
-        List<EntidadRopa> listaDatosRopa = null;                                                // Variable que almacena la lista de informacion registrada de ropa
+        // List<EntidadRopa> listaDatosRopa = null;                                                // Variable que almacena la lista de informacion registrada de ropa
+        List<DTORopa> listaDatosRopa = null;
 
         modelAndView = new ModelAndView();                                                      // Inicialización de la variable que almacena el objeto ModelAndView de la lista ropa
-        listaDatosRopa = ropaServicio.obtenerRopas();                                           // Almacenamos los datos de la lista que obtuvimos de ropa
+        listaDatosRopa = ropaServicio.obtenerRopaDTO();                                           // Almacenamos los datos de la lista que obtuvimos de ropa
 
         modelAndView.setViewName("ropa/listaRopa");                                   // Se define la direccion de la vista ropa
         modelAndView.addObject("listaRopa", listaDatosRopa);                     // Agregamos la lista con los datos obtenidos a la vista. 
@@ -64,8 +66,8 @@ public class ControladorRopa {
         modelAndView.addObject("ropa", new EntidadRopa());                       // Agregamos un nuevo registro para nuestro contexto de ropa
         modelAndView.addObject("productos", productoServicio.obtenerProductosFiltrados("Ropa")); // Agregamos la lista de Datos de nuestros contexto productos para ropa.
         // modelAndView.addObject("productos", productoServicio.obtenerProductos());// Agregamos la lista de Datos de nuestros contexto productos para comida.
-        modelAndView.addObject("origenes", origenServicio.obtenerOrigen());      // Agregamos la lista de Datos de nuestros contexto origen para ropa.
-        modelAndView.addObject("tallas", tallaServicio.obtenerTallas());         // Agregamos la lista de Datos de nuestros contexto talla para ropa.
+        modelAndView.addObject("origenes", origenServicio.obtenerOrigenDTO());      // Agregamos la lista de Datos de nuestros contexto origen para ropa.
+        modelAndView.addObject("tallas", tallaServicio.obtenerTallasDTO());         // Agregamos la lista de Datos de nuestros contexto talla para ropa.
 
         return modelAndView;
     } // Funcion que crea un nuevo registro de Ropa (BOTTOM)
@@ -94,8 +96,8 @@ public class ControladorRopa {
         modelAndView.addObject("ropa", ropaServicio.buscarRopasPorId(id));       // Agregamos los datos que se obtuvieron por el Id correspondiente de ropa
         modelAndView.addObject("productos", productoServicio.obtenerProductosFiltrados("Ropa")); // Agregamos aquellos datos que obtuvios de producto que sean unicamente ropa
         // modelAndView.addObject("productos", productoServicio.obtenerProductos()); 
-        modelAndView.addObject("origenes", origenServicio.obtenerOrigen());      // Agregamos la lista de Datos de nuestros contexto origen para ropa
-        modelAndView.addObject("tallas", tallaServicio.obtenerTallas());         // Agregamos la lista de Datos de nuestros contexto talla para ropa
+        modelAndView.addObject("origenes", origenServicio.obtenerOrigenDTO());      // Agregamos la lista de Datos de nuestros contexto origen para ropa
+        modelAndView.addObject("tallas", tallaServicio.obtenerTallasDTO());         // Agregamos la lista de Datos de nuestros contexto talla para ropa
 
         return modelAndView;
     } // Funcion que edita un registro de Ropa (BOTTOM)

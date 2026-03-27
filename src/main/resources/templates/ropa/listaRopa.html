@@ -27,23 +27,18 @@
     <td th:text="${r.idRopa}"></td>
 
     <!-- PRODUCTO -->
-    <td th:text="${r.producto != null ? r.producto.idProducto : 'Sin producto'}"></td>
+    <td th:text="${r.idProducto != null ? r.idProducto : 'Sin producto'}"></td>
     <!-- CATEGORIA -->
-    <td th:text="${r.producto != null && r.producto.categoria != null ? r.producto.categoria.nombreCategoria : 'Sin categoría'}"></td>
+    <td th:text="${r.nombreCategoria != null ? r.nombreCategoria : 'Sin categoría'}"></td>
     <!-- TALLAS -->
     <td>
-        <span th:each="rt : ${r.tallasAsignadas}">
-        <span th:text="${rt.talla.tipoTalla}"></span>
+        <span th:each="t : ${r.tallas}" th:text="${t + ' '}"></span>
     </span>
     </td>
 
     <!-- ORIGEN -->
     <td>
-        <span th:if="${r.origenes != null}">
-        <span th:each="o : ${r.origenes}" 
-                th:text="${o.nombreOrigen + ' '}">
-        </span>
-        </span>
+        <span th:each="o : ${r.origenes}" th:text="${o + ' '}"></span>
     </td>
 
     <!-- EDITAR -->

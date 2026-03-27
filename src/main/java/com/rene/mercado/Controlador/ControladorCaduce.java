@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rene.mercado.DTO.DTOCaduce;
 import com.rene.mercado.Entidad.EntidadCaduce;
 import com.rene.mercado.Servicio.ServicioCaduce;
 
@@ -34,10 +35,11 @@ public class ControladorCaduce {
     public ModelAndView listar() {
         // Funcion que muestra la lista de los datos registrados de caducidad (TOP)
         ModelAndView modelAndView = null;                                                   // Variable que almacena las operaciones de la vista caduce.
-        List<EntidadCaduce> listaDatosCaduce = null;                                        // Variable que almacena la lista de informacion registrada de caduce.
+        // List<EntidadCaduce> listaDatosCaduce = null;                                        // Variable que almacena la lista de informacion registrada de caduce.
+        List<DTOCaduce> listaDatosCaduce = null;
 
         modelAndView = new ModelAndView();                                                  // Inicialización de la variable que almacena el objeto ModelAndView de la lista caduce.
-        listaDatosCaduce = caduceService.obtenerCaduce();                                   // Almacenamos los datos de la lista que obtuvimos de caduce.
+        listaDatosCaduce = caduceService.obtenerCaducesDTO();                                   // Almacenamos los datos de la lista que obtuvimos de caduce.
 
         modelAndView.setViewName("caduce/listaCaduce");                            // Se define la direccion de la vista caduce.
         modelAndView.addObject("listDatosCaduce", listaDatosCaduce);          // Agregamos la lista con los datos obtenidos a la vista. 

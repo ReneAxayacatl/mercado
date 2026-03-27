@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.lang.NonNull;
 
+import com.rene.mercado.DTO.DTORopa;
 import com.rene.mercado.Entidad.EntidadRopa;
 
 public interface ServicioRopa {
@@ -13,6 +14,8 @@ public interface ServicioRopa {
     public EntidadRopa buscarRopasPorId(@NonNull Integer idInteger);                            // Funcion para buscar los registros de ropa por su identificador.
 
     public List<EntidadRopa> obtenerRopas();                                                    // Funcion para obtener la lista de datos de ropa.
+
+    public List<DTORopa> obtenerRopaDTO();
 
     public void editarRopas(@NonNull EntidadRopa Ropa);                                  // Funcion para editar los registros de ropa.
 

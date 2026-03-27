@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rene.mercado.DTO.DTOCategoria;
 import com.rene.mercado.Entidad.EntidadCategoria;
 import com.rene.mercado.Servicio.ServicioCaduce;
 import com.rene.mercado.Servicio.ServicioCategoria;
@@ -38,10 +39,11 @@ public class ControladorCategoria {
     public ModelAndView listar() {
         // Funcion que muestra la lista de los datos registros de categoria (TOP)
         ModelAndView modelAndView = null;                                               // Variable que almacena las operaciones de la vista categoria.
-        List<EntidadCategoria> listaDatosCategorias = null;                             // Variable que almacena la lista de informacion registrada de categoria.
+        // List<EntidadCategoria> listaDatosCategorias = null;                             // Variable que almacena la lista de informacion registrada de categoria.
+        List<DTOCategoria> listaDatosCategorias = null;
 
         modelAndView = new ModelAndView();                                              // Inicialización de la variable que almacena el objeto ModelAndView de la lista categoria.
-        listaDatosCategorias = categoriaService.obtenerCategorias();                    // Almacenamos los datos de la lista que obtuvimos de categoria.
+        listaDatosCategorias = categoriaService.obtenerCategoriasDTO();                    // Almacenamos los datos de la lista que obtuvimos de categoria.
 
         modelAndView.setViewName("categorias/listaCategoria");                // Se define la direccion de la vista categoria.
         modelAndView.addObject("categorias", listaDatosCategorias);      // Agregamos la lista con los datos obtenidos a la vista. 
@@ -58,7 +60,7 @@ public class ControladorCategoria {
         modelAndView.setViewName("categorias/formularioCategoria");           // Definimos la direccion del formulario con los datos del contexto a nuestra vista categoria
 
         modelAndView.addObject("categorias", new EntidadCategoria());    // Agregamos un nuevo registro para nuestro contexto de categoria.
-        modelAndView.addObject("caduces", caduceService.obtenerCaduce());// Agregamos la lista de Datos de nuestros contexto caduce para la categoria..
+        modelAndView.addObject("caduces", caduceService.obtenerCaducesDTO());// Agregamos la lista de Datos de nuestros contexto caduce para la categoria..
 
         return modelAndView;
     } // Funcion que crea un nuevo registro de categoria (BOTTOM)
@@ -85,7 +87,7 @@ public class ControladorCategoria {
         modelAndView.setViewName("categorias/formularioCategoria");           // Definimos la direccion del formulario con los datos del contexto a nuestra vista categoria.
 
         modelAndView.addObject("categorias", categoriaService.buscarCategoriasPorId(id));// Agregamos los datos que se obtuvieron por el Id correspondiente de categoria.
-        modelAndView.addObject("caduces", caduceService.obtenerCaduce());                // Agregamos la lista de Datos de nuestros contexto caduce para la categoria..
+        modelAndView.addObject("caduces", caduceService.obtenerCaducesDTO());                // Agregamos la lista de Datos de nuestros contexto caduce para la categoria..
 
         return modelAndView;
     } // Funcion que edita un registro de categoria (BOTTOM)

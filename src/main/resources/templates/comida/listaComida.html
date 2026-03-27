@@ -27,9 +27,9 @@
 
     <!-- PRODCUTOS -->
     
-    <td th:text="${c.producto != null ? c.producto.idProducto : 'Sin producto'}"></td>
+    <td th:text="${c.idProducto != null ? c.idProducto : 'Sin producto'}"></td>
     <!-- CATEGORIA -->
-  <td th:text="${c.producto != null && c.producto.categoria != null ? c.producto.categoria.nombreCategoria : 'Sin categoría'}"></td>
+  <td th:text="${c.nombreCategoria != null ? c.nombreCategoria : 'Sin categoría'}"></td>
     <!-- ORIGEN -->
     <td>
   <span th:if="${c.origenes == null || #lists.isEmpty(c.origenes)}">
@@ -37,10 +37,8 @@
   </span>
 
   <span th:if="${c.origenes != null}">
-    <span th:each="o : ${c.origenes}"
-          th:text="${o.nombreOrigen + ' '}">
+      <span th:each="o : ${c.origenes}" th:text="${o + ' '}"></span>
     </span>
-  </span>
 </td>
 
     <!-- EDITAR -->

@@ -1,11 +1,13 @@
 package com.rene.mercado.Servicio.Implementacion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import com.rene.mercado.DTO.DTOCategoria;
 import com.rene.mercado.Entidad.EntidadCategoria;
 import com.rene.mercado.Repositorio.RepositorioCategoria;
 import com.rene.mercado.Servicio.ServicioCategoria;
@@ -36,6 +38,28 @@ public class ImplementacionServicioCategoria implements ServicioCategoria {
         // Funcion que obtiene la lista de datos de nuestro contexto de categoria (TOP)
         return categoriaRepositorio.listarCategorias();                                 // Funcion definido con JPQL para traer una lista de datos de categoria.
         // Funcion que obtiene la lista de datos de nuestro contexto de categoria (BOTTOM)
+    }
+
+    @Override
+    public List<DTOCategoria> obtenerCategoriasDTO(){
+        List<EntidadCategoria> categorias = categoriaRepositorio.listarCategorias();
+        List<DTOCategoria> listaDTO = new ArrayList<>();
+
+    for (EntidadCategoria c : categorias) {
+        DTOCategoria dto = new DTOCategoria();
+        dto.setIdCategoria(c.getIdCategoria());
+        dto.setNombreCategoria(c.getNombreCategoria());
+
+        if (c.getCaduce() != null) {
+            dto.setNombreCaduce(c.getCaduce().getCaduce()); // ajustar al nombre real del campo
+        } else {
+            dto.setNombreCaduce("Sin caduce");
+        }
+
+        listaDTO.add(dto);
+    }
+
+    return listaDTO;
     }
 
     @Override

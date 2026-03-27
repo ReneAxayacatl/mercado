@@ -1,14 +1,15 @@
 package com.rene.mercado.Servicio.Implementacion;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import com.rene.mercado.DTO.DTOComida;
 import com.rene.mercado.Entidad.EntidadComida;
 import com.rene.mercado.Entidad.EntidadOrigen;
 import com.rene.mercado.Repositorio.RepositorioComida;
@@ -36,6 +37,45 @@ public class ImplementacionServicioComida implements ServicioComida {
         // Funcion que obtiene la lista de datos de nuestro contexto de comida (TOP)
         return comidaRepositorio.listarComida();                                    // Funcion definido con JPQL para traer una lista de datos de comida.
         // Funcion que obtiene la lista de datos de nuestro contexto de comida (BOTTOM)
+    }
+
+    @Override
+    public List<DTOComida> obtenerComidasDTO(){
+        List<EntidadComida> comidas = comidaRepositorio.listarComida();
+        List<DTOComida> listaDTO = new ArrayList<>();
+
+        for (EntidadComida c : comidas) {
+            DTOComida dto = new DTOComida();
+
+            dto.setIdComida(c.getIdComida());
+
+            if (c.getProducto() != null) {
+                dto.setIdProducto(c.getProducto().getIdProducto());
+                if (c.getProducto().getCategoria() != null) {
+                    dto.setNombreCategoria(c.getProducto().getCategoria().getNombreCategoria());
+                } else {
+                    dto.setNombreCategoria(null);
+                }
+            } else {
+                dto.setIdProducto(null);
+                dto.setNombreCategoria(null);
+            }
+
+            // Manejo de orígenes
+            if (c.getOrigenes() != null && !c.getOrigenes().isEmpty()) {
+                Set<String> origenesDTO = new HashSet<>();
+                for (EntidadOrigen o : c.getOrigenes()) {
+                    origenesDTO.add(o.getNombreOrigen());
+                }
+                dto.setOrigenes(origenesDTO);
+            } else {
+                dto.setOrigenes(new HashSet<>()); // lista vacía si no hay orígenes
+            }
+
+            listaDTO.add(dto);
+        }
+
+        return listaDTO;
     }
 
     @Override

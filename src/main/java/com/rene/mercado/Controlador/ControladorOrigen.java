@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rene.mercado.DTO.DTOOrigen;
 import com.rene.mercado.Entidad.EntidadOrigen;
 import com.rene.mercado.Servicio.Implementacion.ImplementacionServicioOrigen;
 
@@ -29,10 +30,12 @@ public class ControladorOrigen {
     public ModelAndView listar() {
         // Funcion que muestra la lista de los datos registrados de origen (TOP)
         ModelAndView modelAndView = null;                                           // Variable que almacena las operaciones de la vista origen.
-        List<EntidadOrigen> listaDatosOrigen = null;                                // Variable que almacena la lista de informacion registrada de origen.
+        // List<EntidadOrigen> listaDatosOrigen = null;                                // Variable que almacena la lista de informacion registrada de origen.
+        List<DTOOrigen> listaDatosOrigen = null;
 
         modelAndView = new ModelAndView();                                          // Inicialización de la variable que almacena el objeto ModelAndView de la lista origen
-        listaDatosOrigen = origenServicio.obtenerOrigen();                          // Almacenamos los datos de la lista que obtuvimos de origen.
+        // listaDatosOrigen = origenServicio.obtenerOrigen();                          // Almacenamos los datos de la lista que obtuvimos de origen.
+        listaDatosOrigen = origenServicio.obtenerOrigenDTO();
 
         modelAndView.setViewName("origen/listaOrigen");                   // Se define la direccion de la vista origen.
         modelAndView.addObject("listaOrigen", listaDatosOrigen);     // Agregamos la lista con los datos obtenidos a la vista.

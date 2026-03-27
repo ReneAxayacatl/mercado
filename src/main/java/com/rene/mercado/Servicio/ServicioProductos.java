@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.lang.NonNull;
 
+import com.rene.mercado.DTO.DTOProducto;
 import com.rene.mercado.Entidad.EntidadProductos;
 
 public interface ServicioProductos {
@@ -13,6 +14,8 @@ public interface ServicioProductos {
     public EntidadProductos buscarProductosPorId(@NonNull Integer idInteger);          // Funcion para buscar los registros de producto por su identificador.
 
     public List<EntidadProductos> obtenerProductos();                                  // Funcion para obtener la lista de datos de producto.
+
+    public List<DTOProducto> obtenerProductosDTO();
 
     public void editarProductos(@NonNull EntidadProductos Producto);       // Funcion para editar los registros de producto.
 

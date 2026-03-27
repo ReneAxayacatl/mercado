@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.lang.NonNull;
 
+import com.rene.mercado.DTO.DTOComida;
 import com.rene.mercado.Entidad.EntidadComida;
 
 public interface ServicioComida {
@@ -13,6 +14,8 @@ public interface ServicioComida {
     public EntidadComida buscarComidasPorId(@NonNull Integer idInteger);        // Funcion para buscar los registros de comida por su identificador.
 
     public List<EntidadComida> obtenerComidas();                                // Funcion para obtener la lista de datos de comida.
+
+    public List<DTOComida> obtenerComidasDTO();
 
     public void editarComidas(@NonNull EntidadComida Comidas);         // Funcion para editar los registros de comida.
 

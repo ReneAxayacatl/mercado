@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rene.mercado.DTO.DTOTalla;
 import com.rene.mercado.Entidad.EntidadTalla;
 import com.rene.mercado.Servicio.ServicioTalla;
 
@@ -29,10 +30,11 @@ public class ControladorTalla {
     public ModelAndView listar() {
         // Funcion que muestra la lista de los datos registrados de talla (TOP)
         ModelAndView modelAndView = null;                                                       // Variable que almacena las operaciones de la vista talla
-        List<EntidadTalla> listaDatosTallas = null;                                             // Variable que almacena la lista de informacion registrada de talla.
+        // List<EntidadTalla> listaDatosTallas = null;                                             // Variable que almacena la lista de informacion registrada de talla.
+        List<DTOTalla> listaDatosTallas = null;
 
         modelAndView = new ModelAndView();                                                      // Inicialización de la variable que almacena el objeto ModelAndView de la lista talla.
-        listaDatosTallas = tallaService.obtenerTallas();                                        // Almacenamos los datos de la lista que obtuvimos de talla.
+        listaDatosTallas = tallaService.obtenerTallasDTO();                                        // Almacenamos los datos de la lista que obtuvimos de talla.
 
         modelAndView.setViewName("talla/listaTalla");                                 // Se define la direccion de la vista talla.
         modelAndView.addObject("listaTallas", listaDatosTallas);                 // Agregamos la lista con los datos obtenidos a la vista. 

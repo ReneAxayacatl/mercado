@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rene.mercado.DTO.DTOComida;
 import com.rene.mercado.Entidad.EntidadComida;
 import com.rene.mercado.Servicio.ServicioComida;
 import com.rene.mercado.Servicio.ServicioOrigen;
@@ -40,10 +41,11 @@ public class ControladorComida {
     public ModelAndView listar() {
         // Funcion que muestra la lista de los datos registrados de comida (TOP)
         ModelAndView modelAndView = null;                                               // Variable que almacena las operaciones de la vista comida.
-        List<EntidadComida> listaDatosComidas = null;                                   // Variable que almacena la lista de informacion registrada de comida.
+        // List<EntidadComida> listaDatosComidas = null;                                   // Variable que almacena la lista de informacion registrada de comida.
+        List<DTOComida> listaDatosComidas = null;
 
         modelAndView = new ModelAndView();                                              // Inicialización de la variable que almacena el objeto ModelAndView de la lista comida.
-        listaDatosComidas = comidaService.obtenerComidas();                             // Almacenamos los datos de la lista que obtuvimos de comida.
+        listaDatosComidas = comidaService.obtenerComidasDTO();                             // Almacenamos los datos de la lista que obtuvimos de comida.
 
         modelAndView.setViewName("comida/listaComida");                       // Se define la direccion de la vista comida.
         modelAndView.addObject("listaComidas", listaDatosComidas);       // Agregamos la lista con los datos obtenidos a la vista. 
@@ -61,7 +63,7 @@ public class ControladorComida {
         modelAndView.addObject("comida", new EntidadComida());           // Agregamos un nuevo registro para nuestro contexto de comida.
         // modelAndView.addObject("productos", productoServicio.obtenerProductos()); // Agregamos la lista de Datos de nuestros contexto productos para comida.
         modelAndView.addObject("productos", productoServicio.obtenerProductosFiltrados("Comida")); // Agregamos la lista de Datos de nuestros contexto productos para comida.
-        modelAndView.addObject("origenes", origenServicio.obtenerOrigen());       // Agregamos la lista de Datos de nuestros contexto origen para nuestro contexto de comida.
+        modelAndView.addObject("origenes", origenServicio.obtenerOrigenDTO());       // Agregamos la lista de Datos de nuestros contexto origen para nuestro contexto de comida.
 
         return modelAndView;
     } // Funcion que crea un nuevo registro de Comida (BOTTOM)
@@ -90,7 +92,7 @@ public class ControladorComida {
         modelAndView.addObject("comida", comidaService.buscarComidasPorId(id));     // Agregamos los datos que se obtuvieron por el Id correspondiente de comida
         modelAndView.addObject("productos", productoServicio.obtenerProductosFiltrados("Comida")); // Agregamos aquellos datos que obtuvimos de producto que sean unicamente comida
         // modelAndView.addObject("productos", productoServicio.obtenerProductos());   // Agregamos la lista de Datos de nuestros contexto producto para comida.
-        modelAndView.addObject("origenes", origenServicio.obtenerOrigen());         // Agregamos la lista de Datos de nuestros contexto origen para la comida.
+        modelAndView.addObject("origenes", origenServicio.obtenerOrigenDTO());         // Agregamos la lista de Datos de nuestros contexto origen para la comida.
 
         return modelAndView;
     } // Funcion que edita un registro de comida (BOTTOM)

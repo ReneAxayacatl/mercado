@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.lang.NonNull;
 
+import com.rene.mercado.DTO.DTOCategoria;
 import com.rene.mercado.Entidad.EntidadCategoria;
 
 public interface ServicioCategoria {
@@ -12,6 +13,8 @@ public interface ServicioCategoria {
     public EntidadCategoria buscarCategoriasPorId(Integer id);                                    // Funcion para buscar los registros de categoria por su identificador.
 
     public List<EntidadCategoria> obtenerCategorias();                                            // Funcion para obtener la lista de datos de categoria.
+
+    public List<DTOCategoria> obtenerCategoriasDTO();
 
     public void editarCategorias(@NonNull EntidadCategoria Categorias);               // Funcion para editar los registros de categoria.
 

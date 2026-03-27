@@ -6,7 +6,7 @@
     <title>Lista de Productos</title>
   </head>
   <body bgcolor="#6c9eab" text="white">
-    <h2>Productos</h2>
+    <h2 th:text="${titulo}"></h2>
 
     <a th:href="@{/productos/nuevo}"> Nuevo Producto </a><br /><br />
 
@@ -25,9 +25,9 @@
 
         <td th:text="${p.precioUnit}"></td>
 
-        <td th:text="${p.categoria.nombreCategoria}"></td>
+        <td th:text="${p.nombreCategoria}"></td>
 
-        <td th:text="${p.categoria.caduce.caduce}"></td>
+        <td th:text="${p.nombreCaduce}"></td>
 
         <td>
           <form
